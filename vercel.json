@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "arg-liard.vercel.app",
-      "destination": "arg/C0R3/gateway.html"
-    }
-  ]
-}

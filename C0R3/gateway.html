@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>/// C0R3 SYSTEM BOOTSTRAP</title>
+    <link rel="stylesheet" href="static/glitch.css">
+    <style>
+        body {
+            background: #000;
+            color: #0f0;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Courier New', monospace;
+            line-height: 1.2;
+        }
+
+        .crt::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(0deg, 
+                    rgba(0, 255, 0, 0.1) 0%, 
+                    rgba(0, 255, 0, 0) 5%),
+                repeating-linear-gradient(0deg, 
+                    rgba(0, 0, 0, 0.15) 0px, 
+                    rgba(0, 0, 0, 0.15) 1px, 
+                    transparent 1px, 
+                    transparent 2px),
+                url(static/scanline.png);
+            pointer-events: none;
+        }
+
+        .tab-rail {
+            position: fixed;
+            left: -200px;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+            background: #000;
+            border-right: 1px solid rgba(0, 255, 0, 0.1);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .tab-handle {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 80px;
+            background: #000;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            border-left: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+        .tab-container {
+            padding: 20px 10px;
+            height: 100%;
+        }
+
+        .tab-item {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s all;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 0, 0.02);
+        }
+
+        .tab-item.active {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .top-menu {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 0;
+            z-index: 1001;
+        }
+
+        .menu-tab {
+            background: #000;
+            border: 1px solid #0f03;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: 0.3s all;
+            overflow: hidden;
+            width: 40px;
+            white-space: nowrap;
+        }
+
+        .menu-tab:hover {
+            width: 120px;
+            border-color: #0f0;
+            background: #002200;
+        }
+
+        .menu-tab:hover ~ .menu-tab {
+            margin-left: -30px;
+        }
+
+        .main-interface {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .ascii-terminal {
+            white-space: pre;
+            font-size: 12px;
+            line-height: 1;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            margin: 2rem 0;
+            padding: 2rem;
+            max-width: 90vw;
+            overflow-x: auto;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            outline: none;
+            width: 400px;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            position: relative;
+        }
+
+        .terminal-input::after {
+            content: "_";
+            animation: blink 1s step-end infinite;
+            position: absolute;
+            right: -10px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes systemCrash {
+            0% { background: #000; }
+            20% { background: #200; filter: blur(2px); }
+            40% { background: #002; transform: skewX(20deg); }
+            60% { background: #020; transform: skewX(-20deg); }
+            80% { opacity: 0.5; background: #000; }
+            100% { opacity: 0; }
+        }
+        
+        .crash-active {
+            animation: systemCrash 2s forwards;
+        }
+    </style>
+</head>
+<body class="crt scroll-locked">
+    <div class="tab-rail">
+        <div class="tab-handle" onclick="toggleTabs()">▶</div>
+        <div class="tab-container">
+            <div class="tab-item active" onclick="window.location.href='gateway.html'">MAIN TERMINAL</div>
+            <div class="tab-item" onclick="window.location.href='tabs/fractured litany.html'">FRACTURED LITANY</div>
+            <div class="tab-item" onclick="window.location.href='tabs/be.html'">MURMURING CHORUS</div>
+            <div class="tab-item" onclick="window.location.href='tabs/excision protocol.html'">EXCISION PROTOCOL</div>
+            <div class="tab-item" onclick="window.location.href='tabs/a finality.html'">A FINALITY?</div>
+            <div class="tab-item" onclick="window.location.href='tabs/anima.html'">UNHATCHED</div>
+            <div class="tab-item" onclick="window.location.href='tabs/fatalism.html'">E. "FATALISM". W</div>
+        </div>
+    </div>
+
+    <div class="top-menu">
+        <div class="menu-tab" onclick="window.location.href='redirects/eyes.html'">EYES</div>
+        <div class="menu-tab" onclick="window.location.href='../G0D/PRAYER.html'">PRAYER</div>
+        <div class="menu-tab" onclick="window.location.href='redirects/trash.html'">.TRASH/</div>
+    </div>
+
+    <div class="main-interface">
+        <div class="ascii-terminal">
+            .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--. 
+            / .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \
+            \ \/\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ \/ /
+             \/ /`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'\/ / 
+             / /\                                                                / /\ 
+            / /\ \ ███████╗ █████╗ ██╗   ██╗███████╗████████╗███████╗███╗   ██╗ / /\ \
+            \ \/ / ██╔════╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝██╔════╝████╗  ██║ \ \/ /
+             \/ /  █████╗  ███████║██║   ██║███████╗   ██║   █████╗  ██╔██╗ ██║  \/ / 
+             / /\  ██╔══╝  ██╔══██║██║   ██║╚════██║   ██║   ██╔══╝  ██║╚██╗██║  / /\ 
+            / /\ \ ██║     ██║  ██║╚██████╔╝███████║   ██║   ███████╗██║ ╚████║ / /\ \
+            \ \/ / ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝ \ \/ /
+             \/ /                                                                \/ / 
+             / /\   █████╗ ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗███████╗  / /\ 
+            / /\ \ ██╔══██╗██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝██╔════╝ / /\ \
+            \ \/ / ███████║██████╔╝██║     ███████║██║██║   ██║█████╗  ███████╗ \ \/ /
+             \/ /  ██╔══██║██╔══██╗██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  ╚════██║  \/ / 
+             / /\  ██║  ██║██║  ██║╚██████╗██║  ██║██║ ╚████╔╝ ███████╗███████║  / /\ 
+            / /\ \ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝╚══════╝ / /\ \
+            \ \/ /                                                              \ \/ /
+             \/ /                                                                \/ / 
+             / /\.--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--./ /\ 
+            / /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \
+            \ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `' /
+             `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--' 
+        </div>
+        
+        <div class="access-interface">
+            > ACCESS CODE: 
+            <input type="password" id="accessCode" class="terminal-input">
+            <div id="response"></div>
+        </div>
+    </div>
+
+    <script>
+        let tabsVisible = false;
+        function toggleTabs() {
+            const rail = document.querySelector('.tab-rail');
+            const handle = document.querySelector('.tab-handle');
+            tabsVisible = !tabsVisible;
+            rail.style.left = tabsVisible ? '0' : '-200px';
+            handle.innerHTML = tabsVisible ? '◀' : '▶';
+        }
+
+        const CORRECT_CODE = 'blessed_be_the_doomsday_knights';
+        let attempts = 0;
+        
+        document.getElementById('accessCode').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                const input = e.target.value.trim();
+                const response = document.getElementById('response');
+
+                if(input === CORRECT_CODE) {
+                    window.location.href = 'unlocked.html';
+                } else {
+                    attempts++;
+                    response.innerHTML = `> ERR 0x${(attempts*0xDEAD).toString(16).toUpperCase()}<br>`;
+                    if(attempts >= 3) {
+                        document.body.classList.add('crash-active');
+                        setTimeout(() => {
+                            window.close();
+                        }, 2000);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

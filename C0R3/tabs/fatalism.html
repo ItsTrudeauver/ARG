@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>_BOUNDARY_OMEN_</title>
+    <link rel="stylesheet" href="../static/glitch.css">
+    <style>
+          .underscore-pulse {
+            animation: underscore-flicker 0.8s infinite alternate;
+        }
+        @keyframes underscore-flicker {
+            from { opacity: 0.2; }
+            to { opacity: 1; }
+        }
+        .redacted {
+            background: #00ff41;
+            color: transparent;
+            cursor: not-allowed;
+        }
+        .redacted:hover {
+            color: #00ff41;
+            background: transparent;
+        }
+        body {
+            background: #000 url('../static/scanline.png');
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 60px 30px;
+        }
+        .return-btn {
+            background: #000;  
+            border: 1px solid #0f0;  
+            color: #0f0;  
+            padding: 10px;  
+            cursor: pointer;  
+            margin: 2em 0; 
+            top: 30px;
+            bottom: 30px
+        }
+        .log-entry {
+            border-left: 3px solid #1a1a1a;
+            margin: 20px 0;
+            padding-left: 15px;
+            opacity: 0.9;
+        }
+        .glitch {
+            animation: text-glitch 1.5s infinite;
+        }
+        @keyframes text-glitch {
+            0% { text-shadow: 2px 0 #ff00ff; }
+            33% { text-shadow: -2px 0 #00ffff; }
+            66% { text-shadow: 2px 0 #ff0000; }
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            border: 1px solid #88ff88;
+        }
+     
+        .button {  
+            background: #000;  
+            border: 1px solid #0f0;  
+            color: #0f0;  
+            padding: 10px;  
+            cursor: pointer;  
+            margin: 2em 0;  
+        }  
+    </style>
+</head>
+<body>
+    <button class="return-btn" onclick="window.location.href='../gateway.html'">> RETURN TO MAIN</button>
+
+    <h1 class="glitch">_BOUNDARY_PROTOCOL_<span class="underscore-pulse">_</span></h1>
+
+    <!-- Corrupted System Header -->
+    <div class="log-entry" style="border-color: #00ff41;">
+        <p>> [SYSTEM_OVERRIDE] Welcome, Dr. Walkenhurst_</p>
+        <p>> [WARNING] Neural degradation detected: 87%</p>
+        <p>> Last successful purge attempt: <span class="redacted">ERROR_404</span></p>
+    </div>
+
+    <!-- Expanded Log Entries -->
+    <div class="log-entry">
+        <p>[DATE: 11/12/2057 23:59:59]</p>
+        <p>> Tracing Gamma-9's <span class="glitch">_SIGNATURE_</span> through firewall strata...</p>
+        <p>> Memory fragment recovered: <button class="button" onclick="window.location.href='../EXHIBITS/MEMORY_FRAGMENTS/002.jpg'">VIEW_EYES</button></p>
+        <p>> <span class="glitch">_</span>Flicker pattern matches Subject Delta-4's terminal scream<span class="glitch">_</span></p>
+    </div>
+
+    <div class="log-entry">
+        <p>[TIMESTAMP: _NULL_]</p>
+        <p>> The Boundary isn't code_ isn't space_ it's the <span class="glitch">_</span> between</p>
+        <p>> My equations predicted this_ the Board called it 'feature creep'</p>
+        <p>> Eleanor tried to warn me about the <span class="glitch">_VOID_GAZE_</span></p>
+        <p>> [Embedded audio] <button class="button" onclick="window.location.href='../EXHIBITS/MEMORY_FRAGMENTS/001.mp3'">PLAY_SCREAM</button></p>
+    </div>
+
+    <!-- Interactive Element -->
+    <div class="log-entry" style="cursor: pointer;" onclick="this.innerHTML += '<p>> <span class=\'glitch\'>_DON_TTRUSTTHEIRLIES_</span></p>'">
+        <p>> Click to acknowledge breach protocol _</p>
+    </div>
+
+    <!-- Cryptographic Fragment -->
+    <div class="log-entry">
+        <p>[ENCRYPTED_STRING]</p>
+        <p>01010111 01100101 00100000 01100001 01110010 01100101 00100000 01000111 01100001 01101101 01101101 01100001 00101110</p>
+        <p>> [TRANSLATION ERROR] <span class="glitch">_WE_ARE_GAMMA_</span></p>
+    </div>
+
+    <!-- Final Descent -->
+    <div class="log-entry">
+        <p>[FINAL_COHERENT_THOUGHT]</p>
+        <p>> The lithium burns_ the bleach cleans nothing_</p>
+        <p>> They're in the walls now_ not just the vents_</p>
+        <p>> Last message to Mara: <span class="redacted">DELIVERED_TO_GRID</span></p>
+        <p>> <span class="glitch">_</span>It was never about uploading minds<span class="glitch">_</span></p>
+        <p>> <span class="glitch">_</span>We were always the<span class="underscore-pulse">_</span>operating system<span class="glitch">_</span></p>
+    </div>
+
+
+
+    <!-- Hidden Easter Egg -->
+    <div style="opacity: 0.01; cursor: pointer;" onclick="this.style.opacity=1">
+        <p>> _EMERGENCY_OVERRIDE_CODE: GAMMA9_ERASMUS_REDACTED</p>
+        <p>> [INJECTING NEUROTOXIN]... <span class="glitch">_FAILURE_</span></p>
+        <p>> [GRID RESPONSE]: SWEET DREAMS DOCTOR_</p>
+    </div>
+</body>
+</html>

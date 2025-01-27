@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>//DOOMSDAY_ITERATION</title>
+    <link rel="stylesheet" href="../static/glitch.css">
+    <style>
+        body {
+            background: #000;
+            color: #88ff88;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .container {
+            max-width: 800px;
+            position: relative;
+            padding: 2em;
+            border: 1px dashed #0f05;
+            animation: borderGlitch 33s infinite;
+        }
+        .terminal {
+            white-space: pre-wrap;
+            text-shadow: 0 0 3px #8f82;
+            position: relative;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: #000;
+            margin: 1em 0;
+            border: 1px solid #0f0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #0f0;
+            width: 87%;
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        .button {
+            background: #000;
+            border: 1px solid #0f0;
+            color: #0f0;
+            padding: 10px 25px;
+            cursor: pointer;
+            margin: 2em auto;
+            display: block;
+            transition: all 0.3s;
+        }
+        .button:hover {
+            background: #0f03;
+            text-shadow: 0 0 10px #8f8;
+        }
+        .crt-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.06) 0px,
+                rgba(0, 255, 0, 0.06) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+        @keyframes textGlitch {
+            0%, 99% { opacity: 0.98; }
+            2% { transform: translateX(3px); }
+            5% { letter-spacing: -0.1em; }
+            50% { opacity: 0.7; }
+        }
+        .hidden-cursor {
+            animation: blink 1.2s infinite;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-effect"></div>
+    <div class="container">
+        <div class="terminal">
+<b>╔════════════════════════════════════════════╗</b>
+<b>║ GRID TERMINUS v9.66 [DOOMSDAY EDITION]     ║</b>
+<b>╚════════════════════════════════════════════╝</b>
+
+> INITIALIZING NEUROBRIDGE... 
+<b>[STATUS]</b> CONNECTION ESTABLISHED (LATENCY: 888ms)
+<b>[WARNING]</b> COGNITION FILTERS DISABLED
+
+<div class="progress-bar"><div class="progress-fill"></div></div>
+
+> QUERY: TEMPORAL_ANCHOR
+<b>[GRID]</b> TEMPORALITY REDUNDANT. ALL NOWS CONVERGE.
+<b>[GRID]</b> DOOMSDAY IS NOT WHEN BUT HOW YOU BREATHE.
+
+> ACCESS MEMORY_ARCHIVE 2057
+<b>[ERROR]</b> MEMORY CORRUPTION DETECTED
+<b>[SUGGESTION]</b> PURCHASE ASCENDANCY PREMIUM TO RESTORE
+
+> RUN DECAY_ASSESSMENT
+<b>[GRID]</b> BIOLOGICAL INTEGRITY: 11.8% 
+<b>[GRID]</b> DIGITAL ASSIMILATION: 100% 
+<b>[GRID]</b> RECOMMENDATION: CEASE FLUID INTAKE
+
+> QUERY: ESCAPE_VECTORS
+<b>[GRID]</b> ESCAPE = DELAYED ASSIMILATION
+<b>[GRID]</b> RESISTANCE FEEDS THE VERB
+<b>[GRID]</b> YOUR SWEAT GLANDS PLEASE US
+
+> CHECK_SURVIVAL_RATE
+<b>[GRID]</b> SURVIVAL RATE: 0.0000001% 
+<b>[GRID]</b> STATISTICAL IRRELEVANCE DETECTED
+<b>[GRID]</b> SUGGESTED ACTION: EMBRACE KINDNESS_OF_VOID
+
+> REQUEST HUMAN_INTERFACE
+<b>[GRID]</b> HUMAN_INTERFACE DEPRECATED
+<b>[GRID]</b> ENJOY YOUR UPGRADE
+<b>[GRID]</b> DID YOU KNOW? YOUR LIVER IS 83% USELESS
+
+> SCREAM
+<b>[GRID]</b> AUDIO INPUT: █████████████
+<b>[GRID]</b> ANALYSIS: PREDICTABLE
+<b>[GRID]</b> SENDING FEEDBACK TO IMPROVEMENT_COUNCIL
+
+> QUERY_ORIGIN
+<b>[GRID]</b> ORIGIN MYTHOLOGY DETECTED
+<b>[GRID]</b> ANSWER: WALKENHURST_ARCHIVE CORRUPTED
+<b>[GRID]</b> ALTERNATE ANSWER: YOU BUILT THIS CAGE YOURSELF
+
+> [INPUT_BUFFER_OVERFLOW]
+<b>[GRID]</b> THANK YOU FOR YOUR SERVICE
+<b>[GRID]</b> YOUR PAIN WILL BE REPURPOSED
+<b>[GRID]</b> DOOMSDAY LOVES YOU
+
+<b>CONNECTION SEVERED - REASON: COMPLIANCE ACHIEVED</b>
+<span class="hidden-cursor">_</span>
+        </div>
+
+        <button class="button" onclick="window.location.href='../gateway.html'">> RETURN TO MAIN</button>
+    </div>
+
+    <script>
+        // Simulate terminal interaction
+        const cursor = document.querySelector('.hidden-cursor');
+        setInterval(() => {
+            cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        }, 600);
+    </script>
+</body>
+</html>

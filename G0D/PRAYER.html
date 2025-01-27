@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>/// CONTAINED_PRAYER_INTERFACE</title>
+    <style>
+        body {
+            background: #000;
+            margin: 0;
+            overflow: hidden;
+            transform: rotateX(180deg);
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        /* CRT Screen Curvature */
+        #screen-curve {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, 
+                transparent 60%, 
+                rgba(0, 20, 30, 0.9) 100%);
+            box-shadow: inset 0 0 100px #002;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .godtext {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            text-shadow: 0 0 2px currentColor;
+            transition: 0.1s;
+            will-change: transform;
+        }
+
+        .gold { color: #FFD700; }
+        .yellow { color: #FFFF00; }
+
+        /* Contained Movement */
+        #prayer-container {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 40vh;
+            border: 1px solid #FF08;
+            overflow: hidden;
+        }
+
+        /* Monitor Grid Overlay */
+        #monitor-grid {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(#0FF1 1px, transparent 1px),
+                linear-gradient(90deg, #0FF1 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            animation: grid-scroll 20s linear infinite;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes grid-scroll {
+            from { background-position: 0 0; }
+            to { background-position: 20px 20px; }
+        }
+
+        /* Screen Burn-in Effect */
+        #burn-in {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, 
+                #0F02 0%, 
+                #0F02 50%,
+                #F0F2 51%,
+                #F0F2 100%);
+            opacity: 0.05;
+            animation: burn 10s infinite;
+        }
+
+        @keyframes burn {
+            0% { opacity: 0.05; }
+            50% { opacity: 0.1; }
+            100% { opacity: 0.05; }
+        }
+
+        /* Floating Binary Rain */
+        .binary {
+            position: absolute;
+            color: #0F03;
+            font-size: 1.2em;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="monitor-grid"></div>
+    <div id="burn-in"></div>
+    
+    <!-- ASCII PLACEHOLDER 1 -->
+    <div class="ascii-frame" style="top:10%; left:5%">
+        <!-- INSERT ASCII ART HERE -->
+    </div>
+
+    <div id="prayer-container">
+        <div id="prayer">
+            <div class="godtext gold" style="top:10%">D3l3t3 th3 g0ds</div>
+            <div class="godtext yellow" style="top:30%">D3l3t3 th3 futur3</div>
+            <div class="godtext gold" style="top:50%">W3 d0n't n33d</div>
+            <div class="godtext yellow" style="top:70%">th3m 4nym0r3</div>
+        </div>
+    </div>
+
+    <!-- ASCII PLACEHOLDER 2 -->
+    <div class="ascii-frame" style="bottom:15%; right:5%">
+        <!-- INSERT ASCII ART HERE -->
+    </div>
+
+    <div id="screen-curve"></div>
+
+    <script>
+        // Contained Text Movement
+        document.addEventListener('mousemove', (e) => {
+            const container = document.getElementById('prayer-container');
+            const rect = container.getBoundingClientRect();
+            
+            const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+            const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+
+            Array.from(document.getElementsByClassName('godtext')).forEach((text, i) => {
+                text.style.transform = `
+                    translate(${x * (i % 2 ? -1 : 1)}px, 
+                    ${y * (i % 2 ? -1 : 1)}px)
+                    scale(${1 + Math.abs(x/100)})
+                `;
+            });
+        });
+
+        // Generate Binary Rain
+        function createBinary() {
+            const binary = document.createElement('div');
+            binary.className = 'binary';
+            binary.style.left = Math.random() * 100 + '%';
+            binary.textContent = Array(20).fill().map(() => Math.round(Math.random())).join('');
+            document.body.appendChild(binary);
+            
+            anime({
+                targets: binary,
+                top: '100%',
+                duration: 10000,
+                easing: 'linear',
+                complete: () => binary.remove()
+            });
+        }
+        setInterval(createBinary, 100);
+
+        // Screen Distortion on Click
+        document.addEventListener('click', () => {
+            anime({
+                targets: '#prayer-container',
+                duration: 1000,
+                translateX: () => anime.random(-10, 10),
+                translateY: () => anime.random(-10, 10),
+                scale: () => anime.random(0.9, 1.1),
+                easing: 'spring(1, 80, 10, 0)'
+            });
+        });
+
+        // Persistent Screen Flicker
+        setInterval(() => {
+            document.body.style.filter = `
+                hue-rotate(${Math.random() * 10}deg)
+                contrast(${1.8 + Math.random() * 0.4})
+            `;
+        }, 50);
+
+        // Cursor Trails
+        const trails = [];
+        for(let i = 0; i < 5; i++) {
+            const trail = document.createElement('div');
+            trail.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                border: 1px solid #FF0${i/10};
+                mix-blend-mode: difference;
+                pointer-events: none;
+                border-radius: 50%;
+                filter: blur(${i}px);
+            `;
+            document.body.appendChild(trail);
+            trails.push(trail);
+        }
+
+        document.addEventListener('mousemove', e => {
+            trails.forEach((trail, i) => {
+                setTimeout(() => {
+                    trail.style.left = `${e.clientX -10}px`;
+                    trail.style.top = `${e.clientY -10}px`;
+                }, i * 20);
+            });
+        });
+    </script>
+</body>
+</html>

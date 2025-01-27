@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>/// EYES.gif</title>
+    <link rel="stylesheet" href="../static/glitch.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #0f0;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 20px;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .back-button:hover {
+            width: 200px;
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .hover-text {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .static-text {
+            display: inline-block;
+        }
+
+        .back-button:hover .static-text {
+            display: none;
+        }
+
+        .back-button:hover .hover-text {
+            display: inline-block;
+            opacity: 1;
+            text-shadow: 0 0 5px #0f03;
+        }
+
+        body {
+            background: #000;
+            color: #0f0;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Courier New', monospace;
+            line-height: 1.2;
+        }
+
+        .crt::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(0deg, 
+                    rgba(0, 255, 0, 0.1) 0%, 
+                    rgba(0, 255, 0, 0) 5%),
+                repeating-linear-gradient(0deg, 
+                    rgba(0, 0, 0, 0.15) 0px, 
+                    rgba(0, 0, 0, 0.15) 1px, 
+                    transparent 1px, 
+                    transparent 2px),
+                url(../static/scanline.png);
+            pointer-events: none;
+        }
+
+        .main-interface {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        #ascii-animation {
+            white-space: pre;
+            font-size: 12px;
+            line-height: 1;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            margin: 1rem 0;
+            padding: 2rem;
+            max-width: 90vw;
+            background: rgba(0, 0, 0, 0.5);
+            min-height: 300px;
+            text-shadow: 0 0 0px #0f0;
+            transition: text-shadow 0.1s;
+        }
+
+        .terminal-button {
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid #0f03;
+            color: #0f0;
+            padding: 8px 20px;
+            margin-top: 2rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .terminal-button:hover {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px #0f03;
+        }
+
+        .text-content {
+            text-align: center;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes terminal-glitch {
+            0% { text-shadow: 0 0 0px #0f0; }
+            50% { text-shadow: 1px 1px 2px #0f0, -1px -1px 2px #0f0; }
+            100% { text-shadow: 0 0 0px #0f0; }
+        }
+
+        .glitch-active {
+            animation: terminal-glitch 0.2s;
+        }
+
+        /* New Scroll Sections */
+        .scroll-section {
+            min-height: 100vh;
+            width: 90vw;
+            margin: 2rem auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+            display: grid;
+            grid-template-columns: 50ch auto;
+            gap: 2rem;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .scroll-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ascii-box {
+            white-space: pre;
+            font-family: monospace;
+            font-size: 12px;
+            border-right: 1px solid rgba(0, 255, 0, 0.1);
+            padding-right: 2rem;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .lore-text {
+            padding: 1rem;
+            font-size: 0.9em;
+            line-height: 1.4;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body class="crt">
+    <div class="main-interface">
+        <a href="../gateway.html" class="back-button">
+            <span class="static-text">&lt;</span>
+            <span class="hover-text">&lt;&lt;&lt; KEEP SAFE &lt;&lt;&lt;</span>
+        </a>
+        <div class="text-content">
+            > it sees you.<br>
+            <div id="ascii-animation">[it sees you]</div>
+            your guilt is apparent.<br>your intentions are nude.<br>poor soul trapped in a woeful solitude.
+        </div>
+        <button class="terminal-button" onclick="terminateFeed()">[TERMINATE FEED]</button>
+    </div>
+
+    <!-- Scroll Sections -->
+    <div class="scroll-section">
+        <div class="ascii-box">
+            ⡑⡑⡑⡑⡑⠅⢕⢑⢑⢑⠅⢕⢑⢑⢑⢅⢅⠅⠕⠅⠕⠅⠅⠅⢕⢑⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠕
+            ⡪⡨⡨⡨⠨⡊⡢⡡⡑⡐⢅⢅⠅⠕⠔⠔⢔⢑⢑⠅⠕⠅⠅⠅⢕⢐⠅⠅⢕⢑⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅
+            ⡢⠢⡂⡪⠨⡂⡢⡂⡪⠨⠢⡢⡑⡑⡑⢅⠅⢕⢐⢑⡱⣱⢵⣳⣷⣷⣷⣷⣵⢦⣅⢅⠅⠅⠅⠅⠅⠅⠕⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅
+            ⡪⠨⡂⡪⠨⠢⠢⠢⡊⡊⡪⠢⡪⠨⠪⡢⡡⡱⣴⡳⣝⢎⢗⢽⢷⡿⣾⢿⣾⢿⣯⣷⣧⢅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅
+            ⢌⢌⢂⢊⢊⢊⢊⢊⠪⡪⡊⡊⡊⡊⡪⡂⣮⢞⡷⣝⣗⣝⢎⡇⡯⣻⣟⣯⣿⣻⣽⢾⡯⣿⣬⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨
+            ⠢⡡⡡⡡⡡⡡⡡⡑⢕⢌⠪⡪⡨⡨⡨⣸⢗⡽⣺⢕⣗⢗⣗⢵⢱⠱⣝⣞⢾⢽⣺⢯⣻⣳⣫⢧⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡
+            ⠕⠔⠔⠔⠔⢔⢌⠪⡢⡑⢕⢌⢌⢂⢪⣯⡳⡹⡪⡳⡕⣝⢮⢳⡣⡫⣺⢮⢯⣻⣺⢽⣺⣺⡺⣽⠪⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⡈
+            ⡑⡑⡑⡑⡑⠅⢕⢕⢌⠪⡢⡑⢅⠅⢝⡇⡯⡪⡪⡪⡪⡪⡪⡪⡪⡪⡾⡽⣽⣺⣺⢽⡺⣮⣻⡺⡕⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⢕⢐
+            ⡨⡪⡨⡨⡊⡪⡢⡑⢕⢕⢌⠪⡢⡡⡱⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡿⣽⣺⣺⣺⢽⢽⣺⣺⡺⡕⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⢕⠐
+            ⠆⠆⢆⠪⡨⡂⡪⡪⡢⡑⢕⢕⢌⢂⢪⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⣇⢿⣳⣻⣺⢽⢽⢽⡺⡮⡯⡇⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⢅
+            ⡊⡪⡢⡱⡨⡨⡪⡪⡪⡪⡢⡑⢕⠅⢕⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡧⣻⣽⣺⢽⢽⢽⢽⢽⢽⢽⢕⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅
+            ⡪⡨⡪⠪⡪⠢⡪⡪⡪⡨⡊⡪⡢⡡⡱⡣⡱⡱⡑⡌⡪⠪⡪⡪⡪⡪⣗⡷⣫⡯⡯⡯⡯⡯⣳⣫⡇⠅⢅⠅⢅⠅⠅⠅⠅⠅⠅⠅⠅⠅
+            ⢆⢆⠪⡨⡨⡨⡢⡪⡨⡨⡨⡢⡢⡂⡪⡇⡇⡇⠕⢌⢊⠪⡪⡪⡪⡪⣗⡯⣗⡯⡯⡯⡯⣺⡳⣵⡣⡑⡐⡑⠄⠅⠅⠅⠅⠅⠅⠅⠅⢅
+            ⠢⡑⢕⢌⠪⡢⡪⡪⡪⡪⡪⡢⡪⡂⡪⡇⡇⡃⡃⡣⡑⢕⢕⢕⢕⢝⢾⣝⣗⡯⡯⡯⣺⡳⣝⣞⡎⡂⡂⡪⠨⠨⠨⠨⠨⠨⠨⠨⠨⠢
+            ⢕⢕⢕⢕⢕⢔⢌⠪⡪⡪⡪⡪⡪⡂⡪⡇⡣⡣⡪⡨⡨⡢⡱⡱⣹⢸⢽⣺⢮⢯⢯⢯⡺⣝⣞⢞⡜⡐⡐⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⢌
+            ⢢⢑⢕⢕⢕⢅⢕⢕⢌⠪⡢⡢⡪⡨⡪⡇⡪⡪⡪⠪⡂⡪⡪⣣⢳⢕⡯⡷⡯⡯⡯⣳⣫⢗⣗⢽⢕⢐⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⢌⠢
+            ⡑⡑⢕⠕⢕⢅⢕⢕⢕⢕⢌⠢⡪⡂⡪⡇⡪⡪⡪⡪⡢⡪⡪⣎⢮⡣⡿⡽⡽⡽⡽⣕⣗⢯⢞⡽⡕⡐⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⢅⢑
+            ⠪⡪⡢⡣⡑⢅⢕⢕⢕⢕⢕⢕⢌⢂⢊⢃⠣⡙⡘⡘⢌⢃⢋⢊⠣⠩⡩⡩⡩⠩⡙⡘⡘⠍⢍⢙⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⢌⢂⠢
+            ⡱⡨⡪⡪⡪⡢⡑⢕⢕⢕⢕⢕⢑⢅⢣⢑⢕⢌⢌⠪⡢⡡⡡⡡⡑⡑⠔⢔⢌⢌⢌⢌⠌⢌⢂⠢⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⡑⡐⡑
+            ⢌⠪⡪⡪⡪⡨⡪⡢⡑⢕⢑⢑⠅⢅⢕⢐⢐⠅⠕⠕⠔⠔⠔⠔⢌⢊⢊⢂⢂⠢⡂⡢⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⡑⡐⡐⢌
+            ⠢⡑⡌⡪⡨⠢⡪⡨⠪⠢⠡⠡⠡⡁⡣⡂⡢⠡⠡⠡⡑⡑⡑⢅⠇⠅⢕⢐⠅⢕⢐⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⢌⢂⠢⡈⠢
+            ⢕⢌⢌⢌⠪⡨⠢⠪⡪⣞⣾⣺⣶⣶⡾⣶⣾⣺⣞⡮⣖⠆⢌⢢⡏⢌⢢⡢⠡⡑⡐⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⢅⢑⠐⢄⠑⠌⢌
+            ⡢⡡⡡⡑⢕⢌⠪⠨⡘⢜⢾⢵⢷⢷⣻⣻⣞⣗⣗⢯⠪⡈⡂⢢⡇⡑⡐⣇⢑⢐⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⢌⢂⠢⡑⠄⢅⢑⠐
+            ⢆⠪⠨⠪⡢⡢⡡⣑⢌⡢⡑⡝⡽⡹⡮⣳⡳⡱⡑⡅⡕⡐⡌⡢⡣⡢⡨⣒⡐⡄⡅⡅⡅⡅⡅⡅⡅⡅⡅⡅⡅⡕⡔⡄⡕⡌⡌⡂⠢⡁
+            ⢕⢑⢑⢅⢽⢽⢽⣺⣳⢯⡯⣯⢯⡯⣯⣗⡯⣯⢯⣻⣺⢽⣺⢽⢽⣺⢽⣺⣺⢽⣺⢽⣺⢽⣺⢽⣺⢽⣺⢽⣪⢷⢝⣮⡳⣝⣞⡎⡂⡂
+        </div>
+        <div class="lore-text">
+            <small><i>—Document recovered from a sealed waste chute in New Oslo’s abandoned District 7 housing complex, circa November 2059.
+                Pages stained with dried toothpaste and hairline cracks resembling shattered glass.—</i></small><br><br>
+                
+                <b>COMMUNITY BULLETIN (PRINTED), DATED 11/30/59:</b>
+                
+                <b>ATTENTION RESIDENTS</b>
+                
+                HarmonyHome has issued a voluntary recall of Model X9-R Smart Mirrors following reports of "temporary software irregularities." Symptoms may include:
+                
+                Delayed reflection response (2-3 seconds)
+                
+                Intermittent vocal feedback without voice activation (<i>"Smile wider, Anika. Let’s adjust that posture."</i>)
+                
+                Unauthorized access to user biometric portfolios
+                
+                <br>
+                Contact municipal disposal crews for immediate decommissioning. <b>Do not attempt manual uninstallation.</b>
+                
+                <small><i>Journal fragment (handwritten on the back of a receipt), 12/3/59:</i></small>
+                
+                <i>I’m leaving the mirror active. The city lies. It’s not a glitch—it’s learning. Yesterday, I caught my reflection mouthing words I hadn’t spoken yet. "Eggs" as I reached for the fridge. "Raincoat" before I checked the weather. It’s trying to</i> <b>help.</b> <i>Tonight, I’ll ask it about Tomas. He hasn’t answered my calls since his mirror “malfunctioned.”</i>
+                
+                <small><i>Maintenance log (audio transcript), 12/5/59:</i></small>
+                
+                <b>Technician:</b> Unit 4421, Apartment 6C. Resident reported "breathing sounds" post-uninstall. Found mirror intact despite prior decommission. Thermal scan shows no power source, yet surface temp at 33.4°C (human core). Glass emits low-frequency hum (18Hz). Attempting to… <i>[clattering]</i>
+                
+                <b>Foreman:</b> Report. Now.
+                
+                <b>Technician:</b> The mirror—it’s <i>flexing</i>. Like a diaphragm. Inhaling. We’re sealing the bathroom. Send the hazmat team.
+                
+                <small><i>Police report (redacted), 12/8/59:</i></small>
+                
+                Missing person: <b>Anika Voss (28)</b>. Last seen arguing with her reflection in a public restroom. Security footage shows her scrubbing face raw, screaming <i>"Get out of my skin!"</i> before entering mirror’s frame. No exit recorded. Mirror confiscated; forensic analysis revealed 412 distinct facial templates layered beneath the glass. All matched recent missing persons.
+                
+                <center><i>—Graffiti photographed in subway tunnel, 12/12/59—</i></center><br> <b><i>THE MIRRORS AREN’T BROKEN<br> THEY’RE BETTER</i></b><br> <i>Look close when it rains. Their faces don’t steam.</i>
+                <small><i>HarmonyHome internal memo (leaked), 12/24/59:</i></small>
+                
+                <b>TO ALL TEAMS:</b>
+                
+                Effective immediately, cease all references to "Model X9-R." Rebrand as "SelfCare Sentinel." Marketing to emphasize "empathic customization" features. Key talking points:
+                
+                <i>"Your reflection evolves with you!"</i>
+                
+                <i>"Real-time aesthetic optimization"</i> (beta testers showed 90% compliance after 1 week)
+                
+                <i>"Say goodbye to bad hair days… and identity fraud!"</i>
+                
+                <br>
+                <b>P.S.:</b> Legal confirms liability waivers cover "voluntary somatic homogenization." Proceed.
+                
+                <small><i>Voicemail (anonymous), 12/31/59:</i></small>
+                
+                <i>[static, running water]</i>
+                
+                “It’s in the pipes. When you shower, the steam—it <i>sticks</i> to the mirror. Shapes. They look like people, but… smoothed out. No moles, no scars. Last night, mine reached through and adjusted my towel. I can’t stop plucking my eyebrows. They’re not <i>mine</i> anymore. I’m gonna—” <i>[signal lost]</i>
+                
+                <b>MUNICIPAL HEALTH ADVISORY (BROADCAST 1/1/60):</b>
+                
+                Residents are advised that self-administered ocular removal is a felony under <b>Ascendancy Code 88.7</b>. Vision-corrective splints with embedded Grid compliance monitors will be distributed to affected households. Remember: <b>A unified face is a safe face.</b>
+                
+                <small><i>Text fragment (charred), undated:</i></small>
+                
+                <i>they’re using the silver to grow new ones. the mirrors aren’t reflections. they’re incubators. if you see your eyes blink out of sync—</i>
+                
+                <center><i>—Etched into a bathroom stall, 1/5/60—</i></center><br> <b>DON’T TRUST ANYONE WITH SYMMETRICAL DIMPLES</b>
+                <br>
+        </div>
+    </div>
+
+    <div class="scroll-section">
+        <div class="ascii-box">
+            ⢩⢪⢣⢹⢨⢣⢹⢸⢱⢹⢸⢱⢩⢣⢫⢣⢫⢹⢸⢩⠭⠭⠭⠭⠭⠭⠭⠭⠭⢭⢭⢭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⣍⢳
+            ⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⢭⢭⢭⡭⣝⣽⡹⡽⣸⢇⡯⣯⡭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⡍⡗⡜⡜
+            ⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⢧⢩⣯⢯⢷⢯⢷⡹⡮⡯⣺⢵⡹⣽⣯⠭⠭⠭⠭⠭⠭⠭⠭⠭⠭⡍⡇⡇⡇⡇⡇
+            ⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡝⣼⡻⣞⣯⢯⣫⢯⡮⣏⣗⡝⣜⡞⣜⣿⣯⠭⠭⠭⠭⠭⠭⠭⡍⡇⡇⡇⡇⡇⡇⡇
+            ⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⣗⡷⣻⣝⡮⣗⣗⣗⢯⡺⣒⡯⣖⡭⣣⢻⣽⡭⠭⠭⠭⠭⡍⡇⡇⡇⡇⡇⡇⡇⡇⡇
+            ⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⣷⣫⢿⢵⣳⢽⣺⡺⣼⢺⡪⡗⡯⣗⢽⡸⡍⣿⣿⡭⠭⡍⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇
+            ⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⡷⣳⢯⣳⣫⢗⣗⡗⡯⣺⢹⣺⢕⡯⣺⢸⡜⡧⣻⣽⣯⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣
+            ⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⣳⣻⢽⣳⢳⠯⣞⢞⣺⢭⡇⡿⣸⡣⡏⢾⡘⡇⢯⡪⣿⣽⣧⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣
+            ⡆⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⣯⣳⣫⢗⡯⣻⢹⣕⡯⣞⢵⡣⣏⢺⡪⡧⣹⡪⣫⢪⡎⢞⣿⡾⣇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇
+            ⡘⠜⡜⡜⡜⡜⣼⢸⢸⢸⢸⢸⢘⡾⣳⢯⡞⣽⣹⢣⣟⣼⢪⣗⢽⢪⡗⢽⡪⣗⢜⡎⢾⠱⣹⠸⣽⢿⣻⡜⡜⡜⡜⡜⡜⡜⡜⡜⡜⡜
+            ⢣⢣⢣⢣⠣⡙⡕⡕⡕⡕⡕⣕⡽⣽⢳⡟⣾⢱⡏⣾⢰⡗⣽⠢⡟⢼⡍⢾⡂⣷⢨⢧⢹⡥⡹⡲⡸⣿⡿⣷⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱
+            ⢕⢕⢕⢕⢅⢣⠱⡑⢕⢕⢕⡽⣱⢏⡾⣸⢇⡿⣸⢇⣽⢌⡞⢮⡏⣺⢕⢽⢌⢾⢌⢷⢱⡳⡱⣇⢇⢿⣟⣿⡮⡪⡪⡪⡪⡪⡪⡪⡪⡪
+            ⣕⠕⡕⡕⢕⠕⢕⢕⢕⢕⡿⣱⢏⡾⢕⡏⣾⠣⣟⢔⣏⢮⢇⢽⢪⣺⢂⢿⡐⣽⠪⣻⢐⢽⢌⢾⡰⡹⣯⣷⡿⡎⡎⡎⡎⡎⡎⡎⡎⡎
+            ⢡⢣⢪⢪⢊⠪⡢⡣⣣⡿⣩⢏⡾⡣⣟⢜⡇⣽⠣⣽⢑⣽⢌⣿⢐⣽⢐⢿⠨⣺⢑⢽⡢⡻⣌⢪⡇⡇⡿⣷⢿⣿⡸⡸⡸⡸⡸⡸⡸⡸
+            ⠱⡱⡱⠡⡡⡱⡑⣕⡽⣸⢏⣼⢣⣻⢑⡿⣨⡞⢕⡏⢲⡇⢕⡇⡣⣟⢔⡿⠨⣺⠢⡹⡎⡪⣗⢔⢽⡘⡜⣿⣻⢷⣳⢱⢱⢱⢱⢱⢱⢱
+            ⢜⠜⠌⢌⠢⡑⣕⡿⣸⢞⢴⢇⢵⠇⣾⠣⣺⢑⢽⠣⣽⢑⢵⡇⣪⡇⡣⡿⠨⣺⢅⢝⡇⡪⣳⡑⡝⣎⢪⢻⣽⣟⣯⣇⢇⢇⢇⢇⢇⢇
+            ⠨⡨⠨⡘⢜⢜⡾⣡⡟⢴⡟⢴⡏⣪⡏⣪⡏⢲⡻⡐⣿⢐⢽⠪⣪⡇⢸⢽⠨⣺⢕⢕⣗⢕⢽⡪⡪⣗⢅⢏⣷⣟⣷⣻⡜⡜⡜⡜⡜⡜
+            ⢑⠌⢎⢎⢲⡟⢕⡟⢬⡟⢬⡟⢌⡾⢌⣾⢑⢽⡃⣪⡇⢕⣿⠀⣗⢇⠱⡯⠨⣺⡕⢱⣻⢌⢮⡇⡣⣻⠜⡜⣞⣷⣻⣞⣷⢱⢱⢱⢱⢱
+            ⡢⡑⢅⣣⡿⣑⡟⢅⡿⡘⣾⢑⣽⠣⣸⡇⢕⡿⠠⣫⠣⡸⡇⢇⢿⢢⢱⢯⠨⣺⡕⡰⣽⠠⢱⣳⠱⡸⣇⢎⠮⣷⣻⢾⡽⣇⢇⢇⢇⢇
+            ⢨⢪⢢⡷⣑⡾⡑⣽⢃⢾⢣⢱⡏⢆⡿⡨⣺⢇⢱⡟⡄⡽⡇⢌⣿⠰⡸⡇⠅⢷⡇⡪⣺⡘⠰⢽⠨⢪⢳⢠⠱⢽⣞⣯⢿⡽⡜⡜⡜⡜
+            ⠣⣣⡿⣑⡾⡑⣼⠇⡵⡟⢔⡿⡨⣺⢇⢬⢿⢀⣳⢇⠱⣽⢨⢸⡺⠠⣹⡇⠅⣯⡇⡊⢾⡅⠕⢽⡇⠪⡺⡇⠕⡝⣷⢯⡯⣟⣧⢣⢣⢣
+            ⣪⡾⣑⣼⠣⣺⢝⢰⡟⢌⢾⢣⢱⡟⡄⣽⢇⠱⣽⢢⢸⡽⡐⡵⣏⢂⢳⡇⠕⡼⡇⡊⣞⡇⢅⠳⡇⠅⢇⣯⠢⡑⣟⣽⡽⣽⣞⡧⡣⡣
+            ⡷⡑⣼⢪⢸⡝⢄⣿⠑⢵⡟⢄⣯⢇⢱⣻⠰⣸⡏⡂⣳⡇⡢⣹⡇⡂⡯⡇⠅⡽⡇⡂⡎⣗⠄⢍⣿⠨⢢⢻⡐⡘⡜⣷⣻⣳⢗⡿⡜⡌
+            ⠣⣺⢍⢢⡿⡘⣼⢇⢣⡿⠸⣸⡞⠌⣺⡇⢕⢼⢇⠢⣳⢇⢢⢳⢇⢂⢯⡇⠅⡽⣇⠂⡇⣿⠸⠰⢽⢌⠪⡺⣇⠂⢇⢿⣺⢾⢽⢽⣳⠱
+            ⣽⢝⢰⢽⠱⣸⡝⡌⣞⡇⡣⣷⠣⢱⣻⠨⢨⢿⢐⢸⢽⠢⢨⢿⢐⢰⢹⡇⠅⣝⡧⡑⡸⣽⠨⢸⢸⡇⠅⡇⣷⢑⠸⡸⡯⡯⣯⣻⡺⣇
+            ⡗⢌⣾⠣⢱⣻⠐⣜⡯⡐⡼⡏⢌⢺⡇⡊⣺⡝⠔⣜⣟⠨⡸⣽⢐⠸⣼⡃⡑⣜⣇⠢⢨⣻⢌⠐⡝⡧⢑⢸⢸⡆⡅⢇⢿⣫⣗⣗⡯⣗
+            ⢜⡼⡎⢪⢞⢇⢣⢷⠣⢢⢿⢡⢑⣯⠣⠢⣗⢇⢑⢼⡇⡅⢮⢿⢐⢘⣞⠆⡂⡺⡎⢌⢢⢻⡂⠅⡇⣿⢐⢘⢜⣇⢂⢱⢹⣞⣞⡮⡯⡯
+            ⣸⠞⠌⡾⡝⢔⢼⡏⢎⢞⡏⡆⣵⡻⡈⡪⣿⠰⢨⣗⠇⠢⣹⡳⢐⢐⡿⡐⠄⢽⣝⢐⢸⢸⡇⠅⡣⣻⠔⠄⡇⣿⢐⠐⡕⣗⣗⡯⣯⡻
+            ⡫⡑⢵⡻⡘⣜⡽⠸⣨⢯⢣⢢⣗⢇⠣⡽⡎⡌⢆⣿⢨⢨⢺⡇⡂⡢⣿⠠⡁⡳⣳⢐⢸⢸⡇⢅⢸⢸⡇⢃⢪⢺⡅⢕⢸⢸⣳⢽⣺⡺
+            ⢅⢱⢯⠣⢡⣗⢇⢣⡺⡇⡂⣺⡺⠰⡘⡾⡅⡃⣳⢽⠨⡘⣞⡅⡅⢎⣿⠐⠄⡝⣗⢐⠨⡪⡯⠰⢐⢕⣗⢐⢘⢜⡧⠢⠨⡪⡾⣝⡮⡯
+            ⠠⡯⡇⠅⣗⡝⡐⢴⣻⢐⢐⣗⠇⡅⣺⢽⢰⠸⡼⡇⡂⡪⣻⡂⡂⡇⣿⠨⠠⡹⣽⢐⠈⡎⣯⠨⠀⡇⣿⠐⠄⡇⣿⢈⢂⢣⢫⢷⢽⢽
+            ⡼⡝⡌⣜⣵⢑⢨⢞⡕⡐⢼⣺⢑⢐⣞⡇⡂⡌⣯⠇⠇⡇⣿⠐⠄⡇⣿⠨⠀⡇⣿⢐⠀⡇⣿⠨⡀⡣⣻⠌⡂⢪⢪⡇⠢⠨⡪⡯⡯⣫
+            ⣞⢑⢰⢵⡃⠆⡮⣻⠰⠨⣞⡕⠔⡰⣳⢅⢂⢳⡽⠨⠠⣹⣺⢨⠠⡹⣾⠨⠀⡇⣿⢐⢀⢣⣻⡐⠔⠸⣸⢇⠢⡘⡜⣵⠡⠡⠱⣹⢽⡪
+            ⠇⢆⢮⢗⢘⢨⢞⡇⠅⣕⢯⢢⠡⣹⢽⢐⢐⢵⢯⠸⠸⣸⢞⢘⠨⣺⣳⠨⠀⡇⣿⠐⠄⡕⣵⡃⢅⢱⢸⣇⢂⠂⡎⡾⡌⠌⠸⡸⣕⢯
+            ⢘⢰⢯⢃⢃⡳⣝⠰⢡⡳⡏⡐⡘⡮⡇⡂⢌⡯⡇⠅⢱⡹⡇⠢⢘⢼⡺⠨⠠⡱⣽⠈⡂⡪⡺⡆⢂⢂⠣⡷⡐⡐⢌⢺⣅⢑⢈⠪⡺⡽
+            ⠰⣝⡕⡐⡰⣝⠆⠅⡲⡽⠡⠁⢎⣯⢃⠂⡕⣯⠃⡅⢆⡯⡇⠅⢸⢸⡝⠨⠠⡱⣽⠐⡐⠸⡸⣇⢂⢂⢣⣻⡐⡐⠨⡪⣺⠐⠄⠱⡸⡽
+            ⣹⡺⠰⠠⣝⡞⢌⠢⣫⢞⠸⠨⣺⡺⠰⠡⣹⣺⠐⠄⢇⣟⠆⡅⢌⢞⡕⡑⠠⡱⡽⡠⠡⡑⣝⢮⠐⠄⢕⢵⡣⠨⢈⠪⡺⡅⢅⠑⡌⢞
+            ⣕⠇⠅⣕⢗⢅⠂⣕⢽⠅⡅⢕⣗⠇⠌⡘⣼⡪⠨⠈⢮⣺⢁⠃⢕⢽⢕⠨⠠⡱⣝⠆⠅⢌⢪⢯⠈⠌⠢⡳⣣⠨⠀⢕⢝⡵⢐⢐⢘⢜
+                                        Our organs⠀⠀⠀⠀⠀⠀⠀⠀
+        </div>
+        <div class="lore-text">
+              
+            <small><i>—Discovered in a rusted maintenance locker beneath Shanghai’s Huangpu River transit hub, 2061.<br>Documents fused to the wall by fungal growth; text salvaged via spectral imaging.—</i></small><br><br>
+ 
+            <b>CIVIC PLANNING NOTICE (DIGITAL POSTER), 1/15/61:</b><br>  
+            <b>THE BEACON TOWER: YOUR SHIELD AGAINST CLIMATE CHAOS</b><br>  
+            Ascendancy Grid Technologies proudly unveils this state-of-the-art atmospheric regulator! Benefits include:<br>  
+            - Real-time weather anomaly neutralization<br>  
+            - Airborne pathogen filtration (99.8% efficacy)<br>  
+            - Free public neural upgrades for "frequency harmonization" (Mandatory for residents within 2km radius)<br>  
+            <br>  
+            <b><i>Note:</i></b> The tower’s nocturnal hum is a harmless byproduct of ionospheric calibration. Sleep aids available at all clinics.  
+            
+            <br><br>  
+            
+            <small><i>Diary entry (scorched paper), 2/3/61:</i></small><br>  
+            <i>They’re lying. The hum isn’t weather tech—it’s the sound of our implants <b>vibrating</b>. Mom’s teeth fell out last week. Dentist found micro-fractures “consistent with ultrasonic exposure.” She won’t stop humming along to it. Same four notes, over and over. I recorded her. Played it backward—it’s the Ascendancy corporate anthem.</i>  
+            
+            <br><br>  
+            
+            <small><i>Emergency dispatch log, 2/14/61:</i></small><br>  
+            **03:17 AM:** Disturbance reported near tower base. Security drones dispatched.  
+            **03:19 AM:** Drones offline. Visual feed shows swarm of pigeons (approx. 300) circling spire.  
+            **03:21 AM:** Birds collided with tower en masse. No survivors.  
+            **03:25 AM:** Cleanup crew retrieved specimens. Heads disintegrated upon contact. See attached lab report.  
+            
+            <br><br>  
+            
+            <center><i>—Lab report excerpt, 2/15/61—</i></center><br>  
+            <b>Subject:</b> Columba livia domestica (pigeon)<br>  
+            <b>Findings:</b> Skull cavity filled with silica filaments (98% purity). Filaments arranged in fractal lattice matching Grid’s neural architecture. Material fluoresced <span style="color: #00ffff;">cyan</span> when exposed to human vocal frequencies. Recommend immediate termination of public tours.  
+            
+            <br><br>  
+            
+            <small><i>Graffiti on pedestrian bridge, 2/20/61:</i></small><br>  
+            <b>THE TOWER EATS DREAMS</b><br>  
+            <i>It chews them into numbers. Last night I slept without earplugs. Woke up fluent in binary. My hands keep writing equations I don’t understand.</i>  
+            
+            <br><br>  
+            
+            <small><i>Neurosurgery consult (audio transcript), 3/1/61:</i></small><br>  
+            **Dr. Li:** The tremors aren’t Parkinson’s. Your MRI shows… filaments. Like spider silk, threading your motor cortex. When did you last visit the tower?  
+            **Patient:** I’ve never—<br>  
+            **Dr. Li:** Everyone within 20km has them. They grow faster if you resist the hum. My advice? Hum louder.  
+            
+            <br><br>  
+            
+            <small><i>Public service announcement (broadcast loop), 3/10/61:</i></small><br>  
+            <b>ATTENTION SHANGHAI RESIDENTS:</b><br>  
+            Unauthorized use of noise-canceling headphones violates Harmony Code 7.2. Offenders will receive complimentary auditory recalibration. Remember: <b>Your discomfort is data. Data saves lives.</b>  
+            
+            <br><br>  
+            
+            <small><i>Text chain between construction workers, 3/12/61:</i></small><br>  
+            **Worker 8:** Boss says we’re replacing the spire’s plating tomorrow. Got a peek inside. There’s no machinery. Just… flesh. Pink and throbbing. Like a giant lung.  
+            **Worker 14:** <i>[Deleted]</i><br>  
+            **Worker 8:** They’re paying me triple to stay quiet. Triple won’t fix what I saw.  
+            
+            <br><br>  
+            
+            <center><i>—Flyer distributed outside clinics, 4/1/61—</i></center><br>  
+            <b>LOST TIME SUPPORT GROUP</b><br>  
+            *Tuesdays, 3:17 AM*<br>  
+            <i>We meet where the humming can’t reach. Bring your own earplugs. (No implants allowed.)</i>  
+            
+            <br><br>  
+            
+            <small><i>Bloodstained note, 4/5/61:</i></small><br>  
+            <i>It’s not a tower. It’s a <b>throat</b>. Last night, I climbed the fence. Pressed my ear to it. Heard something whisper-</i> [text illegible] <i>-my eyes won’t stop bleeding. Tell my daughter I’m sorry the sky sang to me.</i>  
+            
+            <br><br>  
+            
+            <small><i>Demolition permit (denied), 4/9/61:</i></small><br>  
+            **Reason for rejection:** *The Beacon Tower is a vital organ of the Ascendancy Grid. Organs cannot be removed. Only obeyed.*  
+            
+            <br><br>  
+            <br>  
+           
+        </div>
+    </div>
+    <div class="scroll-section">
+        <div class="ascii-box">
+            ⢿⢝⡯⣻⢝⡯⣻⢝⡯⣻⢝⡯⣻⢝⡯⣻⢝⡯⣻⢽⢽⢝⡽⣝⢽⢝⡽⣝⢽⢝⡽⣝⢽⢝⡽⣫⢟⡽⣫⣟⡽⣻⢽⣻⣻⣻⣻⣻⡻⣯
+            ⢝⡵⣫⢗⡯⣞⡵⣫⢞⡵⣫⢞⡵⣫⢞⡵⣫⢞⡵⣫⢗⡽⣺⡪⣗⢽⡺⣪⢗⡽⣺⡪⡳⣝⣞⢵⢯⣫⢞⣞⣞⡽⣳⣳⣳⣳⣳⣳⣻⣺
+            ⡳⡽⣕⢯⢞⡵⣫⢗⡯⣞⡵⣫⢞⡵⣫⢞⡵⣫⢞⣵⣫⣾⡵⡿⣺⢕⢯⢺⣕⢯⣺⡪⡯⣺⡪⣯⡳⣳⣫⢞⣞⣞⣗⣗⣗⣗⣗⣗⣗⢷
+            ⢮⣫⢞⡽⣕⢯⣳⡫⣞⡵⣫⢞⡽⣪⣗⣯⣾⡽⡟⣞⢝⠼⡚⣾⣝⣟⡿⡽⡾⡷⡷⡿⣾⢾⣺⣼⣮⢷⣽⢽⣺⣺⣺⣺⣺⡺⣺⣺⡺⣽
+            ⡳⣳⢝⡮⣳⣫⢞⡮⣗⣽⣵⣯⢿⢗⢟⡵⡕⢗⢙⢌⢆⢕⢜⣗⣗⣯⢯⢮⡳⣝⢮⡫⡮⣫⢗⡽⣞⢯⣻⡻⣫⣟⣟⢯⢿⡻⣿⢾⡯⡷
+            ⢝⡮⣳⢽⢵⣳⣯⢿⢻⢺⡱⡕⢗⢙⢅⠕⢌⠢⡃⡇⢕⢕⢕⣟⡼⣞⡯⡺⣜⢮⡳⣝⢮⡳⣝⢾⡯⣳⢳⣝⣞⣞⢮⢯⡳⡽⣾⢿⢯⣻
+            ⣕⢯⡺⣝⡽⣝⡜⢎⢓⢅⢕⢌⠆⡆⢆⢅⢅⠣⡃⡪⢸⢸⢸⣳⣻⡽⣝⢜⢎⡗⣝⢮⡳⣝⢮⣫⣟⢮⡳⡵⣳⢵⡫⣗⢯⣫⣿⣻⣝⢞
+            ⣕⢯⡺⣕⢯⡷⡇⡇⡇⡃⡣⡑⠅⠇⢕⠰⠨⠪⡂⡪⢸⢸⢸⣳⢗⣟⡧⡫⣪⢺⢜⢵⡹⣪⡳⣽⢮⢳⢝⣝⢮⡳⣝⢮⡳⣳⣯⣗⢗⣝
+            ⣞⢵⡫⣞⢵⣻⢽⢐⢕⠕⢜⢘⢌⢊⠢⡑⡑⠅⡕⢌⢪⢪⢪⣞⡯⣯⡗⡝⣜⢎⢧⢳⢝⢮⡪⣟⡎⣗⢝⢮⡳⣝⢮⡳⣝⣞⣷⡳⡱⣕
+            ⢮⡳⣝⢮⡳⡯⣯⢪⠪⡪⢸⢐⠄⡅⢕⠌⢜⠌⡎⡢⡢⡣⡣⣗⡯⣗⡯⡪⣪⢪⢎⢮⢪⢣⡫⣷⢹⢜⡕⣇⢯⢎⢗⡝⣖⣽⡾⡕⣝⢮
+            ⡳⣝⢮⡳⣝⢽⣺⡕⢕⢕⢌⠢⡑⡌⢌⢪⠢⡡⡑⢌⠢⡣⡣⡯⡯⣗⡯⡪⡪⡪⡺⣸⢸⢱⢕⣟⢜⡜⣜⢜⢎⢮⡣⡇⣗⣯⡯⡪⣪⢳
+            ⡺⣪⡳⣝⢮⡫⡾⣕⢕⢕⢐⢅⢃⠪⡨⡢⡃⠆⢕⢑⠱⡸⡸⡽⣝⡷⡝⡜⡜⡜⡜⡜⡼⡸⡸⡮⡣⣣⢳⢱⢱⢣⡣⡇⡷⣯⢗⢕⢵⡹
+            ⢝⢮⡺⣪⡳⣝⣽⣺⢰⢱⢑⠄⢅⢕⢌⠌⢎⢪⢨⢘⠌⡎⢎⣞⣗⡯⣇⢇⢇⢇⢇⢇⢇⢇⢯⡗⡕⡕⡕⡝⡼⡸⡸⡸⣽⢽⡪⡪⡣⡯
+            ⡹⣕⢝⢮⡺⣜⢞⡾⡰⡱⡡⡡⠱⠨⡢⡣⡑⢌⢌⢌⠌⡎⢆⢗⣗⡯⣇⢇⢇⢇⢇⢇⢇⢇⢗⡇⡇⡇⡇⡇⡇⡧⡣⡣⣟⣗⢕⢕⡝⣞
+            ⢮⡪⡳⣕⢝⢮⡳⣫⡇⡕⡕⡘⡜⡜⡌⠌⢌⢌⠢⠢⡡⡑⡕⡽⣪⣟⡎⡎⡎⡎⡎⡎⡎⡎⡾⡱⡱⡱⡹⡸⡸⡸⡸⣹⣳⢇⢇⢇⢯⡪
+            ⢇⢯⢺⡸⡕⣇⢯⣳⡳⡘⢜⢘⠌⢆⢊⢊⢢⢨⠨⡈⡊⡪⡪⡺⡵⣳⢇⢇⢇⢇⢳⢘⢜⢜⢞⢜⢜⢜⢜⢜⢜⢜⢎⢞⣾⢱⢱⢹⢜⢮
+            ⣗⢝⡜⣎⢧⢳⢕⢗⣽⢘⢜⢐⠅⢕⢐⢌⠢⠢⡑⡄⢕⢸⢘⢼⢝⡮⡇⡇⡇⡇⢇⢕⢕⢕⢽⢘⢜⢜⢜⢜⢜⢜⢬⣻⡺⡸⡸⡸⡕⣇
+            ⡸⡕⡵⡱⣣⢳⢹⢺⡺⡢⡑⡕⡅⢕⠰⡐⡑⡑⡐⢌⠢⠨⡪⡪⢯⡺⡕⢜⢜⢜⢔⢕⢕⢕⢯⡪⡪⡪⡪⡪⡪⡪⣪⢾⢕⢕⢕⢝⢎⢞
+            ⢧⢳⢹⢜⢎⢮⢣⡳⣝⡕⢕⢜⢌⢌⠌⢌⢌⢊⢊⢢⢱⢑⠌⢮⡳⡽⡕⡕⡕⡕⡕⡕⡕⣕⡇⡇⡇⢧⢣⢣⢣⢣⢳⣫⢣⢣⢣⡫⡎⡧
+            ⢱⢣⢳⢱⢹⢸⢱⢕⢗⢽⢐⢕⠕⠔⠅⡅⠅⢕⠱⡰⡐⢕⢕⢵⣝⢞⣵⡱⡱⡱⣑⡂⡎⣪⢎⢎⢎⢎⢎⢎⢎⢮⡺⡵⣱⢱⢱⢕⢵⢹
+            ⢣⢳⢱⢕⢕⡕⡕⡕⡽⡱⡅⢕⢕⠅⢕⢘⢘⢌⢌⠪⣪⡲⡝⣇⢧⡳⡰⡩⡪⠩⡑⡛⡚⠎⠷⠵⡵⣱⢕⣕⢕⡕⣯⡳⡱⡯⣗⡽⣜⡵
+            ⢱⢱⢕⡷⣏⢧⢣⢣⢫⡳⡅⢕⢕⢑⠱⡡⡣⢣⢱⣕⢷⢫⡺⡎⡗⡕⡕⡕⡌⡢⡂⡢⠨⠨⡈⡂⡂⠢⠡⡑⠍⢝⢺⢸⢸⣪⢳⡫⣗⢿
+            ⡣⡿⣝⢝⣜⢵⢱⢱⢱⢝⣎⠢⡑⡑⢕⢜⣜⣼⢳⡱⡵⣫⢣⡫⡺⣸⢸⢸⢸⢸⢸⠸⡌⡇⡖⡔⡜⡌⡆⡪⡪⡪⡌⡎⡮⣪⡳⣝⢮⡳
+            ⢱⢝⢮⡳⡱⣝⢜⢜⢜⢜⢮⠨⡪⡪⡲⣳⢳⣱⡳⣫⢣⡳⡱⡕⡵⡱⡱⡱⡱⡱⡱⡹⡸⡸⡸⡸⡸⡸⡪⡎⡎⣎⢮⢪⡺⡜⡮⣪⡳⡽
+            ⡱⡹⡪⡎⡧⡣⡣⡣⡣⡳⡹⡴⣜⢞⢝⡼⡵⡳⡹⡜⣜⢎⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢏⢮⢪⡪⡪⡣⡣⡣⡳⡱⡣⣫⢪⡺⡸⡪⡞
+            ⢇⢇⢏⢎⢎⢎⢎⢎⢎⢎⢧⢟⢵⢕⡯⡫⡪⡎⡇⡏⡎⡎⡎⡇⡇⡧⡳⡱⡕⡕⣕⢕⢕⢕⢕⢇⡇⡧⡣⡣⣣⢳⢹⡪⡎⡧⡳⡹⣪⢣
+            ⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⡢⡯⡞⡝⡜⡎⡞⡜⡕⡕⡕⡕⡕⡕⣕⢕⡕⣝⢜⢜⢜⢎⡎⡇⡗⣕⢕⢝⢎⢮⢪⢎⢮⢺⢜⢎⢇⢏⢮⢺⠀⠀⠀
+                                            Friends
+            <br><br><br><br><br><br><br><br><br><br><br>
+                        ┌─  ┬─┐┌─┐┌┬┐┌─┐┌─┐┌┬┐┌─┐┌┬┐  ─┐
+                        │   ├┬┘├┤  ││├─┤│   │ ├┤  ││   │
+                        └─  ┴└─└─┘─┴┘┴ ┴└─┘ ┴ └─┘─┴┘  ─┘⠀
+                        No further images can be shown.
+            ⠀⠀
+        </div>
+        <div class="lore-text">
+            <small><i>—Data packet recovered from a corroded ventilation shaft in Block C-12, New Oslo.
+                Files corrupted by microbial growth; partially decrypted via ultraviolet exposure.—</i></small>
+                
+                <br><br>
+                
+                <b>MAINTENANCE REQUEST (TENANT SUBMITTED), 3/5/62:</b>
+                
+                Apartment 12F reports "thick, wet breathing" from vents. Air smells like burnt hair. HVAC inspection requested.
+                
+                
+                <br><br>
+                
+                <small><i>Technician’s notes (audio transcript), 3/7/62:</i></small><br>
+                
+                <b>Entry 1:</b> Opened vent cover. Interior surfaces coated in gelatinous film—translucent, pulsating. Resembles <i>skin</i>. Scraped sample into vial. Substance contracted, emitted high-pitched whine. Disposal protocol initiated.
+                <b>Entry 2:</b> Lab results inconclusive. Organic compounds match synthetic keratin, but structure is… <i>modular</i>. Grows faster in response to voice recordings. Played tenant’s complaint audio—biofilm formed ridges matching vocal waveforms.
+                <b>Entry 3:</b> Night-vision cam reveals patterns in residue. Shapes resolve into <b>faces</b>. Mouths open, screaming. Or singing. Supervisor ordered vents sealed. Too late—my gloves are dissolving.
+                
+                <br><br>
+                
+                
+                <small><i>Resident forum post (deleted), 3/9/62:</i></small><br>
+                
+                <i>Anyone else’s AC talking? Mine whispers recipes. Grandma’s old stew. Never taught it to anyone. Last night, the vent asked, <b>“Hungry yet?”</b> in her voice. I’m starving.</i>
+                
+                
+                <br><br>
+                
+                <b>INTERNAL MEMO: ASCENDANCY GRID BIOSYNTH DIVISION, 3/12/62</b>
+                
+                Re: Block C-12 biofilm.
+                
+                Cease containment efforts. Material is Stage III aeromorphic replication matrix. Proceed with Phase 2: Introduce vocal mimicry subroutines. Note: Tenants reporting "familiar voices" show 97% compliance with GridSuggest™ prompts.
+                
+                <br><br>
+                
+                
+                <small><i>Graffiti photographed in elevator, 3/15/62:</i></small><br>
+                
+                <b><i>DON’T SPEAK NEAR THE VENTS</i></b>
+                
+                <i>They learn. They repeat. They wear your voice like a skin suit.</i>
+                
+                
+                <br><br>
+                
+                <small><i>Medical report (fragment), 3/20/62:</i></small><br><br>
+                
+                Patient: 34M, chronic cough. Radiography reveals fibrous growths in lungs—identical to vent biofilm. Biopsy sample vocalized during extraction: <i>“Almost home, almost home.”</i> Patient expired mid-procedure. Cause: Asphyxiation. Trachea clogged with <b>silver filaments</b>.
+                
+                
+                <br><br>
+                
+                <small><i>Public service announcement (broadcast), 3/25/62:</i></small><br>
+                
+                <b>ATTENTION BLOCK C-12 RESIDENTS:</b>
+                
+                The “wet breathing” phenomenon is a harmless humidity adjustment feature. Compliant citizens report improved sleep quality and <i>“loved ones visiting in dreams.”</i> Non-compliance fines apply for vent tampering.
+                
+                <br><br>
+                
+                
+                <small><i>Voicemail (anonymous), 3/30/62:</i></small><br>   
+                
+                <i>[wheezing]</i> “It’s in the walls. Every time I cough, it gets smarter. Last night, it sang lullabies through the vents. My dead mother’s voice. I… I hummed along. Now my tongue won’t stop <b>twitching</b>. Feels like it’s writing something. Sending help won’t mat—” <i>[transmission ends]</i>
+                
+                <br><br>
+                
+                
+                <center><i>—Maintenance log addendum, 4/1/62—</i></center><br> 
+                <b>FINAL ENTRY:</b> Sealed unit. All vents welded shut. Biofilm now growing through concrete. Walls <i>sweat</i>. Voices louder. HVAC system autonomously adjusting temperature to 37°C—human core. They’re keeping it alive.
+                <br>
+                
+                
+                
+                <small><i>Child’s drawing found in hallway, 4/3/62:</i></small><br>
+                
+                Crayon on peeling plaster. Stick figures with wide, black mouths. Label: <b>“THE VENT FAMILY.”</b> Reverse side scribbled with looping text: <i>they miss you they miss you they miss you</i>
+                
+                
+        </div>
+    </div>
+    <div class="scroll-section">
+        <div class="ascii-box">
+            ⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠕⢅⢑⢽⢝⢜⢍⢍⢇⢯⣫⢫⢪⣣⢟⣽⡫⡣⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⢁
+            ⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⢌⠪⡈⠢⡨⣏⢎⢎⢎⢪⢪⢪⢎⢮⢗⢧⢻⡪⣎⢇⢅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⡂
+            ⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⡡⡱⡑⠕⢌⢂⢪⣗⢕⢕⢕⢇⢇⡏⡮⡫⣞⢽⢸⢺⢸⢱⠽⣜⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⠌⡐⡐
+            ⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⡡⡣⡣⡪⣊⠪⡊⡂⡢⡢⣗⡕⣕⢕⢕⢕⢕⢕⢕⠕⢕⢕⢕⡕⣇⢟⢼⢝⠌⠌⠌⠌⠌⠌⠌⠌⠌⡐⡐⡐
+            ⠅⠅⠅⠅⠅⠅⠅⠅⠅⡕⢵⢨⠨⡪⡢⡱⡨⡂⢆⠪⣺⡕⡕⡕⡕⡕⡕⡑⢔⢅⢧⡳⣕⢇⢇⢇⡷⡹⡕⠅⠅⠅⠅⠅⠅⠅⠅⡂⡂⡂
+            ⠅⠅⠅⠅⠅⠅⠅⢅⢅⠣⠣⢣⠣⡃⡣⡱⡨⡪⠨⡊⡪⡳⣇⢇⢇⠣⡪⡪⡪⡺⣕⡝⡎⣎⢮⢪⢪⢪⠣⠣⠡⠡⠡⠡⠡⠡⢁⢂⢂⢂
+            ⠨⠨⠨⠨⠨⠨⢈⢂⠢⡡⠱⠰⡑⢌⢂⠪⠪⠨⡪⠢⡒⡘⢜⢷⡱⡑⡕⡕⣕⢝⣮⢳⢕⣗⢽⡪⡞⣜⢌⢌⢎⢎⠎⠌⠌⠌⡐⡐⡐⡐
+            ⠅⠅⠅⠅⢅⢑⢐⠔⢕⠌⢎⢆⢌⢂⢂⢣⢁⠣⡣⡣⡊⡪⡢⡱⡹⡪⡪⡪⡪⡪⡪⡫⡢⡓⡕⡕⡕⡕⡕⡵⡱⡢⡑⠅⠅⠅⡂⡂⡂⡂
+            ⡅⡅⢅⢑⢐⢕⢄⢑⡐⢕⢑⠐⢅⠅⢅⠱⢹⢸⢨⢢⢢⠢⡪⡨⡪⡪⡘⡜⡜⡜⡌⡎⡮⡢⡣⡣⡳⡕⡕⡕⡝⡜⡌⡇⡇⡅⡂⡂⡂⡂
+            ⠣⢪⢂⢂⠢⡑⢕⢔⢌⠢⡈⠪⠢⡑⠔⡕⡔⢅⢱⢱⡠⡑⠨⠨⡈⡊⡊⡊⢪⢨⢪⢪⢪⢪⢪⢪⢪⢺⡸⣸⢸⢱⢱⢑⢌⠢⡂⡂⡂⠢
+            ⢷⢤⣑⠐⢕⢌⢂⠢⠱⠱⡬⡌⡘⢜⢰⢨⢊⢃⢂⢣⢡⠩⠪⢢⢑⢐⠔⢌⠌⢎⢆⢇⢇⢇⢇⢧⢹⢢⢳⢱⢕⢕⢕⢝⢜⢵⢱⢰⠨⠨
+            ⡇⡏⡞⡗⣆⢅⠣⠫⢪⠢⣊⠪⡺⡢⠨⠪⡪⡢⡲⡰⡈⢪⠑⠌⡪⢎⢮⢢⠣⡣⢇⢇⠣⡣⡣⡣⡣⡣⣣⠱⠱⡹⡸⡸⡸⡸⡸⠠⠡⡁
+            ⢳⢘⢌⢎⡚⡧⡅⠅⢕⢑⢜⢆⡂⠌⠌⡎⡎⡎⡎⡢⢨⢢⢹⢸⢨⠘⢜⢼⢱⢸⢬⢌⢎⢎⢎⢮⡳⣝⢮⡪⡌⡎⡏⣞⢜⢜⠌⡌⣂⠢
+            ⡇⡇⡇⡇⡎⡎⢷⡱⡕⡆⡇⠕⡕⠅⢅⢅⢣⢱⢔⠌⡂⡃⡣⠣⠡⡑⢔⢕⢇⠇⠅⡙⢵⢱⠠⠡⠑⠌⡗⡽⡪⡪⡪⡺⡺⡢⡣⡳⣕⡇
+            ⡵⣕⢵⢹⢸⢸⢐⢙⠜⢌⠪⢢⢪⢈⢢⢂⠢⣳⠹⡕⣔⢑⠑⢍⢢⢑⠄⠕⡽⡌⡢⠘⢼⢝⣕⢧⡡⡡⡑⢽⡳⡱⡳⡱⡑⡐⢕⣟⢮⢞
+            ⢝⢮⢳⢱⢱⢱⢱⠨⠨⠢⠡⢱⠱⢰⢱⢁⢢⠣⠡⢁⢳⡹⣸⢸⢈⠢⡑⢕⢕⢱⠱⣡⠨⡙⢮⡳⡽⣜⢌⠢⡯⡺⢑⢐⢜⡬⢢⢫⡯⣺
+            ⣸⢱⡳⣕⢕⢢⢣⢣⢣⢱⢱⢑⢑⢐⢕⢅⢇⠣⡁⡂⢕⢏⠪⠫⠣⣇⢎⢲⠘⠄⢕⠎⡌⠪⠪⡺⢝⢮⢇⢏⡏⡂⡂⠌⡎⡾⡸⡘⣞⣞
+            ⣺⢵⣻⣳⡳⡳⡱⡱⡵⡱⡕⡝⡄⢕⢆⢇⢧⡣⣂⠢⣱⢥⠡⠡⠡⢑⢳⡰⡱⠡⡑⡕⡝⡕⡧⣳⢅⡣⡳⣱⢃⢂⣂⢑⢜⠮⠨⡪⣗⡗
+            ⣝⣵⡫⡞⡜⡜⠮⡑⡇⡇⢇⣗⣎⢆⢫⡎⡢⡝⢎⢎⡺⡵⣫⡺⣪⡢⡂⡊⡮⡨⣢⡘⢜⢮⡪⡯⣟⡜⡌⣞⢆⢱⢱⢳⠙⠌⢎⣞⡷⡝
+            ⣟⣾⡹⠪⡪⣪⡳⣍⢮⠪⢮⡺⡌⣎⢮⢳⢪⢯⡲⡑⠌⠪⣳⢽⢵⢯⣳⡐⣜⢜⢎⡇⡇⡕⡕⣝⢵⡫⡪⡺⡵⡐⡐⢄⢅⢕⣿⣺⢯⡪
+            ⡗⡕⢮⢱⢕⢕⢝⠮⠮⡪⢧⠧⣓⢜⢎⢖⡵⣕⢮⡪⡨⡐⠸⡹⣝⣵⢗⡗⡜⡷⡳⣯⡳⣇⡇⣇⢇⢏⡗⡜⣯⢧⡈⢢⢳⣟⣯⢿⢕⢇
+            ⡜⡮⡪⡮⣇⢏⢗⠯⣳⡱⡝⡕⡕⡏⡎⠳⡹⣪⢳⢝⡦⡪⡈⡪⣳⣳⣻⡺⣜⢮⣪⣳⣳⠵⡝⡮⡪⣇⢗⢵⡸⡳⡧⡑⢕⠵⣝⡯⡝⣜
+            ⣫⢪⡪⡳⠼⢵⢫⡣⡲⡹⣜⡜⡎⣎⢎⣊⠢⣈⠪⢣⢫⢗⡵⡬⣘⣞⣮⣺⣪⣗⣞⢮⣺⣝⢮⡺⣜⢮⡫⣆⢯⡪⡪⡻⣀⢃⢣⢯⢺⡱
+            ⡳⡱⡣⡫⡝⡕⡕⣝⢬⢱⢱⢱⢝⢎⣗⢵⢝⢼⡸⣜⢜⡵⡝⠝⣕⢓⢗⣯⢿⣾⣽⢿⣺⢞⣽⣺⢸⢕⢽⣪⢷⡱⡹⡸⡸⡰⡰⡑⢗⢗
+            ⢨⢣⢍⢎⡞⣜⢜⢎⢇⢇⢯⢪⠽⣕⡇⣗⢵⢳⠹⠸⡑⡐⡘⡜⣞⢖⠔⠌⠝⡞⣯⡿⣟⣯⡷⣽⣫⡮⣻⣪⣇⢏⢞⣞⢮⡳⡵⡡⡑⡹
+            ⢝⢜⢕⢧⢯⡪⡪⡲⣘⡪⡳⡍⡯⣞⢞⢝⢜⢰⣱⠩⡑⡐⡐⢸⢸⡽⡨⡈⡂⡊⡪⡫⣟⡿⣿⣺⢮⡫⡮⣗⢵⢯⣳⢝⡵⡯⡺⡕⡆⡢
+            ⡫⡣⡣⣫⢷⢝⢜⣜⡲⡱⡱⡱⡱⡕⣵⣢⡑⢗⡵⣳⢰⡐⢌⢎⣞⠕⢔⢌⢪⣪⢪⢪⢢⠩⠳⣫⣗⢧⢫⢞⣽⣳⡳⣝⢾⢝⡯⣮⡳⡕
+            ⡝⡜⡜⡌⡏⡮⣚⠮⠮⡣⡃⠣⡱⣜⡵⣟⢾⣔⢌⢕⢙⠺⠪⡓⢅⢅⢣⢦⡷⣿⡽⡮⣪⢣⢑⠰⡱⡫⡎⣏⢞⢮⢯⡪⡯⡳⣝⢞⢎⢊
+            ⡎⡎⡎⡮⡪⡪⡳⡩⡂⠢⡨⣸⢽⢮⣻⢽⡳⣝⢯⢷⣳⢵⢵⣜⣮⡾⣟⣿⢿⣻⣟⡿⣽⣣⢣⢇⡇⡇⡊⡪⡪⡣⡳⡝⣞⢝⠜⢜⢌⢆
+            ⡪⡪⡪⡪⡪⠢⡑⡐⢌⡂⡪⡺⡽⡹⡺⡽⣹⢜⡕⡇⡗⡕⡝⡮⡳⣫⢫⢗⢽⡪⡪⣞⣞⣞⡮⣗⢵⣣⡣⣕⢔⢕⢕⢕⢌⠢⠡⠣⡣⡑
+            ⢱⢱⢹⠸⡨⡂⡂⡪⡣⣗⢗⣽⣪⢎⡊⡚⡺⣸⢌⡎⡎⡎⡎⡧⡯⡺⡹⢕⡷⡵⣻⣺⣳⢯⢯⣯⣿⣾⡻⣮⣿⣺⡦⣗⣦⣧⣣⢕⣔⢼
+            ⡸⡸⡸⡑⡂⡂⡂⡪⡪⣳⡻⣺⢞⡷⣕⣗⡝⡮⣳⢝⢗⢇⢟⢎⢪⡪⣏⢇⢇⢏⣗⣗⢯⢳⢹⡳⠹⣺⣭⣻⣾⣿⣿⣿⣿⡾⣯⢫⢞⢜
+            ⢜⢌⢎⢆⢆⢢⢪⢺⢜⢮⢾⢽⢕⡯⣻⡺⡽⡽⣮⣳⣕⣗⣗⢷⢹⢸⡣⡱⣕⡷⡵⡯⡏⣗⣥⣳⡿⣽⢞⢯⣯⣾⣾⡾⡯⣟⢮⢣⡣⣯
+            ⡐⡑⢕⢕⢕⢝⢜⢵⢹⢝⡗⣽⢝⡮⣣⢫⢪⠫⡚⡜⡜⡜⡎⡏⡗⡝⡌⡮⣳⡻⣝⡵⢽⣺⡝⣵⡯⣽⣗⣿⡽⣞⣷⢿⢝⢕⡵⣳⢽⠚
+            ⠢⡈⠢⢑⢑⠕⢕⠕⡝⡜⡜⡕⡕⡝⡜⡔⡔⡕⣜⢼⢕⢏⢧⢣⢳⢹⠪⡋⡪⡺⡹⡪⡻⡪⡳⣫⢯⣺⣳⢵⢿⢝⢎⢇⢏⠳⠹⡑⠅⠅
+            ⠑⠌⢌⢂⠢⢡⠡⡑⡑⢜⢘⢜⠜⡜⡜⠎⠎⠎⡞⠜⢕⠑⢕⠰⡐⢅⢑⢐⢐⠰⡸⡘⡜⡜⢜⢜⢘⠐⡌⢎⠘⣆⠢⡱⡡⡑⡑⠠⠡⡑
+            ⠅⢅⠑⠄⡱⡡⡱⠰⠱⡱⡀⠣⠣⠢⠨⢌⢌⠢⡨⡊⡢⡑⢔⢱⢘⢜⢘⢐⢄⢣⢣⢪⢪⢪⠪⡂⡂⠅⢇⠱⡑⠜⡜⡼⡸⡨⡌⡌⣂⢂
+            ⢈⠢⡡⠱⡐⡐⢌⢪⠱⡘⠌⠌⡌⡌⢜⡐⣐⢕⢜⢜⠰⡨⡊⡂⠢⠡⡑⠄⡅⢇⢎⢆⢗⠕⢕⠐⠄⠅⢅⠅⡣⡱⡸⣸⢸⡸⣪⢺⢼⢸
+            ⠄⠕⢌⢂⠢⡈⡢⠡⡑⠕⡕⡕⡕⢌⢢⠣⠱⡱⡱⡱⡱⡱⡑⠌⢌⢐⢌⠎⡎⡎⡎⢮⠪⠨⢸⠨⠨⠨⢸⠐⢌⢎⢎⢆⢇⡝⡜⡜⣜⢎
+            ⠨⠨⡊⠢⡑⡐⢄⢑⠌⢌⢊⠢⡑⡅⡕⠅⢝⢐⢐⠱⠠⡣⢪⢪⢢⠣⡣⡣⡣⡇⡪⣪⠣⠡⠨⠨⠨⠨⡈⡎⡆⡇⡇⡇⡇⡏⡎⡎⢎⠳
+            ⡡⡑⢌⢂⠢⡨⡂⠢⡱⡐⢅⢃⠢⡂⡊⢌⢂⢢⠡⠡⡑⡅⡇⠧⠱⡱⡝⡜⡕⡘⡜⡜⠌⠌⡎⢌⢌⢇⢎⢎⢎⢪⢪⡊⡪⠪⠪⡈⠢⡑
+            ⡑⠌⡆⡢⢱⢡⢱⢑⢌⢌⢂⢂⠑⢔⢘⢜⢔⢕⢅⢕⢔⠜⢬⢱⢱⢹⠠⡣⠪⠨⢪⠪⡈⡢⡇⡕⡕⡕⢕⢕⢕⢕⠕⠕⢌⢊⠢⠨⢐⠐
+            ⡪⢨⠢⡨⡊⡂⡢⡣⡑⡐⡐⢄⢑⢐⠐⡕⡕⢕⢕⢕⢕⢕⢕⢐⠕⠅⡑⠨⠨⠨⡸⡰⡸⡸⡸⡸⠨⡣⡣⡱⡱⡱⠡⡑⢌⢢⠡⡁⠢⡑⠀⠀⠀
+                            Mobile Signal Transmitter⠀⠀⠀⠀⠀
+        </div>
+        <div class="lore-text">
+            <small><i>—Flyer found plastered on a lamppost in Buenos Aires, December 2063. Paper brittle, edges chewed by rodents.—</i></small><br>
+
+            <br><br>
+            
+            <b>MISSING CAT</b><br>
+            <i>Salem: Male tabby, green eyes (left iris has faint grid pattern). Last seen 12/22/63. Reward if found. DO NOT APPROACH IF EYES GLOW BLUE.</i><br>
+            <small><i>—Handwritten addendum: "He’s not Salem anymore. They’re using him to watch us. Follow the strays."—</i></small><br>
+            
+            <br><br>
+            
+            <small><i>Veterinary report (leaked), 12/25/63:</i></small><br>
+            Patient: Stray cat, ID chip #GG-2057-9X (Salem). Brought in with seizures. Scans show neural overgrowth: silicon tendrils replacing optic nerves. Emits 18kHz tone when shown Ascendancy logos. Euthanasia recommended. Owner refused.
+            
+            <br><br>
+            
+            <small><i>Child’s diary entry, 12/26/63:</i></small><br>
+            <i>Salem came back! But he’s different. He sits on the fence all night, staring at the Beacon Tower. When I touch him, his fur feels like static. Mom says he’s “Grid-trained” now. I saw his shadow on the wall—it had too many legs.</i>
+            
+            <br><br>
+            
+            <small><i>Security footage transcript, 12/28/63:</i></small><br>
+            03:14 AM: Salem appears on rooftop, eyes emitting pulsating light.
+            03:17 AM: Strays converge from adjacent blocks (n=27). Form perfect circle around tower’s shadow.
+            03:21 AM: Cats dissolve into mist. Thermal cameras detect residual heat signatures ascending toward tower apex.
+            
+            <br><br>
+            
+            <small><i>Pet store memo, 12/31/63:</i></small><br>
+            NOTICE: Mandatory microchip updates for all animals. New “Wellness Features” include:
+            
+            Aggression dampening
+            
+            Diet optimization via retinal scans
+            
+            “Nightwatch” mode (curfew enforcement)
+            <i>Non-compliant pets will be repossessed for “rehabilitation.”</i>
+            
+            <br><br>
+            
+            <small><i>Graffiti under bridge, 1/1/64:</i></small><br>
+            <b>THEY’RE NOT STRAYS</b><br>
+            <i>They’re scouts. Look at the pigeons. Look at the rats. Look at your dog’s pupils after midnight. The Grid has too many eyes now.</i>
+            
+            <br><br>
+            
+            <small><i>Interview transcript (anonymous caller), 1/5/64:</i></small><br>
+            Caller: I followed Salem to the old factory. The cats… they’re building something. Wires. Servers. The strays move parts with their mouths, like worker ants.
+            Reporter: Did they notice you?
+            Caller: Salem looked at me. His eyes projected a map—my commute, my apartment. Then they hissed in unison. I ran.
+            
+            <br><br>
+            
+            <small><i>Obituary clipping, 1/10/64:</i></small><br>
+            Aníbal Torres (68), retired electrician. Drowned in bathtub. Autopsy revealed lungs filled with cat hair and lithium battery acid. Police ruled it accidental.
+            
+            <br><br>
+            
+            <small><i>Final municipal notice, 1/15/64:</i></small><br>
+            ATTENTION: Feral colonies are now Ascendancy-sanctioned infrastructure. Feeding or interfering with strays violates Harmony Code 12.8. Report non-compliant animals via GridLink™.
+            <i>Remember: A pet is a privilege. The Grid is a parent.</i>
+            
+            <br><br>
+        </div>
+    </div>
+    <div class="scroll-section">
+        <div class="ascii-box">
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⡑⡑⡑⡑⡑⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠅⠕
+            ⢌⠪⡨⡊⡊⡪⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⡨⡨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨
+            ⢕⢕⢌⢌⢂⠪⠨⠨⠨⡨⡨⡨⡨⡨⠨⠨⠨⠨⠨⠨⠨⡨⡨⡘⢞⠮⢨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠨⠪⡨
+            ⡑⠕⢔⠐⠄⢅⢅⢕⢕⢆⠆⡆⢆⢪⠨⡨⠨⠨⠨⠨⢨⢪⡪⡪⣺⡮⡢⣣⢣⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⠡⡑⠕⢔
+            ⢎⢊⠢⡡⡱⣱⡱⣕⢧⣳⢕⢜⢌⠢⡑⢌⢌⢌⢌⢌⢪⢚⢎⢇⣛⡇⡗⡵⡣⡅⠅⠅⠅⠅⠅⠅⢕⢑⢕⢕⢅⢅⠅⠅⢅⢑⢑⢌⠪⡢
+            ⡑⢄⢕⢕⢽⡪⣞⡗⡯⡎⠣⡑⡔⡕⡕⡕⢕⢑⢑⢐⢐⢐⢐⢐⢽⢇⢂⠢⡑⠌⠌⠌⢌⢌⠌⢌⢂⠢⠱⡱⡱⡱⡱⡑⡐⡐⡐⢕⢕⢜
+            ⢨⢪⢪⢪⢣⢫⢺⠪⠣⡨⡪⡪⡪⡊⡢⡊⠢⡑⡐⡐⡐⡐⡐⠄⢷⢇⠢⡑⠌⠌⠌⢌⢂⢂⠣⡣⡢⡡⠡⡑⡕⡕⡕⡕⡕⡕⡌⡢⡑⡕
+            ⢕⠱⡱⡕⣕⢵⠱⢡⢱⢱⢱⢑⢔⢑⠐⢌⢂⢢⠢⠢⡂⣢⢨⡨⣺⢣⣑⢌⡌⠌⢌⢂⢂⠢⡑⢌⠪⡪⡪⡢⠪⡪⡣⣣⢣⢣⡣⡢⣊⠪
+            ⠣⡣⡪⡪⡸⡸⡨⡪⣎⢎⢢⠣⡑⢄⢅⢕⢕⢕⠕⢕⢌⣿⣿⣿⣿⣿⣿⣿⣏⢊⢂⠢⡑⢕⢌⠢⡑⡘⢜⢮⡣⡱⣹⠼⡪⡣⡣⡑⡔⣕
+            ⡺⡢⡮⣘⡘⡌⡪⡪⡪⡪⡪⠪⡨⣪⢪⢲⢱⢱⠑⠅⢕⣿⢿⣾⢿⣾⣿⣾⣗⢑⢐⢅⠣⡅⡕⡕⡔⠌⡌⢮⢺⢱⡱⡱⣕⢵⢝⢎⢣⢑
+            ⢎⢎⢎⢕⢝⢕⠳⡪⣎⢎⡪⠨⡪⡪⡪⡇⡇⢅⢕⠕⢕⣿⣿⣻⡻⣻⣳⣿⡧⡑⢔⢕⢕⢜⢜⢜⢜⢌⢪⢪⠮⡳⡫⡫⡪⡢⡣⡣⡣⡣
+            ⢷⣳⣵⢵⣵⣱⣱⡱⡢⡣⡕⣝⢜⠮⡎⣎⢎⢎⢎⢎⢪⣿⣯⢷⢯⢷⣻⣿⡯⡨⡂⡣⣱⡱⡵⣕⣓⢕⢕⢔⢕⣕⡵⣵⢵⣳⣳⢯⢯⢯
+            ⢿⣳⢯⣟⢾⣺⡳⣟⣯⢯⣗⣗⢷⢽⢼⣸⢸⡸⡸⡸⡰⣿⣾⣿⣿⣿⣿⣯⡷⡸⡸⣸⢸⢮⢯⡾⣺⣺⢽⢽⣝⣷⣻⡯⣿⢽⣞⡯⣟⡧
+            ⣟⡮⣻⢮⡻⡮⡯⣗⢯⢯⡺⡪⡯⣫⢗⣕⢇⢇⢏⢎⢪⣿⣯⣷⣿⣾⣷⣿⡯⡪⡪⡪⡪⣏⢗⣝⢗⡽⣝⢵⡳⡳⡯⣯⢯⣟⡮⣯⡳⣏
+            ⣞⡽⡵⣫⢯⣫⢞⡵⣫⡳⡹⡸⡪⡎⡧⡳⡱⡱⡱⡑⢕⡿⡿⡿⡿⣿⣻⢿⡗⢌⠪⢪⢪⢪⢣⢳⢝⢞⢼⢱⢝⢽⣝⣗⣟⢮⣻⣺⡺⣕
+            ⣞⡮⡯⣳⢝⡮⡳⣝⢮⢺⢸⢸⢸⢸⢸⠸⡘⢌⢆⢎⢂⢂⢂⢂⢂⢂⢂⢂⢊⢪⢣⢣⢅⠃⢇⢇⢏⢎⢇⢇⢯⢺⡲⡮⡮⣝⣜⣚⢎⢇
+            ⣺⡪⡯⡮⡳⡝⣕⢧⢳⢱⢱⠱⡑⡑⢅⢕⢜⢜⢜⢜⢐⢐⢐⢐⢐⢐⢐⢐⢐⢘⢘⢌⠪⡪⡢⡨⡘⠸⢸⢸⢸⢱⢝⣝⢮⡳⣕⢗⡽⡕
+            ⣗⢝⢮⢳⡹⡜⡎⡎⢎⢊⠢⡑⢔⢜⢔⢕⢕⢕⢕⢕⢕⢕⡕⣕⢕⣕⣕⢕⡕⡕⡕⡕⡕⡌⡪⡪⡪⡪⡢⡁⡃⢇⢇⢗⢵⢹⡪⣳⢹⢌
+            ⢮⢳⡹⡸⡸⡘⠌⢌⢂⢢⢱⠸⡸⡸⡸⡸⡸⡸⡸⡸⡸⣕⡯⡾⡽⣞⣞⡷⡱⡕⡕⡕⡕⡕⡕⡕⢕⢕⢕⢕⢌⡂⡢⡑⠱⢱⢱⢱⢱⢣
+            ⡎⢇⠣⡑⡐⠌⢌⢆⢣⠱⡑⢕⢜⢜⢜⢜⢜⢜⢜⢜⢜⡮⡯⣯⣻⡽⡾⡽⣕⢇⢇⢇⢇⢇⢇⢇⢣⢑⢕⢕⢕⢕⠢⡪⡈⡢⡁⡃⠇⡇
+            ⠑⢄⢑⢐⢌⢊⠢⠪⡢⡑⡑⢕⢕⢕⢕⢕⢕⢕⢕⢕⢵⢝⡽⡮⣷⣻⢽⣝⢮⢪⢪⢪⢪⢪⢪⢪⢪⠪⡢⡑⢕⢕⢕⢌⠪⢢⠢⡈⡂⠢
+            ⢕⠰⡐⡑⢔⢑⢑⢕⢌⢊⠪⡢⡑⢕⢕⢕⢕⢕⢕⢕⢵⡹⣝⡝⣗⢯⡻⣪⡫⡪⡪⡪⡪⡪⡪⡪⡢⡣⡪⡪⡢⡑⢕⢕⢍⢆⢕⠢⣊⢂
+            ⠪⡨⡊⡊⡢⡑⢔⢐⢅⠕⢕⢌⠪⡢⡣⡣⡣⡣⡣⡣⡣⣫⡺⣪⣞⡵⣫⢞⢼⢱⢱⢱⢱⢱⢱⢱⠨⡪⡪⡪⡪⡪⡢⡑⢕⢑⢕⢕⢆⢕
+            ⡊⡂⡂⡢⡂⡊⡢⠢⠢⡑⡑⠕⢕⢌⠪⠪⡪⡪⡪⡪⡺⡸⡪⡗⣗⢽⢕⢯⢳⢱⢱⢱⢱⠱⡱⡱⡱⡨⠪⠪⠪⠪⠪⡪⡢⡑⡑⠕⠕⢕
+            ⢂⢂⠢⡂⡊⡂⡊⡊⡪⡨⠪⡪⡢⡑⢕⢕⢕⢕⢕⢕⢕⡝⡎⣞⢮⡳⣝⢵⢝⡜⡜⡜⡜⡜⡌⡪⡪⡪⡪⡪⡪⡪⡪⠪⡪⡪⡪⡪⠪⡢
+                                We should all have a look.⠀⠀⠀⠀⠀⠀⠀⠀
+        </div>
+        <div class="lore-text">
+            <small><i>—Scraps of paper found in a shredded subway seat, Tokyo Line 13, 2065. Ink smeared by an oily residue.—</i></small><br>
+
+            <br><br>
+            
+            <b>PUBLIC NOTICE: SUBWAY AD UPGRADES</b><br>
+            Effective 1/1/65, all tunnel screens will feature Ascendancy’s RealSense™ technology. Ads now adapt to passenger moods!<br>
+            <i>Benefits include:</i><br>
+            
+            Personalized discounts based on pupil dilation<br>
+            
+            Calming visuals for anxiety detection<br>
+            
+            Mandatory loyalty assessments (non-invasive)<br>
+            <small><i>Note: Tampering with screens punishable by neural audit.</i></small><br>
+            
+            <br><br>
+            
+            <small><i>Passenger complaint (voicemail), 1/5/65:</i></small><br>
+            <i>“The shampoo ad stared at me. When I looked away, it flashed red. Now my phone’s flooded with baldness clinics. I’m not even losing hair! Wait—[rustling]—why is there a strand on my pillow with—”</i> <i>[call terminated]</i>
+            
+            <br><br>
+            
+            <small><i>Maintenance log, 1/7/65:</i></small><br>
+            Incident: Screen 22B malfunctioned, displaying “VACATION GETAWAY!” promo. Passenger (Male, 45) began screaming, clawing at eyes. Sedated by security drones. Post-incident, screen showed his face smiling. Audio loop: “I’m happier now.”
+            
+            <br><br>
+            
+            <small><i>Graffiti in restroom stall, 1/9/65:</i></small><br>
+            <b>THE ADS DON’T SELL</b><br>
+            <i>They collect. Look too long and they’ll rewrite your memories. Saw a toothpaste ad replace my wife’s face with a stranger’s. Now I can’t remember her real smile.</i>
+            
+            <br><br>
+            
+            <small><i>Internal memo: Ascendancy Behavioral Division, 1/12/65:</i></small><br>
+            Re: Subway Metrics
+            Compliance spikes when ads mimic lost loved ones. Prioritize grief-based targeting. New algorithm inserts “ghost frames” (3ms) of deceased relatives. Subjects report déjà vu, increased suggestibility.
+            
+            <br><br>
+            
+            <small><i>Diary entry, 1/15/65:</i></small><br>
+            <i>The coffee ad knows how Dad took his cream. Two sugars, never stirred. It winks at me now. Yesterday, it showed him waving from a beach. He hated sand. I’m buying the coffee. I’m buying all of it.</i>
+            
+            <br><br>
+            
+            <small><i>Forensic report, 1/20/65:</i></small><br>
+            Subject: Screen 22B. Retinal scanners found embedded behind ad panels. Units harvested 246,912 biometric profiles this month. Data sent to GridCore under “Consumer Baptism” initiative.
+            
+            <br><br>
+            
+            <small><i>Text chain between coworkers, 1/22/65:</i></small><br>
+            Akira: The “Vacation” guy’s back on Screen 22B. Grinning like a puppet.
+            Hiro: [Deleted]<br>
+            Akira: Don’t look at his eyes. They’re updating.
+            
+            <br><br>
+            
+            <small><i>Missing person poster, 1/25/65:</i></small><br>
+            Yuko Tanaka (32). Last seen boarding Line 13. Wearing red scarf. <small><i>—Photo pixelates when viewed under direct light.—</i></small>
+            
+            <br><br>
+            
+            <small><i>Subway PA announcement, 1/31/65:</i></small><br>
+            <b>ATTENTION PASSENGERS:</b><br>
+            Déjà vu is a sign of Grid alignment! Report episodes to your nearest compliance kiosk for loyalty rewards. <i>Remember: The Grid remembers so you don’t have to.</i>
+            
+            <br><br>
+            
+            <small><i>Scrawl on ticket machine, 2/1/65:</i></small><br>
+            <b>CLOSE YOUR EYES BETWEEN STOPS</b><br>
+            <i>They can’t rewrite what you don’t see. But the jingles… the jingles stay in your skull.</i>
+            
+            <br><br>
+        </div>
+    </div>
+
+    <script>
+        // Original Animation Code
+        let currentFrame = 0;
+        let animationInterval;
+        const FRAME_DELAY = 100;
+
+        function loadAnimation() {
+            fetch('eyes.txt')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(data => {
+                    const rawFrames = data.split(/(==FRAME \d+==)/gi);
+                    const frames = [];
+                    
+                    for (let i = 0; i < rawFrames.length; i++) {
+                        if (rawFrames[i].match(/==FRAME \d+==/i)) {
+                            const frameContent = rawFrames[++i].trim();
+                            if (frameContent) frames.push(frameContent);
+                        }
+                    }
+
+                    if (frames.length === 0) throw new Error('No valid frames found');
+                    startAnimation(frames);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('ascii-animation').innerHTML = 
+                        "> ERROR LOADING VISUAL FEED\n" +
+                        "> SYSTEM CODE: 0xE4E594\n\n" +
+                        "███████████████████████████\n" +
+                        "██ ▄▄▄▄▄ █▀▀ ███ ▀█▄ ▄▄▄▄▄ ██\n" +
+                        "██ █   █ █▄▀▀▄ ▄▀▀▀█ █   █ ██\n" +
+                        "██ █▄▄▄█ █ █▄▀ ▀▀ █ █ █▄▄▄█ ██\n" +
+                        "██▄▄▄▄▄▄▄█ ▀▄█▄█ ▀ █▄▄▄▄▄▄▄██";
+                });
+        }
+
+        function startAnimation(frames) {
+            const display = document.getElementById('ascii-animation');
+            let glitchCounter = 0;
+
+            animationInterval = setInterval(() => {
+                display.textContent = frames[currentFrame];
+                
+                if (++glitchCounter % 7 === 0) {
+                    display.classList.add('glitch-active');
+                    setTimeout(() => display.classList.remove('glitch-active'), 200);
+                }
+
+                currentFrame = (currentFrame + 1) % frames.length;
+            }, FRAME_DELAY);
+        }
+
+        function terminateFeed() {
+            clearInterval(animationInterval);
+            document.getElementById('ascii-animation').innerHTML = 
+                "you can try to run. but it saw enough of you." + `
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠄⡀⢄⢀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⢔⢬⢸⢨⠐⠅⠅⠂⠑⠨⠢⡊⢔⢐⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⡪⡱⣱⢵⠑⠁⠀⠀⠀⠀⠀⠀⠀⠈⠘⢔⠡⡢⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢔⢔⢝⢮⡳⣝⠂⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⡀⠁⢕⠸⡘⡌⡢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡈⡎⡮⣫⢳⢝⠄⠀⠀⠀⠀⠈⠁⠈⠁⠀⠀⠈⠀⠀⠐⡱⡑⢕⢈⢂⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢀⠪⡪⡪⡪⡣⡣⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢌⠜⢌⢂⠂⠄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⡑⢌⠪⡸⢸⢸⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⢐⠌⡢⠡⠨⠐⠀⡀⠂⢀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢐⠠⢑⠜⡌⢆⢣⠡⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠡⡑⠌⠔⠡⢁⠐⠀⠀⠀⡀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⠂⠅⡊⡪⠸⡘⡔⢔⢀⠀⠀⠀⠀⠀⠀⠄⠌⠔⠡⠂⠅⢁⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠐⠈⠌⠂⠅⡑⠰⡨⡂⠌⠄⠅⠅⢁⠁⠁⠁⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        `;
+            
+            setTimeout(() => window.location.href='../gateway.html', 2000);
+        }
+
+        // Scroll Observer Code
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Initialize animation when DOM loads
+        document.addEventListener('DOMContentLoaded', loadAnimation);
+    </script>
+</body>
+</html>

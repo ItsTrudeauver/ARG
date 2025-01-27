@@ -1,0 +1,51 @@
+body {
+    background: #001100;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+}
+
+.crt::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(scanline.png);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.flicker {
+    animation: flicker 0.1s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+.terminal {
+    white-space: pre;
+    margin: 2rem;
+}
+
+.blink::after {
+    content: "_";
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+.hidden-content {
+    opacity: 0;
+    animation: contentGlitch 2s forwards;
+}
+
+@keyframes contentGlitch {
+    0% { opacity: 0; }
+    20% { opacity: 0.4; text-shadow: 3px 0 0 #f00; }
+    100% { opacity: 1; }
+}

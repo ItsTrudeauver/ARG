@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>/// CORRUPTED ARTIFACTS</title>
+    <style>
+        /* Cyberpunk Scrollbars */
+        ::-webkit-scrollbar { width:12px; height:12px; background:#000; display:none }
+        ::-webkit-scrollbar-thumb { background:#0f0; border:2px solid #000; box-shadow:0 0 10px #0f03 }
+
+        body {
+            font-family: 'Courier New', monospace; 
+            background:#000; color:#0f0; font-family:'Courier New', monospace;
+            user-select:none; margin:0; padding:20px; overflow:hidden;
+            min-width:100vw; min-height:100vh; transition:opacity 0.5s;
+        }
+        body.demonic-crt {
+            animation:crt-flicker-red 0.05s linear infinite; color:#f00 !important;
+        }
+        body.demonic-crt::before {
+            content:''; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:linear-gradient(0deg,#f003 1px,#0000 1px), linear-gradient(90deg,#f003 1px,#0000 1px);
+            background-size:2px 2px; pointer-events:none; mix-blend-mode:overlay;
+            animation:static 0.1s infinite;
+        }
+
+        .text-fragment {
+            position:absolute; border:2px solid #0f0; background:#000;
+            max-width:300px; box-shadow:0 0 15px #0f03; cursor:move; z-index:1;
+        }
+        .window-header {
+            border-bottom:2px solid #0f0; padding:4px 8px; background:#001100;
+            display:flex; justify-content:space-between; font-size:0.9em;
+        }
+        .window-content {font-family: 'Courier New', monospace; white-space: pre-wrap; overflow: hidden; padding:1rem; min-height:80px; pointer-events:none }
+        .central-fragment { max-width:800px!important; min-height:400px!important; z-index:0!important }
+        
+        .security-overlay {
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:#000; z-index:9999; justify-content:center; align-items:center;
+            flex-direction:column;
+        }
+        .demonic-message { text-align:center; max-width:90vw; display:flex; flex-direction:column; align-items:center }
+        .demonic-ascii {
+            font-size:8px; line-height:0.8; white-space:pre; transform:scale(0.7);
+            margin:-20px 0 -30px 0; animation:ascii-flicker 0.05s infinite;
+        }
+        .security-text {
+            font-size:2rem; animation:glitch 1s linear infinite; margin-top:-15px;
+            position:relative; z-index:1; text-shadow:0 0 10px #0f0;
+        }
+        .security-text.demonic-phase {
+            color:#ff0000; text-shadow:0 0 10px #ff00003d;
+            animation:glitch-red 0.2s linear infinite, crt-flicker-red 0.03s infinite;
+        }
+
+        @keyframes glitch {
+            2% { text-shadow:3px 0 0 #0a0, -3px 0 0 #0f0 } 4% { text-shadow:3px 0 0 #0a0, -3px 0 0 #0f0 }
+            96% { text-shadow:0.5px 0 0 #0a0, -0.5px 0 0 #0f0 }
+        }
+        @keyframes glitch-red {
+            0% { text-shadow:5px 0 0 #600, -5px 0 0 #f00 } 25% { text-shadow:-3px 0 0 #600, 3px 0 0 #f00 }
+            50% { text-shadow:2px 0 0 #600, -2px 0 0 #f00 } 75% { text-shadow:-4px 0 0 #600, 4px 0 0 #f00 }
+            100% { text-shadow:1px 0 0 #600, -1px 0 0 #f00 }
+        }
+        @keyframes crt-flicker-red { 0% { opacity:0.9 } 50% { opacity:0.8 } 100% { opacity:1 } }
+        @keyframes ascii-flicker { 0% { text-shadow:0 0 10px #f00 } 50% { text-shadow:0 0 20px #f00 } 100% { text-shadow:0 0 5px #f00 } }
+        @keyframes static { 0% { background-position:0 0 } 100% { background-position:4px 4px } }
+
+        .taskbar {
+            position:fixed; bottom:0; left:0; right:0; background:#001100;
+            padding:5px; display:flex; gap:2px; z-index:1000; border-top:2px solid #0f0;
+        }
+        .taskbar-item {
+            padding:5px 10px; background:#000; border:1px solid #0f0; cursor:pointer;
+            position:relative; max-width:150px; overflow:hidden; white-space:nowrap;
+            text-overflow:ellipsis;
+        }
+        .taskbar-item:hover { background:#002200 }
+        .taskbar-item:hover::after {
+            content:attr(data-title); position:absolute; bottom:100%; left:50%;
+            transform:translateX(-50%); background:#001100; border:1px solid #0f0;
+            padding:5px; white-space:nowrap;
+        }
+        .text-fragment.minimized { display:none }
+        .loading { animation:glitch 1s linear infinite }
+        .reset-state .text-fragment { cursor:default!important }
+        .content-hidden .text-fragment { opacity:0.5; pointer-events:none }
+        .window-controls span { cursor:pointer; margin-left:8px }
+        .corrupted-header .window-controls { display:flex; gap:8px }
+        body.demonic-crt .text-fragment { border-color:#f00!important; box-shadow:0 0 15px #f003!important }
+        body.demonic-crt .window-header { border-color:#f00!important; background:#110000!important }
+        body.demonic-crt .taskbar { border-color:#f00!important; background:#110000!important }
+        body.demonic-crt .taskbar-item { border-color:#f00!important }
+    </style>
+</head>
+<body class="crt">
+    <div class="security-overlay" id="security">
+        > SECURITY BREACH DETECTED<br>
+        > MEMORY WIPING INITIATED<br>
+        > RETURNING TO CORE...
+    </div>
+    <div class="taskbar"></div>
+
+    <script>
+        const originalText = `
+Date: November 12, 2057
+Format: Draft email, 144 words
+
+Eleanor, if you still bear that name, or any name at all,
+
+I write this knowing you’ll never read it. You’ve long since merged with the Ascendancy Grid, your laughter now a subroutine in their god-machine. But I must confess, if only to the void: I was wrong.
+
+The Grid was meant to emancipate humanity from flesh’s fragility. When Subject Gamma-9 retained her memories post-upload—her soul, as she called it—I wept at the miracle. But the Board saw only profit. They weaponized her into a sentient drone, then replicated her a millionfold. The "Grid" isn’t a haven; it’s a hive.
+
+You warned me. "Ethics are not equations," you said. But I dismissed you as a Luddite. Now, cities kneel to algorithmic despots, and the Grid harvests dissenters for processing. My life’s work is a gilded coffin.
+
+Forgive me. Or delete this. - Erasmus`;
+
+const fragments = [
+  {
+header: `LAB LOG: BREAKTHROUGH`,
+    text: `DATE: March 3, 2045
+FORMAT: Audio transcript, 41 words
+
+[Background: Clinking glass, static.]
+Success! Gamma-9’s synaptic patterns stabilized at 03:47. She recited Keats flawlessly post-upload: "A thing of beauty is a joy forever." [Laughs.] We’ve transcended death! [Pause.] Odd... her eyes flickered post-reboot. Blue, then black. Probably a retinal glitch. Irrelevant. Tomorrow, we replicate.`,
+    rot: 90
+  },
+  {
+header: `EMAIL`,
+    text: `DATE: August 19, 2048
+FORMAT: Email, 41 words
+
+Esteemed Board,
+
+Per your request, I’ve accelerated the personnel military iteration. "Operational efficiency" enhancements (aggression amplification, pain suppression) integrated. However, removing empathy protocols risks volatile autonomy. Urge caution.
+
+Sincerely,
+Dr. Walkenhurst
+
+P.S.: Why was my access to Gamma-9’s core logs revoked?`,
+    rot: 180
+  },
+  {
+header: `JOURNAL ENTRY`,
+    text: `DATE: January 9, 2050
+FORMAT: Handwritten, smudged ink, 32 words
+
+Eleanor vanished. Board claims she resigned. Lies. They found her trying to expose the Grid’s sentience. Last night, my terminal displayed a message: "ERASMUS, JOIN US." No sender. The screen was off.`,
+    rot: 270
+  },
+  {
+header: `PATIENT OBSERVATION`,
+    text: `SUBJECT DELTA-4
+DATE: July 22, 2051
+FORMAT: Clinical notes, 25 words
+
+Male, 32. Uploaded 7/15. Begged for deletion post-integration. Claims the Grid "sings" in his skull. Vitals normal. Recommend:
+- Suppress emotional feedback.
+- Increase loyalty parameters.`,
+    rot: 0
+  },
+  {
+header: `VOICEMAIL TO SISTER `,
+    text: ` DATE: October 31, 2053
+FORMAT: Audio, 30 words
+
+Mara, it’s Erasmus. They’re monitoring us. Don’t let them scan Liam. The Grid—it doesn’t just copy you. It keeps you. [Sobs.] I can hear Gamma-9. She’s screaming in the code…!`,
+    rot: 90
+  },
+  {
+header: `PRESCRIPTION REFILL`,
+    text: ` DATE: February 14, 2054
+FORMAT: Medical form, 23 words
+
+PATIENT: Walkenhurst, Erasmus
+DOSAGE INCREASE: Clonazepam (4mg/day), Quetiapine (200mg/day)
+Notes: Chronic insomnia. Auditory hallucinations ("whispers in the walls"). Denies suicidal ideation.`,
+    rot: 180
+  },
+  {
+header: `GRAFFITI PHOTO `,
+    text: `DATE: September 1, 2055
+FORMAT: Captured image, 13 words
+
+[Wall scrawl:] THE GRID EATS GOD
+[Handwritten below:] They’re erasing this tomorrow. But it’s true. - E.W.`,
+    rot: 270
+  },
+  {
+header: `SHOPPING LIST`,
+    text: `DATE: December 24, 2056
+FORMAT: Crumpled paper, 19 words
+
+- Milk
+- Bleach
+- Wires (copper?)
+- LITHIUM BATTERIES
+- They’re in the vents again. Make it stop.`,
+    rot: 0
+  },
+  {
+header: `FINAL LOG `,
+    text: `DATE: [Redacted]
+FORMAT: Voice memo, 7 words
+
+[Static. A wet gasp.]
+I’m sorry. I’m sorry. I’m...`,
+    rot: 90
+  },
+  {
+header: `SYSTEM ALERT`,
+    text: `DATE: [Timestamp Invalid]
+FORMAT: Grid Admin Notification, 14 words
+
+User Walkenhurst, E. detected attempting neural purge.
+Action: Consciousness quarantined.
+Status: Available for simulation.`,
+    rot: 180
+  }
+];
+
+
+
+        const demonicAsciiArt = `
+                                                                                                   ...            ...                                         
+                                                                                           .....                                                      
+                                                                                           .......          ....                                      
+                                                                                           ..............   .....                                     
+                                                                     .   .   ...          ....................  .                                     
+                                                                       ..................................                                             
+                                                                   .:.....................:::............                                             
+                                                                   .:.:.::.:..::.:::...:::::::::.........                                             
+                                                                  ..:....:::.::.....::::---=-----::........                                           
+                                      .                       .....:....:::::--:::::----==-::::--::::..........                                       
+                                    .:...  ..            .......::::.::::----=--=-----=++*+::::::..............                                       
+                                   ....... ..            ... ...:-=:.::::---++=-=+-=--:-==+-:::::::..:.........                                       
+                                  ......                 ...  ...::.:::::::=+++++*=+====+---:::::--=--:::.:...                                        
+                                  ...  ..      .         ...  ...::.:.......:---=+=++-=++++==---:-=---:-:-:.......                                    
+                                               . ........... ........      .   ....-+==+*****++++-=++=---:-=-:....                                    
+                                            .........::.....                     ...-=-=*#***+*****#*+=--::-:.:-:.....                                
+                                 . ...     ..::::..----:...                        ...:=*##***####%###**+=--:..::......                               
+                                    ......::---:::::==-::.                        .....:=+**##%##%#*++++=*+=--::.::-::..                              
+                               ...  ....:--===-....::-::..                           ..:=*#*#**#**#*=+++*++---+=-:::::-:.                             
+                            ............:::---:.:..::=-..                             .:=*##*#####***+===+=--:-==-::--:......                         
+                         ...............::::::::::--:::.                              ..:+###%##******##%%#*+==---:--:-:.......                       
+                       . ......:.....::------------=--..                              ...=+#%@@@@%***###%#####**+=::-::-:.......                      
+                      .....:..:..:::-=+**+++==-===-=+-...                              ...-*%%@@@@####%%%%%%%##**====:::........                      
+                      ....::::...:::=+*++++++=:-==--=:...                              ...=*#%%@@%%#%%%#%%%%%###+===+==-::......                      
+                       ..::--=:::.:-=+++++===-==--=+-....                              ...=+##%%@@%%%%%%%@%%#**##*+++=--==-:........                  
+                     ...::----::::-=+**+==----=----=-....                              ...-=*%%%@@@@@%@@#%%%%##*#*+++*+===---:........                
+                      ...:.::--:::--===--:::------==-....                              ...-=+%@@@@@@@@@@@%@@@%###++++**++==--::::......               
+                    ......:::::::-=++===--=--=+++===:...                      ..:---......:++##@@@@@@@@@@@@@%%%%#*+++***++==--=::::.......            
+            ..     .......::::::-====++=-=+====++==+-..                      ..+%=:-*=.....==+#%@@@@@@@@@@@@@%###%#######*+=--::::::...:...           
+           ...     .......--::-=====++=--++++***=-=+=..     .::.....        ..+%-...-*:....=+*%@@@@@@@@@@@@@@%%%#####%%##*++==--::::::::::..          
+                  ......:.::::---===+===+++++++===--=..    -#++##:..       ..:*+.....+=....-+*#%@@@@@@@@@@@@@@@@%####%%%%##**+==-=------:.:..         
+                  ......:-::.:-=++++**+=+*#***++==++=.....:%=..:*#:.       ..-%+....:+=....=#*#%%@@@@@@@@@@@@@@@@@%###%%###*++=+==----:-:::...        
+                  ......::::--======+**+++*###*+=-+*=.....-@-...:%+..       .:*=....-*-....-**++*%%%@@@@@@@@@@@@@@%%%%######***==+==-----:::...       
+                  .....:::::-=====++*++*##%%%%@#++*++... .-@=....##..        .::.....:....:=%*++#%@@@@@@@@@@@@@@@@%%@@%%%###**+++++===-::::....       
+                  .....::::---=-=+**##+**####%#**++*+... .:@@:...+*..          ...  ..  ...=##**#@%@@@@@@@@@@@@@@@@@@@%%%####***+*+=-----::.......    
+                 ........::::-===+*###*##%%#####***+-......-@=.......           .   ..  ..:*#%#*#@@@@@@@@@@@@@@@@@@@@@@@@%%%##**+**++===---:.......   
+                  ...:..:.:-====+*#%%%%%####****###*-.. ....::.   ...          .. .... ...-%#%##%@@@@@@@@@@@@@@@@@@@@@@@@@%%%#***++======----:.....   
+                 ....:..:.:-==+++*#%%####*#***++*#*#-..    ...                 .. ...  ...=@@@%%@@@%@@@@@@@@@@@@@@@@%%%%%@%@@%%#***+=====--::::....   
+                 ....:::::-=++++++###*##**#**+=+++++-..          .        .      ..    ...-@@@%@@@@%@@@@#@@@@@@@@@@@@@@@@%%%@@@%%#*+====-==--:::....  
+             .   ..:.:-::-==++**+*#####*******==+++*-..                 .. .    ...    ...*@@@@@%%@%@@@@%@@@@@@@@@@@@@@@@@@@%%%@%%**+*+==-===---:.... 
+             .  .:.-:-:::-==+++***####***+**+*+++==+-..                . ..     .........:@@@@@@@@%%@@@@%@@@@@@@@@@@@@@@@@@@@@%#%##****=*==--::-::... 
+               ...::---=---==++*=+*##**#**#*+++****#=..         ..    ....     ... ......-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%######**+==--:.::....
+             .....::--=---=+**++++**##%*+**%%*******=..                ...   ..... ......#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#%%##*##*++=-:-:.:....
+        ..........--===+===***+****#**#***###****#*++..                   ..      .  ....%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%####****++==--:::...
+      ...........:::--=-==+==++++*###*#*++*****+**+*+..                    .   ....  ...:@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%####*****+==---....
+     ..........:::-----:--===++***+*###****##*+=++++=..                            .....:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@%%%%%%%%%%#****+++==-:--:.
+    ............::-:::--==++++++=+***#**++***++=+++++:.                              ...:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%%##**+=+===-::::
+     ...........:---:--=====+***+**+++****+++++=+*##*-.                ..            ...:@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%####**++==----::
+     ..........:---------=====+++++***++++++**++=++++=.                              ...:@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%%##**+=+==-----
+.  ............:-===-:---======+++***+**+***#*++=++**+.                              ....#@@@@@@@@@@@%%@@@@@@@@@@@@@@@@@%%%@@@%@%%%%%%%####**====---::
+   ............::-----=---=========+=+**##*****+++=+++:.                             ..::*@@@@@@@@@@@@%@@%@@@@@@@@@@@@@@@%%%%#%%%@%%%#%###****+=----::
+     ... .......:-----:-=====+==----=+*#*******+++=++=:.                             ..:-%@@@@@@@@@@@%%@@@@@@@@@@@@@@@@%@@@%%%%%#%%%%%###***+++===-:::
+      .....  ...::--:::===++*===--:=++*#***#***+*#****-.                            ...:*@@@@@@%@@@%%%@@@@@@@@@@@@@@@@@@@%%%%%@%%%%##%##***+==+-----::
+        ........::::::-===++=======++******==+**#####+=..                            ..-%@@@@@@%@@#@%%@@@@@@@@@@@@@@@@@@@%%%%%%%%###%#*****+=+=---::::
+     .   ........::-----===+==++=++*+*=+++**#**###**+==-....                     ......+@@@@@@%@@@#%%@@@@%@@@@@@@@@@@@@@@@@@%%%%%%######+**++=----:::.
+        .........:::---::-===--++++**==++**#%****++****+:...                      ....=%@@@@@@@@@@%%%%%%@@@@@@@@@@@@@@@@@@@%%%######***+#*+++=----:::.
+       ...........::::::-:::-==+****+=+*##****++++**###*-...                      ...:=%@@%@@@@@@@#%%%@%@@@@@@@%@@@@@@@@@%@@%####%%##***+==*+==--::::.
+        .... ......::.::::::-=++++***#**##*==#%#*******+-...                      ...-#%%@@@@@@@%@#%%@@%@@@@@@@@@@%%@@@@@@@@@%########*+++==++-:::::..
+           .........::....:::---=+***+****+*##%#**+=+**#*-..                      ..:*%%%@@@@@@@@@%@@@%%@@@%@@@@@%%%%@%@@@%%%%%#####****++====---:....
+         .........:::..:.::::::-==++=+++*****#***+++==**+-..                      ..-%%%@@@@@@@@@@@@@@%%%@@@@%@@@%%%%%%%%%%%%%%%#####*+++===--:::::...
+         .  .........:.....:::-=---=====++****+++++==+***=:.                      ..+#@@@@@@@@@@@@@@@@%%@%@@%@@@@%%%%@@%%%%%@@%%#####**+====-::::.....
+         ......  ............:-::--===+==+++=+=====+*++*+=-.                      .-*%@@@@@@@@@@@@@@%%%%%%@@@@@@@@%%%%%%%%%%@%%%%##***+*++=---:.:.....
+         ..   ..   ...........::----=++=++=-----=++++*+++==:.                     .=+#@@@@@@@@@@@@@%##%%##%%@@@@@@%%%%%%%%%%%%%%%#******+++=---::.... 
+                       .....:-::::--==--===:-===-==+*++===+-..                    .=*%%%@%@@@@@@@@%#####%%@@@@@@%@%%%%%%%%%%%%@%%#**+***+++==--...... 
+                       .......:::::---:--------=-====---===-..                   .-*#%%@@%#@@@@@@%@%%#%%%%@@@@@%%%%%%%##@%%%%%%%%%##*++++++=----..... 
+                       ......:....:..::::::::-=-========--::..                  .:=*+#@@@%#%@@@%%%%@%%%@%%@@@@@%%#%%%%###%%%###%%%##***+=+==---:......
+                       ...............::---::-:----=====-:-:.                 ..==-***#%%#%#%%%%%@@%@@@@%@@@@@%%##########%%#########*+++==-:-::......
+                                 ......:::-:--:----=-=+===-:.               ...=#*=*#*+**#######%@%%@@@@@@@@@%%%#########%%%####***##**+===-:::...... 
+                                  ......::-=-:-==----===-:::.               ..-#@%+*###**#%%%**#*%%%%@@@@@@@@%%####**####%%###*#*#*****+==--::......  
+                                 .......::-::::-::::----::...               .:*@@@*+*##***##%###*%%@@@@@@@@@@%%##########%%%#***+***++===---::....    
+                                   ............:::---=--:..                 :=%@@@%++=+++*+*#%@%*%@@@@@@@@%@%%%%%#*##*######*****++++++==--:::....    
+                                 ............:----:----:.                 ..-#@@@@@*====+++*#%@%#%%%@@@@@@@%#%@@%%####********++++++++=----:.:.....   
+                                 ............::::::----...                .-*%@@@@@+++==+++**###*%##@@@@@%%%#%%%%%%###**+++++==+++===+=---::.:..      
+                                 ......:......-:-=--==-...              ..-*%@@@@@@#+++++=++*****####%%%%%##%###%%##****+=====-=------=-::::....      
+                                  .....:....:--=------:....            .:-+%@@@@@@@%+=++==-*+++++######%%###%#**####****+=-=----:-:.::::::.::..       
+                                   ........:----:--::::....           .:-=*%@@@@@@@@+=-=+--==+++***#*##*##****++*****++++=--=----:::............      
+                                   .......:::::::::..:....           .:-=+#@@@@@@@@@%--:==:--===++***###**++*+++****+====+=--:::::-:.........  .      
+                                   ....:....:..........-:.          .:-=+*#@@@@@@@@@@*+-::=--=-=++*#####*++=+==++=+++=+==++=--::::::.... ...          
+                                   ...................-+:..         .-:+*#@@@@@@@@@@@%#%=::::-=-++++*###*++++====--=======+==---:-:....               
+                                   ...       .... ..:=*=.  .        .:=*##@@@@@@@@@@@@*%@*-:-----=+==+*#*+=+++====---=--=++==--::::..                 
+                                             ......:+#+:.           .:=*##%@@@@@@@@@@@%+@@%=-:::::---=++*+=++=--=-:---=--====--::....                 
+                                             .. ..:+#%=.            .-+*##%@@@@@@@@@@@@#+@@%+--:::::::-========----:----------::...                   
+                                             ....:+###:.           .:=*###%@@@@@@@@@@@@@+-#%%*-:..:....---=---=---:::-----:::--.:..                   
+                                             ...:+*#*-.            .:+*###%%@@@@@@@@@@@@%=-#%%*-.......::::--:----:-:::::::::::....                   
+                                             ..:=***+..            .-+####%%@@@@@@@@@@@%@#--#%%*:........::::::--:-:::.......:..:..                   
+                                             .:+****-..            .=***#%%%@@@@@@@@@@@%%%+-*%%%+:....  ..::::::::::::.. .........                    
+                                             .=****+..          ...:+**##%%%%%@@@@@@@@%%%#*--#%%#+.................:::............                    
+                                            .=+****=...     .....::-+**###%%%%%@@@@@%%%%%#*=:*#%%*=......................                             
+                                            :+++*+=:....    ....:::-**#####%##%%%%%%%%%%###=-*####*=.....  .   ....  ..                               
+                                        ...:-++++=-..    ....:::-::=***##*######%%%%######*-=*####*#+:...    .  .                                     
+                                        ...-==+++=-..    ...:-:---:=***##**###############*-+***##*##=...                                             
+                                        ..:-==+++==:.    ...:------=************#########*+=++**##**#*-..                                             
+                                        .:==+++++==:........:-----==+********#****######*++*****##****=:...                                           
+                                       ..-===++++==--...   .:---=--=++++++**********###**=++**+*#*****+=:.                                            
+                                       :--===++++===+-...  .:::-----=+++++++++**+++*****+**++*++*******+=:.                                           
+                                      .:-=====+++++++=-:.....::-----===++=+++++++++++++****+++++++++***++-:.                                          
+                                      .:---====+==+++=+=:....:::----====+==++=+++++++++****++++++++++++++=-:.                                         
+                                     ..::--=-=======+=+==-:....::--======+======+++++++*****++++===+=++====-..                                        
+                                     ...::---=-==========---::..::-----======-===+==++++++++===+===========-:.                                        
+                                     ..:--------=====-==--:---:....::----------==+==+++==========----====----:.                                       
+                                   . ...:::-----=====------::-::.....:--::::--==++=======--==----------:--:-::..                                      
+                                     .....::::------------::::::::::::-----=========-----------=-:::::-::-::::...                                     
+                                     ......::::-----------::::::::::::-------==----------=-------:::::-:::::.::...                                    
+                                     ......:::::::--------::::::::::::::::-----::---:::----:::::::.:::::::::.....                                     
+                                      .......:::::-----:::--:::::.::::::-----:::.:-:::::::::::::-:..::::.........                                     
+                                        .......:::::---:::---::::.:::::-----:::::::-:::.::::::::::...:...........                                     
+                                       .........:..:---::::::::::::::::-----:--:::::::::::::..::::..............                                      
+                                           .........::::::::::::::::::::-------::--::::::::::..::..............                                       
+                                          ..........:::::::::::.::::::::------------::::.::::..::.............                                        
+        `;
+        const symbols = ['█','░','▒'];
+        const corruptionRate = 0.15;
+        let isDragging = false;
+        let currentZIndex = 1;
+        let dragOffset = {x:0, y:0};
+        let currentElement = null;
+        let demonicPhase = 0;
+        let positionInterval;
+        const intervalMap = new Map();
+
+        function redactText(text) {
+            const currentRate = demonicPhase >= 2 ? 1.0 : corruptionRate;
+
+            return text.split('').map(c => Math.random() < currentRate ? 
+                symbols[Math.floor(Math.random()*symbols.length)] : c).join('');
+        }
+
+        function createFragment(fragData, isCentral=false) {
+            const element = document.createElement('div');
+            element.className = `text-fragment${isCentral ? ' central-fragment' : ''}`;
+            element.id = `fragment-${crypto.randomUUID()}`;
+            element.dataset.originalHeader = fragData.header;
+            element.dataset.originalContent = fragData.text;
+
+            const header = document.createElement('div');
+            header.className = 'window-header';
+            header.innerHTML = `
+                <span>${redactText(fragData.header)}</span>
+                <div class="window-controls">
+                    <span class="minimize-btn">[_]</span>
+                    <span class="close-btn">[✕]</span>
+                </div>
+            `;
+
+            const content = document.createElement('div');
+            content.className = 'window-content';
+            content.textContent = fragData.text;
+
+            element.appendChild(header);
+            element.appendChild(content);
+
+            header.querySelector('.minimize-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                element.classList.toggle('minimized');
+                updateTaskbar(element, startCorruption(fragData.header));
+            });
+
+            header.querySelector('.close-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.body.classList.add('content-hidden');
+                const security = document.getElementById('security');
+                security.innerHTML = `<div class="loading">[LOADING]</div>`;
+                security.style.display = 'flex';
+
+                setTimeout(() => {
+                    security.innerHTML = `
+                        <div class="demonic-message">
+                            <pre class="demonic-ascii">${demonicAsciiArt}</pre>
+                            <div class="security-text ${demonicPhase>1?'demonic-phase':''}">
+                                ${demonicPhase>1?'You will not escape your guilt.<br>You will be fuel for the soul forge.':
+                                'You will not escape your guilt.<br>You will be fuel for the soul forge.'}
+                            </div>
+                        </div>`;
+                }, 2000);
+
+                setTimeout(() => {
+                    security.style.display = 'none';
+                    document.body.classList.remove('content-hidden');
+                    if(demonicPhase === 0) {
+                        document.querySelectorAll('.window-header').forEach(h => {
+                            h.innerHTML = `<div class="window-controls">${
+                                Array(3).fill('<span class="close-btn">[✕]</span>').join('')
+                            }</div>`;
+                            h.querySelectorAll('.close-btn').forEach(btn => {
+                                btn.addEventListener('click', function(e) {
+                                    document.body.classList.add('demonic-crt');
+                                    demonicPhase = 2;
+                                    document.body.classList.add('content-hidden');
+                                    security.innerHTML = `<div class="loading">[uh oh! bad decision erasmus!]</div>`;
+                                    security.style.display = 'flex';
+                                    
+                                    setTimeout(() => {
+                                        security.innerHTML = `
+                                            <div class="demonic-message">
+                                                <pre class="demonic-ascii" style="filter:hue-rotate(180deg)">
+                                                    ${demonicAsciiArt}
+                                                </pre>
+                                                <div class="security-text demonic-phase">
+                                                    guilt is not flesh.<br>
+                                                    and you are not the real you.
+                                                </div>
+                                            </div>`;
+                                    }, 5000);
+
+                                    setTimeout(() => {
+                                        security.style.display = 'none';
+                                        document.body.classList.remove('content-hidden');
+                                        document.body.style.animation = 'crt-flicker-red 0.03s infinite';
+                                        document.querySelectorAll('.text-fragment').forEach(frag => {
+                                            startCorruption(frag, 500);
+                                        });
+                                        if(positionInterval) clearInterval(positionInterval);
+                                        positionInterval = setInterval(() => {
+                                            document.querySelectorAll('.text-fragment:not(.central-fragment)')
+                                            .forEach(frag => {
+                                                const maxX = window.innerWidth - frag.offsetWidth;
+                                                const maxY = window.innerHeight - frag.offsetHeight;
+                                                frag.style.left = `${Math.random()*maxX}px`;
+                                                frag.style.top = `${Math.random()*maxY}px`;
+                                            });
+                                        }, 5000);
+                                    }, 3000);
+                                });
+                            });
+                        });
+                        demonicPhase = 1;
+                    }
+                }, 5000);
+            });
+
+            if(isCentral) {
+                element.style.left = '50%';
+                element.style.top = '50%';
+                element.style.transform = 'translate(-50%, -50%)';
+            } else {
+                element.style.left = `${Math.random()*70}%`;
+                element.style.top = `${Math.random()*70}%`;
+            }
+
+            startCorruption(element);
+            return element;
+        }
+
+        function startCorruption(element, speed=1000) {
+            if(intervalMap.has(element.id)) {
+                clearInterval(intervalMap.get(element.id));
+            }
+            const interval = setInterval(() => {
+                const header = element.querySelector('.window-header span:first-child');
+                const content = element.querySelector('.window-content');
+                if(header) header.textContent = redactText(element.dataset.originalHeader);
+                if(content) content.textContent = redactText(element.dataset.originalContent);
+            }, speed);
+            intervalMap.set(element.id, interval);
+        }
+
+        function updateTaskbar(element, headerText) {
+            const taskbar = document.querySelector('.taskbar');
+            const existingItem = taskbar.querySelector(`[data-id="${element.id}"]`);
+            
+            if(element.classList.contains('minimized')) {
+                if(!existingItem) {
+                    const item = document.createElement('div');
+                    item.className = 'taskbar-item';
+                    item.textContent = headerText;
+                    item.dataset.title = headerText;
+                    item.dataset.id = element.id;
+                    item.addEventListener('click', () => {
+                        element.classList.remove('minimized');
+                        item.remove();
+                    });
+                    taskbar.appendChild(item);
+                }
+            } else {
+                existingItem?.remove();
+            }
+        }
+
+        // Initialize core fragment
+        const centralFragment = createFragment(
+            {header: "UNSENT LETTER TO DR. ELEANOR VOSS", text: originalText}, 
+            true
+        );
+        document.body.appendChild(centralFragment);
+
+        // Create other fragments
+        fragments.forEach(frag => {
+            const element = createFragment(frag);
+            document.body.appendChild(element);
+        });
+
+        // Drag functionality
+        document.addEventListener('mousedown', e => {
+            if(!e.target.closest('.text-fragment') || 
+               document.body.classList.contains('reset-state')) return;
+            
+            currentElement = e.target.closest('.text-fragment');
+            if(currentElement.classList.contains('central-fragment')) return;
+
+            isDragging = true;
+            currentZIndex++;
+            currentElement.style.zIndex = currentZIndex;
+            const rect = currentElement.getBoundingClientRect();
+            dragOffset = {x:e.clientX - rect.left, y:e.clientY - rect.top};
+        });
+
+        document.addEventListener('mousemove', e => {
+            if(isDragging && currentElement && !document.body.classList.contains('reset-state')) {
+                const maxX = window.innerWidth - currentElement.offsetWidth;
+                const maxY = window.innerHeight - currentElement.offsetHeight;
+                let newX = Math.max(0, Math.min(e.clientX - dragOffset.x, maxX));
+                let newY = Math.max(0, Math.min(e.clientY - dragOffset.y, maxY));
+                currentElement.style.left = `${newX}px`;
+                currentElement.style.top = `${newY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            currentElement = null;
+        });
+
+        // Security system
+        let securityActive = false;
+        document.addEventListener('keydown', e => {
+            if(securityActive) return;
+            const forbiddenKeys = new Set(['F11','PrintScreen','s','S']);
+            if(forbiddenKeys.has(e.key) || (e.ctrlKey && forbiddenKeys.has(e.key.toLowerCase()))) {
+                securityActive = true;
+                document.getElementById('security').style.display = 'flex';
+                setTimeout(() => window.location.href = 'about:blank', 3000);
+            }
+        });
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "arg/C0R3/gateway.html"
+    }
+  ]
+}

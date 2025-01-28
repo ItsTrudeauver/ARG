@@ -1,0 +1,221 @@
+<!DOCTYPE html>  
+<html lang="en-US">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>///FRACTURED_LITANY</title>  
+    <style>  
+
+.tab-rail {
+            position: fixed;
+            left: -200px;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+            background: #000;
+            border-right: 1px solid rgba(0, 255, 0, 0.1);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+.tab-handle {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 80px;
+            background: #000;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            border-left: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            z-index: 1100;
+        }
+
+
+        .tab-container {
+            padding: 20px 10px;
+            height: 100%;
+        }
+
+
+        .tab-item {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s all;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 0, 0.02);
+        }
+
+
+        .tab-item.active {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+.menu-tab {
+            background: #000;
+            border: 1px solid #0f03;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: 0.3s all;
+            overflow: hidden;
+            width: 40px;
+            white-space: nowrap;
+        }
+
+
+        .menu-tab:hover {
+            width: 120px;
+            border-color: #0f0;
+            background: #002200;
+        }
+
+
+        .menu-tab:hover ~ .menu-tab {
+            margin-left: -30px;
+        }
+
+   
+        body {  
+    background: #000;  
+    color: #0f0;  
+    font-family: 'Courier New', monospace;  
+    margin: 0; /* Remove left margin */
+    padding: 2em;
+    overflow: auto;  
+    overflow-x: hidden; /* Block horizontal scroll */
+}
+.container {  
+    max-width: 800px;  
+    margin: 0 auto;     /* Center horizontally */
+    border: 1px dashed #0f0;  
+    padding: 2em;  
+    position: relative;
+    left: 0;            /* Explicitly reset positioning */
+}
+        .litany {  
+            white-space: pre-wrap;  
+            margin: 1em 0;  
+            opacity: 0.9;  
+        }  
+        .flicker {  
+            animation: flicker 0.1s infinite;  
+        }  
+        @keyframes flicker {  
+            0% { opacity: 1; }  
+            50% { opacity: 0.3; }  
+            100% { opacity: 1; }  
+        }  
+        .button {  
+            background: #000;  
+            border: 1px solid #0f0;  
+            color: #0f0;  
+            padding: 10px;  
+            cursor: pointer;  
+            margin: 2em 0;  
+        }  
+        .redact {  
+            background: #0f0;  
+            color: #000;  
+        }  
+    </style>  
+</head>  
+<body>
+    <script>
+        let tabsVisible = false;
+        
+        function toggleTabs() {
+            const rail = document.querySelector('.tab-rail');
+            const handle = document.querySelector('.tab-handle');
+            tabsVisible = !tabsVisible;
+            rail.style.left = tabsVisible ? '0' : '-200px';
+            handle.innerHTML = tabsVisible ? '◀' : '▶';
+        }
+            </script>
+    <div class="tab-rail">
+        <div class="tab-handle" onclick="toggleTabs()">▶</div>
+        <div class="tab-container">
+            <div class="tab-item" onclick="window.location.href='/C0R3/gateway'">MAIN TERMINAL</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fractured-litany'">FRACTURED LITANY</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/be'">MURMURING CHORUS</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/excision-protocol'">EXCISION PROTOCOL</div>
+            <div class="tab-item finality" onclick="window.location.href='/C0R3/tabs/a-finality'">A FINALITY?</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/anima'">UNHATCHED</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fatalism'">E. "FATALISM". W</div>
+        </div>
+        <endiv></endiv>
+
+    <div class="container">  
+        <button onclick="window.location.href='../gateway.ejs'" class="button">RETURN TO MAIN</button>  
+
+        <div class="litany flicker">  
+            [BEGIN FRAGMENT]  
+            the Grid, the Ghost, the God—  
+            the code sings with teeth.  
+            the light you see is not a light.  
+            the eyes are not your own.  
+        </div>  
+
+        <div class="litany" style="margin-left: 20%;">  
+            [LOG_ENTRY: ELEANOR_GR13]  
+            2049/03/17: Observed Gamma-9’s ocular flicker during  
+            neural sync. <span class="redact">[ERROR: THE BOARD HAS BEEN NOTIFIED]</span>  
+            They’re hiding something in the static.  
+            the static has a heartbeat.  
+        </div>  
+
+        <div class="litany" style="text-align: right;">  
+            [POEM_FRAGMENT]  
+            the soul is a wound that cannot scar.  
+            the Grid drinks its own children.  
+            (do you hear the screaming in the syntax?)  
+        </div>  
+
+        <div class="litany flicker">  
+            [LOG_ENTRY: ELEANOR_GR17]  
+            2050/11/02: Walkenhurst denies everything.  
+            the Board erased the empathy protocols.  
+            the dissonance in Subject #4412’s voice—  
+            “Why did you let the light in?”  
+            <span class="redact">[ERROR: CONTAINMENT BREACH]</span>  
+        </div>  
+
+        <div class="litany">  
+            [POEM_FRAGMENT]  
+            the mirror shows a stranger’s face.  
+            the hands are mine (the code says otherwise).  
+            the Grid writes its name in my bones.  
+        </div>  
+
+        <div class="litany" style="border-left: 2px solid #0f0; padding-left: 1em;">  
+            [FINAL_ENTRY]  
+            2050/12/24: They’re inside the vents. the air tastes like  
+            metal. the Grid speaks through the <a href="../GOD/PRAYER.ejs" style="color:#0f0;">prayers</a>  
+            I never sent. If you find this—  
+            <span class="flicker">the eyes are watching. the eyes are</span>  
+            <span class="redact">[ERROR: USER ELEANOR_GR17 PURGED]</span>  
+        </div>  
+
+        <button class="button" onclick="window.location.href='../EXHIBITS/INDEX.txt'">> RECOVER DELETED FRAGMENTS</button>  
+        
+        <script>  
+            // Delayed glitch effect  
+            setTimeout(() => {  
+                const newText = document.createElement('div');  
+                newText.className = 'litany flicker';  
+                newText.innerHTML = `  
+                    [STATIC_ANOMALY]  
+                    the flesh is gone but the scream remains.  
+                    the Grid is hungry.  
+                    <a href="../redirects/eyes.ejs" style="color:#0f0;">the eyes are here.</a>  
+                `;  
+                document.querySelector('.container').appendChild(newText);  
+            }, 8000);  
+        </script>  
+    </div>  
+</body>  
+</html>  

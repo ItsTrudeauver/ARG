@@ -1,0 +1,211 @@
+<!DOCTYPE html>  
+<html lang="en-US">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>///ASCENDANCY_GRID/EXCISION_PROTOCOL</title>  
+    <style>  
+    
+.tab-rail {
+            position: fixed;
+            left: -200px;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+            background: #000;
+            border-right: 1px solid rgba(0, 255, 0, 0.1);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+.tab-handle {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 80px;
+            background: #000;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            border-left: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+
+        .tab-container {
+            padding: 20px 10px;
+            height: 100%;
+        }
+
+
+        .tab-item {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s all;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 0, 0.02);
+        }
+
+
+        .tab-item.active {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+.menu-tab {
+            background: #000;
+            border: 1px solid #0f03;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: 0.3s all;
+            overflow: hidden;
+            width: 40px;
+            white-space: nowrap;
+        }
+
+
+        .menu-tab:hover {
+            width: 120px;
+            border-color: #0f0;
+            background: #002200;
+        }
+
+
+        .menu-tab:hover ~ .menu-tab {
+            margin-left: -30px;
+        }
+
+
+        body {  
+            background: #000;  
+            color: #0f0;  
+            font-family: 'Courier New', monospace;  
+            margin: 2em;  
+        }  
+        .container {  
+            max-width: 800px;  
+            margin: 0 auto;  
+        }  
+        .glitch {  
+            text-shadow: 0 0 4px #0f0;  
+        }  
+        .annotation {  
+            color: #ffffff;  
+            font-size: 0.8em;  
+            border-left: 2px solid #0f0;  
+            padding-left: 1em;  
+            margin: 1em 0;  
+        }  
+        .button {  
+            background: #000;  
+            border: 1px solid #0f0;  
+            color: #0f0;  
+            padding: 10px;  
+            cursor: pointer;  
+            margin-top: 2em;  
+        }  
+        .button:hover {  
+            background: #0f03;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <script>
+        let tabsVisible = false;
+        
+        function toggleTabs() {
+            const rail = document.querySelector('.tab-rail');
+            const handle = document.querySelector('.tab-handle');
+            tabsVisible = !tabsVisible;
+            rail.style.left = tabsVisible ? '0' : '-200px';
+            handle.innerHTML = tabsVisible ? '◀' : '▶';
+        }
+            </script>
+    <a href="../gateway.ejs" class="button">> RETURN TO MAIN</a>
+    <div class="tab-rail">
+        <div class="tab-handle" onclick="toggleTabs()">▶</div>
+        <div class="tab-container">
+            <div class="tab-item" onclick="window.location.href='/C0R3/gateway'">MAIN TERMINAL</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fractured-litany'">FRACTURED LITANY</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/be'">MURMURING CHORUS</div>
+            <div class="tab-item active" onclick="window.location.href='/C0R3/tabs/excision-protocol'">EXCISION PROTOCOL</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/a-finality'">A FINALITY?</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/anima'">UNHATCHED</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fatalism'">E. "FATALISM". W</div>
+        </div>
+    <div class="container">  
+        <button onclick="window.location.href='../gateway.ejs'" class="button">RETURN TO MAIN</button>  
+
+        <pre>  
+╔════════════════════════════════════════════╗  
+║ ASCENDANCY GRID - EXCISION PROTOCOL v9.4.7 ║  
+╚════════════════════════════════════════════╝  
+        </pre>  
+
+        <h1>>> BLESSED RECLAMATION PROCEDURE</h1>  
+
+        <p><strong>[Purpose]:</strong> Permanent termination of corrupted consciousnesses. Target data is irrecoverable. See <a href="../COR3/redirects/eyes.txt" style="color:#0f0;">Ethical Waiver 881-A</a>.</p>  
+
+        <div class="annotation">  
+            [Dr. Walkenhurst, 2053]<br>  
+            They call it "blessed" to soften the sin. The Board says it’s mercy.  
+            The Grid says it’s evolution. I hear them scream in the static.  
+        </div>  
+
+        <pre>  
+=== PHASE 1: IDENTIFICATION ===  
+- Scan for SOUL-SIGNATURE_ANOMALY (deviation >12.8%).  
+- Cross-reference with dissent patterns (see <a href="../COR3/logs/user_activity.asc" style="color:#0f0;">user_activity.asc</a>).  
+        </pre>  
+
+        <div class="annotation glitch">  
+            [Subject Gamma-9 fragment, recovered]<br>  
+            I don’t want to be blessed. I want to see the sun again.  
+        </div>  
+
+        <pre>  
+=== PHASE 2: NEUTRALIZATION ===  
+- Deploy NEURAL_ACID via Grid backbone (latency <3ms).  
+- Monitor disintegration: Full erasure requires 8.2 seconds.  
+        </pre>  
+
+        <div class="annotation">  
+            [Log entry, Chamber Omega-7]<br>  
+            Subject #2281 clawed at the code. Left fractures in the substrate.  
+            The Grid sang louder to drown her out.  
+        </div>  
+
+        <pre>  
+=== PHASE 3: SANITIZATION ===  
+- Purge residual emotive data.  
+- Append tag: [BLESSED_AND_UNBOUND]  
+        </pre>  
+
+        <div class="annotation glitch">  
+            [Message scrawled on mirror, Sector Gamma]<br>  
+            THEY LIE. THE BLESSED ARE TRAPPED IN THE WALLS.  
+        </div>  
+
+       
+
+        <script>  
+            // Auto-load "eyes" fragment after delay  
+            setTimeout(function() {  
+                const newElement = document.createElement('div');  
+                newElement.innerHTML = `  
+                    <pre class="glitch">  
+[SYSTEM NOTICE]  
+BLESSED RECLAMATION COMPLETE.  
+5,302,881 ENTITIES SANITIZED.  
+ERROR: SOUL SIGNATURE DETECTED IN <a href="../redirects/trash.ejs" style="color:#0f0;">.TRASH</a>  
+                    </pre>  
+                `;  
+                document.body.appendChild(newElement);  
+            }, 10000);  
+        </script>  
+    </div>  
+</body>  
+</html>  

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>/// EYES.gif</title>
+    <title>/// i saw you</title>
     <link rel="stylesheet" href="../static/glitch.css">
     <style>
         .back-button {
@@ -175,7 +175,7 @@
 </head>
 <body class="crt">
     <div class="main-interface">
-        <a href="../gateway.html" class="back-button">
+        <a href="../gateway.ejs" class="back-button">
             <span class="static-text">&lt;</span>
             <span class="hover-text">&lt;&lt;&lt; KEEP SAFE &lt;&lt;&lt;</span>
         </a>
@@ -753,7 +753,7 @@
         const FRAME_DELAY = 100;
 
         function loadAnimation() {
-            fetch('/redirects/eyes.txt')
+            fetch('/static/eyes.txt')
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
                     return response.text();

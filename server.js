@@ -12,6 +12,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+// Serve static files
+app.use('/static', express.static(path.join(__dirname, 'static')));
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
@@ -32,8 +34,6 @@ app.use(session({
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
-app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // Helper function to dynamically handle .ejs routes
 const renderEJSRoute = (subPath) => (req, res) => {

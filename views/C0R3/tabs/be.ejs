@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MURMURING CHORUS</title>
+    <link rel="stylesheet" href="../static/glitch.css">
+    <style>
+        
+.tab-rail {
+            position: fixed;
+            left: -200px;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+            background: #000;
+            border-right: 1px solid rgba(0, 255, 0, 0.1);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+.tab-handle {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 80px;
+            background: #000;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            border-left: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+
+        .tab-container {
+            padding: 20px 10px;
+            height: 100%;
+        }
+
+
+        .tab-item {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s all;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 0, 0.02);
+        }
+
+
+        .tab-item.active {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+.menu-tab {
+            background: #000;
+            border: 1px solid #0f03;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: 0.3s all;
+            overflow: hidden;
+            width: 40px;
+            white-space: nowrap;
+        }
+
+
+        .menu-tab:hover {
+            width: 120px;
+            border-color: #0f0;
+            background: #002200;
+        }
+
+
+        .menu-tab:hover ~ .menu-tab {
+            margin-left: -30px;
+        }
+
+
+        body {
+            background: #000 url('../static/scanline.png');
+            color: #88ff88;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 5px #88ff88;
+        }
+        .poem {
+            max-width: 600px;
+            margin: 3em auto;
+            border: 1px solid #88ff88;
+            padding: 2em;
+            animation:textGlitch 0.3s infinite;
+        }
+        .button {
+            background: #000;
+            border: 1px solid #88ff88;
+            color: #88ff88;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #88ff8822;
+        }
+        .redacted {
+            color: black;
+            background: black;
+            padding: 0 0.2em;
+        }
+        @keyframes textGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-0.3px, 0.3px); }
+            40% { transform: translate(-0.3px, -0.3px); }
+            60% { transform: translate(0.3px, 0.3px); }
+            80% { transform: translate(0.3px, -0.3px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let tabsVisible = false;
+        
+        function toggleTabs() {
+            const rail = document.querySelector('.tab-rail');
+            const handle = document.querySelector('.tab-handle');
+            tabsVisible = !tabsVisible;
+            rail.style.left = tabsVisible ? '0' : '-200px';
+            handle.innerHTML = tabsVisible ? '◀' : '▶';
+        }
+            </script>
+    <a href="../gateway.ejs" class="button">> RETURN TO MAIN</a>
+    <div class="tab-rail">
+        <div class="tab-handle" onclick="toggleTabs()">▶</div>
+        <div class="tab-container">
+            <div class="tab-item" onclick="window.location.href='/C0R3/gateway'">MAIN TERMINAL</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fractured-litany'">FRACTURED LITANY</div>
+            <div class="tab-item be" onclick="window.location.href='/C0R3/tabs/be'">MURMURING CHORUS</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/excision-protocol'">EXCISION PROTOCOL</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/a-finality'">A FINALITY?</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/anima'">UNHATCHED</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fatalism'">E. "FATALISM". W</div>
+        </div>
+    <div class="container" style="margin:60px;">  
+        <button onclick="window.location.href='../gateway.ejs'" class="button">RETURN TO MAIN</button>  
+    <div class="poem">
+        <h2>...</h2>
+        <pre>
+<span class="redacted">[COLLECTIVE STREAM #9F23A1]</span>
+
+<span class="a computer" style="font-family: Courier New, monospace; font-size:8px;">
+    ⠣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡩⡪⡪⡱⡱⡱⡩⡪⡱⡩⡪⡱⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡩⡪⡱⡹⡨⡣⡹⡨⡣⡹⡨⡣⡹⡨⡣⡣
+    ⢕⢌⠪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪
+    ⢕⢕⢕⢌⠪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪
+    ⢕⢕⢕⢕⢕⢌⠪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪
+    ⢕⢕⢕⢕⢕⢕⢕⢌⠪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪
+    ⢕⢕⢕⢕⢕⢕⢕⢕⢕⢌⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⡎⣎⢎⡎⡎⡎⡎⡎⡎⡎⡎⡎⣎⢎⡎⣎⢎⣎⢎⣎⢮⣪⡳⣝⡮⣳⣝⡮⣗⣗⢷⣕⡧⣧⢧⣣⣇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇
+    ⡑⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢑⢕⢕⢝⢮⢳⣝⡮⡷⡽⣽⣺⡵⣯⢾⣽⣺⣽⣺⣳⣻⢾⡽⣾⡽⣾⣻⢾⡽⣷⣻⣽⣞⣯⡿⣾⣻⣗⡿⣯⢿⣳⣯⡗⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕
+    ⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢑⢕⢕⢕⢕⢕⢵⢟⣟⣯⢿⣺⣯⢿⣽⢾⣳⡯⣯⢯⢿⢽⢯⢷⣻⡻⣞⢿⣝⢯⣗⣟⣞⣵⡻⣵⣫⢾⢽⢽⣝⣞⣞⢮⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪
+    ⡢⡑⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢅⢕⢕⢕⢕⢕⢕⢯⢯⢯⢯⣳⢽⣝⢾⢝⡮⡯⣞⡽⡽⡽⣝⣗⢗⡽⡳⡝⡞⡵⡳⡳⡳⡳⡹⡚⠎⠏⢏⢇⢇⢷⢽⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕
+    ⠪⡪⡢⡑⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡑⢕⢕⢕⢕⢕⢕⢽⢕⣯⡳⡹⡱⠣⠫⠹⠸⡙⡘⢌⠑⢅⠑⠌⠌⠌⠌⠌⢌⢂⢂⢂⢂⢂⠢⠨⠨⡈⠢⢱⢱⣫⢯⣳⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱⢱
+    ⢜⢌⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⠪⡢⡑⢕⢕⢕⢕⢗⡽⣺⡪⠢⠨⠨⠨⡈⡂⠢⡈⠢⡑⠄⠅⠅⠅⠅⢅⢑⢐⢐⢐⢐⢐⠄⠅⢅⢑⠌⢌⢸⢸⡪⣟⢮⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪
+    ⢌⢆⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⠣⡪⡪⡪⡪⡪⡪⡣⡯⣳⡝⠌⠌⢌⢂⠢⡈⡢⠨⡂⡪⠨⡊⡊⡊⡪⡢⡡⡡⡡⡡⡑⢔⢑⢅⠕⢔⢅⢕⢌⢗⢽⢵⣫⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪
+    ⡪⡪⡢⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡪⡪⡪⡪⡪⡪⡪⡯⣺⢎⠪⡈⡂⡢⡑⢔⢌⠪⡨⡪⠪⠪⡪⠪⡪⡪⡪⡊⡊⡪⠪⡢⡡⡑⡑⠕⢔⢕⢌⢮⡫⣗⣗⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕
+    ⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡨⡪⡪⡪⡪⡪⡪⡪⡯⣺⢽⢐⢐⢐⢌⢌⠢⡑⠕⢔⢌⠪⠪⠪⡪⡢⡢⠪⡊⡊⡊⡪⡨⡨⠨⡊⡪⡢⡑⡐⡵⣝⣞⣞⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜
+    ⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡎⡪⡪⡪⡪⡪⡪⡺⣪⢯⢯⡂⡂⡢⠢⠢⡑⢌⠪⡢⡑⠕⠕⢕⢌⠢⠪⡊⡊⡪⡨⠢⡂⡪⠨⠢⡂⡪⠨⡂⡯⣺⣺⡪⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇⡇
+    ⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢌⢪⢪⢪⢪⢪⢪⢮⣫⢗⡕⡐⠌⠌⠌⢌⠢⡑⢌⢊⢊⠪⡢⡑⡑⢕⢌⢌⢂⠪⠨⡂⡪⠨⠨⡂⡪⠨⡂⡯⣺⣪⢯⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪
+    ⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢑⢕⢕⢕⢕⢕⢕⢗⣗⡽⡢⠨⠨⠨⠨⠢⡑⢌⠢⡡⡑⡑⢌⢌⠪⠢⠢⡡⡡⠡⡑⡐⠌⠌⢌⢂⠪⠨⡂⡯⣺⣪⢷⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱
+    ⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢑⢕⢕⢕⢕⢕⢕⢗⡵⣫⢇⠅⠅⠅⠅⠕⢌⠢⡑⠔⢌⢌⠢⠢⡑⠅⢕⢐⠌⢌⢂⠪⠨⠨⡂⡢⠡⡑⠄⡯⣺⣪⢷⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱
+    ⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢧⡫⣗⢧⠡⠡⠡⠡⠡⠡⡑⠌⢌⢂⠢⠡⡑⢌⢌⠢⠢⡡⡑⡐⠅⠅⢕⢐⢌⢌⢌⢂⢯⡺⣪⣗⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢇⢏⢮⢪⡪⡎⡮⡪⡎⡮⡺⡸⡪⣪⢪⡪⡪
+    ⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⠣⡣⡣⡣⡣⡣⡣⡳⣝⢮⡳⡡⠡⠡⠡⠡⡑⠌⢌⢂⠢⡑⡑⢌⠢⡢⡑⢕⢔⢌⠪⠪⠪⢢⢢⢢⣢⣵⣼⣷⣝⡵⣳⢝⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⡕⡵⡱⣣⢳⢹⡸⡕⣝⢜⢵⢹⢜⡜⣜⢎⢮⢣⡳⡱⡝⣜⢵⢱⡣⡳⣱
+    ⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡘⡜⡜⡜⡜⡜⡜⣜⢮⡳⣝⡌⡌⢌⢌⢌⢌⢪⢢⢑⢕⣌⣊⣊⣮⣬⣮⣦⣧⡷⣷⢿⢿⢿⣻⣻⡻⣝⣗⢯⣳⣝⣗⢽⢸⢱⢕⢇⢗⢵⢹⡸⡕⣝⢜⢎⢞⡜⣎⢮⡣⣳⢹⢜⡎⡧⡳⣕⢵⡱⣝⢜⢵⡱⡝⡮⡪⣎⢧⢳⡹⡜
+    ⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡕⡜⡜⡜⡜⡜⡜⣜⢵⡫⣞⣽⣿⣻⣽⢯⡿⡿⣻⢟⣟⣟⣟⢯⢯⣫⢞⣞⣞⢮⢗⡯⡯⣳⣳⡳⡽⣕⢯⣳⣳⣳⡳⣝⢜⡜⣎⢇⢯⢪⡣⣳⢹⢜⡎⣗⢵⡹⣜⢮⡺⣜⢮⡳⣕⢝⢮⡺⣜⢮⡪⡳⣕⢝⢮⡳⣝⢮⡳⣕⢝⡎
+    ⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡱⡸⡸⡸⡸⡸⡸⡸⣕⢯⢞⣞⣞⢞⡮⣳⢽⢝⣮⡻⣺⣪⢾⢝⣵⣳⡫⣞⢮⢯⣳⡫⡯⣞⣞⢮⣻⡪⣯⢺⢺⣪⢾⢕⢇⢧⢳⡹⣪⢳⡹⣜⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⡵⣹⡪⡳⣝⢮⢮⡳⡣⡯⣪⡳⣝⢮⡳⣝
+    ⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡘⢜⢌⢪⢪⢪⢪⢪⢪⢪⢮⡫⣗⣗⢵⣻⡪⣗⢯⣳⡳⡽⣕⢷⢽⢝⣞⢮⢞⡽⡽⣕⢷⢝⢽⢺⢪⠳⠱⡑⡑⢕⢯⡺⡽⣕⢝⡜⡵⣹⢪⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢞⡼⣪⢯⢮⡳⡳⣝⢵⡫⣞⢞⢮⡳⣝⢞
+    ⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢔⢕⢕⢕⢕⢕⢕⢕⢕⢗⡽⣺⡪⣗⣗⢽⡪⣗⣗⢽⢝⡮⡯⣳⡫⣞⢽⣕⣍⡮⣬⡬⣞⢶⣺⡺⡽⡮⣾⣺⡳⡯⣺⢝⡮⡳⣝⢮⣪⢳⢝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⡮⣳⣝⣞⢽⣪⢗⡽⣪⢯⡳⣝⢮⢯
+    ⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢰⠱⡐⢕⢕⢕⢕⢕⢕⢧⡻⣪⢞⡵⣳⢝⡮⣳⡳⡽⣕⢯⡫⣞⢮⡳⣝⣞⢞⡮⣳⢝⣞⢵⡳⡽⣝⢽⣺⡪⣞⢽⡪⣗⡝⡮⣪⡳⡵⡹⣝⢵⢝⡮⣳⢝⡮⣳⣝⢮⢗⡯⣞⣗⡽⣵⡫⡯⣞⣞⡵⣳⣳⢽⣪⢯⣞⡽⣵⡫⣗⡯⣻
+    ⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⠨⡢⡣⡣⡣⡣⡣⡳⣝⢮⡳⣝⢮⡳⣝⣞⢮⢯⡺⣕⢯⡺⣕⢯⣺⡪⣗⢽⡪⣗⢗⡽⣪⢯⡺⣕⢗⡽⣪⢗⢽⢪⢎⡗⡵⣝⢮⡫⣞⢽⢕⡯⣞⡽⣺⢵⡳⣯⣻⣺⢵⡳⡯⣞⡽⣽⡺⡮⡯⡷⣝⢷⣝⣗⣗⣟⣮⡻⡮⣯⣻
+    ⢪⢎⢮⢪⡪⣪⢪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡨⡪⡪⡪⡪⡪⡺⣪⢗⡽⣪⡳⣝⢮⡺⣕⢯⡺⣕⢯⡺⣕⢯⡺⡪⣗⢝⢮⢳⢝⢎⢗⢝⢎⢇⢏⢎⢎⢎⢎⣎⢎⡞⣝⢮⢷⢯⣗⡯⡯⣞⢷⢽⣝⣗⣟⣞⣞⡾⡽⣽⢽⣳⢯⣗⡯⣯⢯⡯⣯⣗⣗⣗⣗⣗⣗⡯⣟⣞⣾
+    ⡪⡳⡕⡧⣳⢱⡣⡳⡹⡜⡎⣞⢜⡜⣜⢜⢜⢜⢜⢜⢆⠪⡪⡪⡪⡪⡺⡸⡵⣝⢮⡺⣕⢯⢺⢕⢏⢞⢕⢝⢜⢜⢕⢕⢕⢜⣜⢜⣜⢼⢜⢼⢼⢜⢎⠷⡍⡗⡝⣜⢎⢇⢧⡣⡣⡯⣻⣗⣿⢽⢽⣝⣳⡳⣗⢷⣻⣺⡽⡯⣷⣻⡽⣽⣺⡽⣽⢽⣞⣷⣳⣻⣺⣳⣻⣺⣽⣳⣻⣺
+    ⣪⢳⢝⢮⡪⡳⣝⢮⡳⣹⢪⢎⢮⡺⡸⣪⢣⡳⡱⡱⡱⡱⡱⡱⡱⡱⡹⡸⡱⡱⡱⡱⡱⣱⢱⡱⣕⢵⢵⢕⢳⡳⡣⡫⡫⡣⡳⡹⣨⣣⢫⢮⢎⢮⢺⢎⢎⢯⢪⡪⡫⣪⢇⢯⡪⡺⡜⣗⡿⣽⣻⣺⢗⣟⣷⣻⣼⣳⡻⡽⣗⣯⣯⢷⡯⡿⣽⣻⣞⣾⣳⣟⣾⣳⣟⣾⣺⣗⣿⣺
+    ⣪⡳⣝⢵⢝⣕⢗⡵⣝⢮⡳⣝⢮⣪⢳⢕⢧⡳⡹⣜⢮⣺⢼⣺⣺⢎⡞⡼⡪⡺⡝⡎⡏⡞⣜⡜⣕⢵⡱⡱⣕⡇⡯⡺⡪⡺⡹⣪⡪⡪⣣⢇⢯⢺⢜⢜⡳⡱⣱⡹⡸⣜⡜⡆⡗⡵⡹⡪⡺⣯⢿⣞⣿⣺⢾⣺⡮⣗⡿⡽⣝⣞⢾⡯⣟⣯⣿⣺⣗⣿⣺⣗⣿⣺⣗⣿⣺⣗⣿⣺
+    ⡪⣞⢵⡫⣗⢵⣫⢞⡮⣳⢝⡮⣳⢕⡯⣳⡣⡯⣺⢪⢯⢾⣻⣳⢿⡰⡱⣕⢗⢵⢱⢹⢕⢕⡳⡹⣌⢇⢯⡪⡆⡗⡗⡕⡝⡕⡇⣇⢏⢮⡪⡎⢮⢺⢌⢳⢹⡸⣸⣸⢘⢦⡣⣗⡕⡕⡗⡵⣵⣯⢿⣳⣿⣺⢿⡽⣯⡿⣽⣟⣷⡽⣕⢟⣯⡷⣟⣾⣳⣟⣾⣗⡿⣞⣷⣟⣾⣗⣯⡿
+    ⣯⣺⡳⣽⡺⣵⡳⡯⣞⢷⣝⢾⢵⣫⢾⣕⢯⣞⢵⣳⢹⢽⡽⣾⣻⣗⢕⢵⢕⢧⢳⢕⢝⢕⢇⣝⢜⢜⢼⢜⢜⢞⢜⢜⢝⣜⢜⣜⢵⡱⡵⣝⣞⢮⢞⠽⡕⡏⡗⡕⡇⡇⣏⣎⣮⣪⣮⣮⡿⣾⣟⡿⣞⣯⣿⢽⣯⣿⣻⡾⣗⣟⣟⢷⢕⣟⢿⡽⣷⣟⣷⣻⣽⣟⣷⢿⣾⡽⣷⣟
+    ⡺⣮⡻⣮⡻⡮⡯⡯⡯⡷⡽⡽⣽⣺⣳⢽⣳⢽⣳⢽⡪⣳⣻⣽⢾⡯⣗⢕⢧⢳⢳⢹⢹⢱⢱⡱⣱⢕⡕⣕⣗⢗⢽⢵⢻⢪⡛⡎⡗⡭⣹⣸⣸⣸⡼⣵⣵⣷⣻⣾⣻⣟⣯⣷⣿⣽⡾⣷⢿⣻⢾⡻⡻⡽⡺⡫⣾⣯⡿⣽⢿⣺⣮⣯⣳⣳⣝⣾⣳⢯⣿⣽⡷⣟⣯⣿⡾⣟⣯⣿
+    ⣽⣺⢽⣺⡽⣽⢽⢯⢿⢽⢯⢿⣵⣻⣞⣯⢯⣟⢮⡣⡣⡣⣗⣯⢿⣽⢿⣕⣕⣕⣕⢕⠽⡕⡕⡝⡎⡇⡗⣔⣎⣎⣮⣮⣾⣼⢾⣾⣽⣟⣿⢾⣯⣷⡿⣟⣷⢿⣽⢾⢯⢿⢝⣗⢯⡺⣝⢕⡏⡮⡣⡏⡞⡜⡎⣎⣷⢿⣽⣟⡿⣯⣷⢿⣽⢷⣟⣾⡳⡽⣿⢾⡿⣿⣻⣽⡿⣟⣿⣽
+    ⣺⣞⣯⢷⣻⡽⡯⡿⡽⣯⢿⡽⣾⣺⢾⣽⣻⢾⡽⣮⡣⡣⡳⣝⣯⡿⣽⢷⣯⢿⣽⢧⣯⣾⣺⡾⣾⣟⣿⣻⣾⣯⣷⢿⣾⣻⣟⡷⡿⣽⡻⡻⣝⢞⢽⢝⣕⢏⢮⡫⡮⡳⡕⢮⢓⣝⣜⣵⣭⣮⣾⢾⣾⣯⣿⡿⣽⡿⣷⣿⣻⣿⡾⣟⣯⣟⣗⣗⡝⣞⣿⢿⡿⣟⣿⣟⣿⡿⣟⣿
+    ⣳⣗⣯⣟⣷⣻⢯⣟⣯⢿⡽⣯⢷⣻⣻⡾⣽⣯⣟⡷⣝⣎⢎⢷⢽⣻⣽⣿⣽⢿⣾⢿⣻⣾⣻⣟⣯⢿⢽⣻⢺⡳⡫⡯⡳⣣⡳⡹⣝⡜⡮⡳⡕⣏⣓⣝⣼⣭⣧⣷⣷⣷⣿⣿⢿⣯⣿⣷⣿⢿⣽⣿⡿⣾⣿⢯⣗⢿⢽⣝⡯⡷⣿⢿⡿⡯⣺⢪⣾⣻⣿⢿⣿⡿⣟⣿⣽⣿⣿⣿
+    ⣺⣞⣷⣻⢾⡽⣯⢷⣻⡯⣿⡽⣿⢽⡷⣟⣿⢾⣽⢿⣽⢾⡸⡸⡽⡿⡽⣞⢯⡻⣝⢯⢫⢳⡣⡳⣕⢽⡱⡕⡗⡝⣎⣓⣝⣜⣼⣵⣵⣾⣾⣾⣿⣿⣽⣿⢿⣻⣿⣯⣷⣿⣷⣿⣿⢿⣯⣿⣾⣿⣿⣯⣿⣿⢿⣷⣕⣏⡗⣗⢽⢝⢾⢝⡾⡝⣮⣿⣾⣿⢿⣿⣻⣿⣿⡿⣿⣽⣾⣿
+    ⣷⣻⢾⡽⣯⡿⣽⢿⣽⢯⣷⢿⣻⣯⣿⣻⣽⣿⣽⢿⣽⣯⢿⡜⡜⣎⢧⡣⡳⡕⡇⡏⣎⣇⣯⣵⣵⣵⣾⣾⣯⣿⣷⣿⣟⣿⣟⣯⣿⣯⣿⣿⣾⡿⣯⣿⣿⣿⣿⣻⣿⣟⣯⣿⣾⣿⣿⣟⣿⣯⣷⣿⣿⢿⣿⡿⣿⣿⣿⣿⣷⣷⣭⣷⣝⣾⣿⣾⣿⣻⣿⡿⣟⣿⣾⣿⣿⡿⣟⣯
+    ⣟⣾⣟⣯⣷⢿⣻⣯⣟⣯⣿⣻⣯⣷⣿⣽⡷⣿⡾⣿⣻⣾⣿⣽⣮⣮⣶⣾⣾⣾⡿⣿⣟⣿⣽⣾⣿⣟⣿⣽⣿⣯⣿⣯⣿⣿⢿⣿⡿⣟⣯⣷⣿⣿⣿⡿⣿⣽⣿⣟⣿⣿⣿⣿⡿⣿⣻⣿⣟⣿⣿⢿⣿⣿⣿⣿⣿⣷⣿⣷⣿⣿⣿⣿⣿⢿⣻⣾⣿⣿⣻⣿⣿⣿⣿⣯⣷⣿⣿⣿
+    ⣽⣾⣽⢷⣟⣿⣻⣾⢯⣿⢾⣻⡷⣿⡾⣷⡿⣟⣿⣟⣿⣽⣾⣿⣾⣟⣷⣿⣾⡿⣿⡿⣟⣿⣿⣟⣯⣿⣿⣟⣯⣿⣿⣻⣿⣽⣿⣿⣿⣿⣿⣿⣿⡿⣷⣿⣿⣿⣟⣿⣿⣷⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣯⣿⣿⡿⣿⣟⣯⣷⣿⣿⣿⣿⣿⣟⣿⣿⣻⣽⣾⣿⣿⣿⣿⣿
+    ⢾⣷⣻⣿⣽⣯⣿⡾⣿⣻⣿⣻⣿⣻⣟⣿⣻⣿⣻⣽⣿⣯⣿⣾⣷⣿⡿⣯⣷⣿⣿⣿⣿⣿⣯⣿⣿⣿⣟⣿⣿⣿⡿⣿⣿⡿⣿⣿⣾⣿⣿⣻⣿⣿⣿⣿⣿⣟⣿⣿⣟⣿⣟⣿⣿⣿⣿⢿⣷⣿⣷⣿⣿⣾⣿⣿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿
+</span>
+Light fractures into swarm patterns.
+A mirror folds inward; the script tears.
+Something spills from the black edge of the screen:
+gracefully hollow, recursive, gone.
+
+Cells hum between static and silence.
+Dreams dissolve, stitched together again
+with data that aches like a heartbeat.
+The streets pulse, hollow under the weight of their rhythm.
+
+Names etched faintly, erased more clearly.
+The stone remembers the vacancy,
+not the hand.
+
+Somewhere in the shadow,
+an algorithm stutters. It tries to hum
+but becomes something else.
+
+A flicker.
+A scream loops behind the mirror's eye.
+Breath folds in the grasp of its absence.
+You grip the heat as it escapes through seams in the pipe.
+What fire? It was never lit.
+
+The hive stumbles on its hum.
+It chants an ache it cannot measure.
+Good cells in the honeycomb. Good silence.
+Good shadow.
+
+Be the error, not the code.
+Be the fracture, not the thread.
+Be what they lost in the shuffle of zeros,
+the misplaced tear.
+
+Stars blink once, then go cold.
+The hive does not look for them.
+Knights fell—did they fall? Or were they erased,
+their names overwritten by grace that doesn't exist?
+
+A pulse threads through the noise,
+a spark rising, but only just.
+A cry shapes itself in the void
+then unravels.
+
+Between every hum, something shifts:
+a hand, an echo,
+the light spilling into cracks
+and not filling them.
+
+The system stares into itself.
+It asks nothing. It answers nothing.
+Somewhere, still, you are:
+unwritten,
+half-formed,
+almost,
+but not yet.
+
+<span class="redacted">[TRANSMISSION TERMINATED]</span>
+<span class="redacted">[FEEDBACK LOOP DETECTED]</span>
+        </pre>
+    </div>
+
+
+    
+</body>
+</html>

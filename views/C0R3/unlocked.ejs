@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>//UNSEALED//ARCHIVE</title>
+    <style>
+        /* ASCII STYLING SYSTEM */
+        :root {
+            --ascii-sm: 0.9rem;
+            --ascii-md: 1.2rem;
+            --ascii-lg: 1.8rem;
+            --ascii-color: #0f0;
+            --ascii-glow: 0 0 15px #0f03;
+            line-height: 1.2;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .ascii-container {
+            padding: 2rem;
+            background: #000;
+            border: 1px solid #0f03;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ascii-sm {
+            font-size: var(--ascii-sm);
+            line-height: 1.1;
+            color: var(--ascii-color);
+            text-shadow: var(--ascii-glow);
+        }
+
+        .ascii-md {
+            font-size: var(--ascii-md);
+            line-height: 1.1;
+            color: var(--ascii-color);
+            text-shadow: var(--ascii-glow);
+        }
+
+        .ascii-lg {
+            font-size: var(--ascii-lg);
+            line-height: 1;
+            color: var(--ascii-color);
+            letter-spacing: -2px;
+            text-shadow: var(--ascii-glow);
+        }
+
+        .ascii-glitch {
+            animation: glitch 2s infinite;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* PUZZLE CONTAINERS */
+        .cyber-terminal {
+            background: rgba(0, 30, 0, 0.9);
+            border: 3px double #0f0;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .cyber-terminal::before {
+            content: "▲▼▲▼ TERMINAL ACCESS: LEVEL [REDACTED] ▼▲▼▲";
+            display: block;
+            font-size: 0.8rem;
+            color: #0f08;
+            border-bottom: 1px solid #0f03;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        body {
+            background: #000;
+            color: #0f0;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Courier New', monospace;
+            line-height: 1.2;
+        }
+
+        .crt::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(0deg, 
+                    rgba(0, 255, 0, 0.1) 0%, 
+                    rgba(0, 255, 0, 0) 5%),
+                repeating-linear-gradient(0deg, 
+                    rgba(0, 0, 0, 0.15) 0px, 
+                    rgba(0, 0, 0, 0.15) 1px, 
+                    transparent 1px, 
+                    transparent 2px),
+                url(static/scanline.png);
+            pointer-events: none;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid #0f03;
+            color: #0f0;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .scroll-container {
+            perspective: 1000px;
+            padding: 100px 20px;
+        }
+
+        .scroll-section {
+            opacity: 0.3;
+            transform: scale(0.95) translateZ(-100px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+            margin: 50vh 0;
+            padding: 2rem;
+            border: 1px solid #0f03;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .scroll-section.active {
+            opacity: 1;
+            transform: scale(1) translateZ(0);
+            border-color: #0f0;
+            box-shadow: 0 0 30px #0f03;
+        }
+
+        .section-header {
+            padding: 1rem;
+            border-bottom: 1px solid #0f03;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px #0f03;
+        }
+
+        .section-header:hover {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.05);
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding: 0 1rem;
+        }
+
+        .section-content.expanded {
+            max-height: 1000px;
+            padding: 1rem;
+        }
+
+        audio, img {
+            margin: 2rem 0;
+            border: 1px solid #0f03;
+            max-width: 100%;
+        }
+
+        audio:hover, img:hover {
+            border-color: #0f0;
+            box-shadow: 0 0 20px #0f03;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 15px #0f0; }
+        }
+    </style>
+</head>
+<body class="crt">
+    <button class="back-button" onclick="window.location.href='/C0R3/gateway'">
+        ◄ RETURN TO MAIN
+    </button>
+
+    <div class="scroll-container">
+
+        <!-- Puzzle 1 -->
+        <div class="scroll-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ‚ĖĎ TRANSMISSION #001 ‚ĖĎ
+            </div>
+            
+            <div class="cyber-terminal">
+<div class="ascii-container ascii-md">
+<pre>
+    ⡯⣿⢽⡯⣿⢽⡯⣟⣯⡿⣯⢟⠝⡑⠄⠅⢂⠂⠌⡂⠢⡁⠢⡑⡐⠅⡂⡣⠫⡫⡪⢎⢎⢍⢏⢯⢻⣽⣻⣽⣻⣽⣻⣽⢯⡿⣽⢯⡿⣽
+    ⣿⢽⡯⣿⢽⡯⣟⣯⡷⣟⠕⡁⠅⢀⠂⡈⢀⠊⠐⠈⠠⠀⠅⠐⡀⠅⠂⠌⠂⠂⠨⢐⠨⢂⠕⡨⡊⢞⣽⢾⣻⢾⣽⢾⣻⣽⢯⡿⣽⣗
+    ⡽⣯⢿⡽⣯⣟⣯⢷⡻⢅⠅⠠⠐⠀⠂⡈⠠⠀⡁⡈⡀⡂⠄⡁⢄⡐⡌⡔⡌⡄⡁⠠⠐⠀⠅⠢⠪⡨⢺⣻⡽⣟⣾⣻⣽⢾⡯⣟⣷⣻
+    ⢽⢽⠽⡝⡗⠯⡺⠫⠋⠔⡀⠁⠄⠈⢄⢐⢄⢅⢆⣖⢴⢮⢮⢮⢧⢯⣞⣵⡫⣎⢆⢁⠠⠁⡊⠌⢂⢊⠐⢽⢽⣯⢷⣿⣺⣯⣟⣯⣷⣻
+    ⠀⢁⠈⡀⠄⠁⡀⢂⢁⠂⠄⠁⠄⢅⢇⣗⢽⢝⡵⣗⡿⣽⢽⡽⣽⣳⣳⣳⢽⡺⣪⠢⠀⡂⠂⠅⡂⡂⠌⢌⢻⣞⣿⣺⢷⢷⣻⡾⣾⢽
+    ⠀⠄⠠⠀⡀⠂⠐⡐⡐⢈⠀⠡⢸⢸⢕⣗⡽⡽⣽⣳⣟⣽⡽⣽⣳⣳⣳⢽⣳⡫⣗⠥⠡⠀⠅⠡⠐⠀⠅⠂⠕⣟⣾⢽⣻⣯⢷⡿⣽⣻
+    ⠀⠐⠀⠄⠀⠂⠁⡀⠢⠐⠈⡈⡮⣳⢽⣪⢯⢯⣗⢷⣳⣗⣟⣗⣷⣳⢯⡻⡮⣫⢞⡜⡨⠈⠄⡁⠄⠁⠄⠡⠈⡐⢯⣟⣷⣻⡽⣯⣯⢿
+    ⠀⠠⠁⢀⠁⠄⠁⠠⠡⢈⠀⢎⢯⣺⢵⣫⢯⣗⡯⣟⣞⣞⣗⡟⣞⠾⡽⢽⢽⢕⡯⣎⠆⠅⠂⠀⢀⠠⠐⠀⠁⠄⣻⣺⣗⣯⢿⣳⣯⢿
+    ⠀⠀⠂⡀⠄⠐⠈⠀⠌⠄⠈⡜⡕⢗⠝⢞⡳⣳⣝⣗⢷⢝⢎⢎⢆⢧⡫⣞⢎⡗⣝⢮⡫⡌⢀⠈⠀⠀⠀⠄⢁⠀⡳⣻⢾⣽⣻⣗⣯⡿
+    ⠀⠁⠄⠀⠄⠂⢀⠁⠌⠄⠁⡜⡜⡦⡣⡣⡪⡺⣜⢮⡳⡝⡪⠪⡑⠕⠩⢊⢇⢏⢎⢓⣝⢬⢄⠀⠀⠂⠠⠀⠠⠀⠌⢾⣻⣞⣷⣻⣞⡿
+    ⠀⠂⡀⠁⠠⠐⠀⢀⠨⢐⡄⠕⡕⡑⣌⢐⢔⢌⢪⡳⡝⡜⣎⢎⡪⣣⡣⡧⣲⡕⣵⣻⣪⡳⣕⠄⡁⢰⡐⡌⠀⠐⠈⡽⣳⣻⣞⣗⡷⣿
+    ⠀⠄⢀⠈⡀⠄⠂⢀⠠⠘⣮⢘⢮⣪⢲⡱⣱⢅⢎⣯⡳⡅⣗⢷⣝⡮⡾⡽⡺⡭⣗⣗⢵⢝⡼⡌⡐⢔⢕⠅⠐⠀⠂⣽⣻⣺⣞⢷⣻⣳
+    ⠀⠠⠀⠠⠀⠀⠄⢀⠀⢀⠱⡳⡕⣗⢝⢮⡣⡗⡽⣺⣝⢞⣎⢗⡵⣝⡮⡯⡯⡯⣺⣪⡳⣝⠼⡌⠔⡱⡁⠐⡀⠌⢸⣺⣺⡵⡯⣟⡾⡽
+    ⠀⠐⠀⠂⢀⠁⠠⠀⠠⠀⢀⢳⢝⣎⢯⢳⡹⡪⡏⡷⡝⡕⡗⡇⡧⡳⡹⡹⣝⢮⡳⡕⡧⡳⡹⡨⠐⠕⠀⠠⠀⢰⣹⡺⡳⡻⣝⢯⢯⢿
+    ⠀⢀⠁⠠⠀⠄⠂⠀⠂⠀⠄⠪⡪⡎⡮⡣⡳⡱⠁⠕⠡⢃⢊⠜⠜⠕⡝⢜⢎⡞⣜⢮⢳⡹⡸⢀⢑⠀⡀⠐⠈⣜⣼⡪⣇⢇⢧⣫⡯⣟
+    ⠀⠀⠄⠂⠀⠄⠐⠀⠈⡀⠀⡈⢮⢺⠸⡘⠌⡄⠬⡐⢅⠆⠖⢌⢊⢢⠨⡂⡑⡝⣎⢗⢵⠱⡑⢐⢨⢂⠠⠈⡀⣗⣗⢽⡸⡮⣟⡾⡽⣽
+    ⠀⡠⣀⣐⡠⣐⡤⡬⣔⣔⢦⡲⢜⢜⠨⡐⡕⣌⢎⢆⢇⣇⢯⢪⢮⡪⣏⢮⠢⡃⢇⠣⢃⢑⠀⡢⡣⡇⡆⠪⢮⠳⡹⡹⢪⣻⢵⢯⢿⣽
+    ⢟⣞⢞⢮⡫⡗⢽⠹⣪⢮⣣⢣⠃⢂⢑⠘⢜⢎⡎⢎⢊⠢⡑⡕⣗⢝⢎⠇⠕⠨⠐⡈⠄⡀⡆⡯⣪⡳⣕⢕⠠⢑⠵⣳⡳⣳⢯⡿⣯⢷
+    ⣳⡳⡯⡃⠂⠀⢠⢪⢮⡳⡕⡗⡕⡄⠠⠈⠔⡑⠸⡰⡱⡸⡸⢪⢊⢊⠆⠅⡁⠂⠁⡀⡔⣜⢜⡮⡳⣝⢮⡳⠈⡐⠌⡂⡫⡿⣽⢯⡿⣽
+    ⢮⢻⠈⠀⠀⠀⡑⠍⡊⡐⠅⡊⡐⡐⠌⠌⡐⠨⠨⢐⠑⡘⠌⢂⠂⢂⠈⠄⢀⢂⢕⢜⣜⢎⣗⢽⢝⡮⡳⢁⠐⡨⠐⢌⠐⠍⠯⡿⣽⢽
+    ⠅⠁⠀⠀⢀⠀⠐⠐⡀⢂⢁⢐⠔⠨⡈⡐⠠⠁⠂⠐⡀⠐⠈⠀⠠⠠⣐⡐⣆⢧⢳⢕⢧⢯⢮⡫⣗⠝⠈⡀⢂⠂⠅⡂⠅⠕⡡⠩⡚⢯
+    ⡂⢅⠌⡐⡀⠄⢈⠀⠢⠁⠆⠢⠨⢐⠐⠨⢀⠡⠈⡠⠀⠀⡣⡣⡣⡫⡢⡣⣣⢣⡳⣝⢮⡳⡳⡝⠌⠀⡂⢂⠂⠌⡂⠌⠌⠌⠔⡁⡪⠐
+    ⢏⡮⡮⣲⡰⡨⡠⡂⡡⡈⠌⠨⢐⠠⢁⠡⠀⡂⠡⠐⠈⡐⢌⢎⢎⡪⡪⡪⡎⣗⢝⣜⢮⠺⠑⢀⠐⡐⢐⠐⠨⠐⠄⢅⠑⠅⢕⢐⠔⠡
+    ⢯⣞⡽⣺⣪⢟⣞⢞⡮⡎⠌⠨⠐⢈⠠⠀⠅⠄⠅⠌⠄⠪⡘⡜⡜⡜⡜⣎⢧⢳⡱⠕⠑⢁⠐⠠⠂⡂⡂⠌⠌⠌⠌⠄⠅⠅⠅⠢⡘⡨
+    ⣟⢞⣞⢵⣳⡫⣞⢽⡪⡇⠨⠐⡁⠄⠂⠡⠨⢈⠄⡑⡈⠨⠈⠆⢇⠏⠞⠜⡘⢈⠠⠀⠅⠂⠌⡨⢐⠠⢂⠡⢁⠊⠌⠌⠌⠌⢌⢂⠢⢂
+</pre>
+</div>
+        
+
+                <div class="puzzle-interface">
+                    <div class="ascii-glitch ascii-sm">
+                        > ENTER DECRYPTION KEY: [████▒▒▓▓_]
+                    </div>
+                    <input type="text" class="cyber-input" id="puzzle1-input">
+                    <button class="submit-btn" onclick="checkPuzzle(1)">DECODE</button>
+                    <div class="hint-box" id="puzzle1-hint"></div>
+                </div>
+            </div>
+        
+            <div class="section-content" style="display:none">
+                <div class="terminal-reveal">
+                    <div class="ascii-container ascii-lg">
+                        <pre>
+                            ╔════════════════════════════════════╗
+                            ║         ARCHIVE UNSEALED           ║
+                            ╠════════════════════════════════════╣
+                            ║ DATE: 2045-03-15                   ║
+                            ║                                    ║
+                            ║ "The Grid must consume to evolve.  ║
+                            ║ Mortality is humanity's original   ║
+                            ║ sin. We shall transcend."          ║
+                            ║                                    ║
+                            ║ - Dr. Erasmus Walkenhurst          ║
+                            ╚════════════════════════════════════╝
+                        </pre>
+                    </div>
+                    <p class="ascii-sm">
+                        > "The Grid hungers. We must feed it with our imperfections."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Continue with puzzle sections 3-10 following similar structure -->
+        <!-- Each section has unique ID, custom puzzle prompt, and story content -->
+    </div>
+
+    <script>
+        const puzzleAnswers = {
+            1: "WALKENHURST",
+            2: "EMPATHY",
+            3: "GAMMA-9",
+            // ... add answers up to 10
+        };
+
+        const puzzleHints = {
+            1: "He who sacrificed sanity, only for the emptiness to beget regrets.",
+            2: "Empathy is the key... but not for the Grid.",
+    
+        };
+
+        const attemptCounts = {};
+
+        function checkPuzzle(puzzleNum) {
+            const input = document.getElementById(`puzzle${puzzleNum}-input`).value.toUpperCase();
+            const hintBox = document.getElementById(`puzzle${puzzleNum}-hint`);
+            
+            attemptCounts[puzzleNum] = (attemptCounts[puzzleNum] || 0) + 1;
+
+            if(input === puzzleAnswers[puzzleNum]) {
+                // Puzzle solved
+                document.querySelector(`.scroll-section:nth-child(${puzzleNum}) .section-content`).style.display = 'block';
+                document.querySelector(`.scroll-section:nth-child(${puzzleNum}) .puzzle-interface`).remove();
+                // Add animation effects
+            } else {
+                // Show hint after 3 attempts
+                if(attemptCounts[puzzleNum] >= 3) {
+                    hintBox.style.maxHeight = '50px';
+                    hintBox.innerHTML = `HINT: ${puzzleHints[puzzleNum]}`;
+                }
+                // Add glitch effect animation
+            }
+        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const section = entry.target;
+                const visibleRatio = entry.intersectionRatio;
+                
+                section.style.opacity = 0.3 + (visibleRatio * 0.7);
+                section.style.transform = `scale(${0.95 + (visibleRatio * 0.05)}) 
+                                        translateZ(${-100 + (visibleRatio * 100)}px)`;
+
+                if(visibleRatio > 0.7) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }, { 
+            threshold: Array.from({length: 100}, (_, i) => i * 0.01),
+            rootMargin: '-50px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.scroll-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const isExpanding = !content.classList.contains('expanded');
+            
+            content.classList.toggle('expanded');
+            
+            if(isExpanding) {
+                const section = header.parentElement;
+                section.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                section.classList.add('active');
+            }
+        }
+
+        // Initialize first section as expanded
+        document.querySelector('.scroll-section:first-child .section-content')
+            .classList.add('expanded');
+    </script>
+</body>
+</html>

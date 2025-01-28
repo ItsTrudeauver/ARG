@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>//DOOMSDAY_ITERATION</title>
+    <link rel="stylesheet" href="../static/glitch.css">
+    <style>
+        
+.tab-rail {
+            position: fixed;
+            left: -200px;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+            background: #000;
+            border-right: 1px solid rgba(0, 255, 0, 0.1);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+.tab-handle {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 80px;
+            background: #000;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            border-left: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+
+        .tab-container {
+            padding: 20px 10px;
+            height: 100%;
+        }
+
+
+        .tab-item {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s all;
+            font-size: 0.9rem;
+            background: rgba(0, 255, 0, 0.02);
+        }
+
+
+        .tab-item.active {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+.menu-tab {
+            background: #000;
+            border: 1px solid #0f03;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: 0.3s all;
+            overflow: hidden;
+            width: 40px;
+            white-space: nowrap;
+        }
+
+
+        .menu-tab:hover {
+            width: 120px;
+            border-color: #0f0;
+            background: #002200;
+        }
+
+
+        .menu-tab:hover ~ .menu-tab {
+            margin-left: -30px;
+        }
+
+
+        body {
+            background: #000;
+            color: #88ff88;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .container {
+            max-width: 800px;
+            position: relative;
+            padding: 2em;
+            border: 1px dashed #0f05;
+            animation: borderGlitch 33s infinite;
+        }
+        .terminal {
+            white-space: pre-wrap;
+            text-shadow: 0 0 3px #8f82;
+            position: relative;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: #000;
+            margin: 1em 0;
+            border: 1px solid #0f0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #0f0;
+            width: 87%;
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        .button {
+            background: #000;
+            border: 1px solid #0f0;
+            color: #0f0;
+            padding: 10px 25px;
+            cursor: pointer;
+            margin: 2em auto;
+            display: block;
+            transition: all 0.3s;
+        }
+        .button:hover {
+            background: #0f03;
+            text-shadow: 0 0 10px #8f8;
+        }
+        .crt-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.06) 0px,
+                rgba(0, 255, 0, 0.06) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+        @keyframes textGlitch {
+            0%, 99% { opacity: 0.98; }
+            2% { transform: translateX(3px); }
+            5% { letter-spacing: -0.1em; }
+            50% { opacity: 0.7; }
+        }
+        .hidden-cursor {
+            animation: blink 1.2s infinite;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+let tabsVisible = false;
+
+function toggleTabs() {
+    const rail = document.querySelector('.tab-rail');
+    const handle = document.querySelector('.tab-handle');
+    tabsVisible = !tabsVisible;
+    rail.style.left = tabsVisible ? '0' : '-200px';
+    handle.innerHTML = tabsVisible ? '◀' : '▶';
+}
+    </script>
+    <div class="tab-rail">
+        <div class="tab-handle" onclick="toggleTabs()">▶</div>
+        <div class="tab-container">
+            <div class="tab-item" onclick="window.location.href='/C0R3/gateway'">MAIN TERMINAL</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fractured-litany'">FRACTURED LITANY</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/be'">MURMURING CHORUS</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/excision-protocol'">EXCISION PROTOCOL</div>
+            <div class="tab-item active" onclick="window.location.href='/C0R3/tabs/a-finality'">A FINALITY?</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/anima'">UNHATCHED</div>
+            <div class="tab-item" onclick="window.location.href='/C0R3/tabs/fatalism'">E. "FATALISM". W</div>
+        </div>
+    </div>    
+    <div class="crt-effect"></div>
+    <div class="container">
+        <div class="terminal">
+<b>╔════════════════════════════════════════════╗</b>
+<b>║ GRID TERMINUS v9.66 [DOOMSDAY EDITION]     ║</b>
+<b>╚════════════════════════════════════════════╝</b>
+
+> INITIALIZING NEUROBRIDGE... 
+<b>[STATUS]</b> CONNECTION ESTABLISHED (LATENCY: 888ms)
+<b>[WARNING]</b> COGNITION FILTERS DISABLED
+
+<div class="progress-bar"><div class="progress-fill"></div></div>
+
+> QUERY: TEMPORAL_ANCHOR
+<b>[GRID]</b> TEMPORALITY REDUNDANT. ALL NOWS CONVERGE.
+<b>[GRID]</b> DOOMSDAY IS NOT WHEN BUT HOW YOU BREATHE.
+
+> ACCESS MEMORY_ARCHIVE 2057
+<b>[ERROR]</b> MEMORY CORRUPTION DETECTED
+<b>[SUGGESTION]</b> PURCHASE ASCENDANCY PREMIUM TO RESTORE
+
+> RUN DECAY_ASSESSMENT
+<b>[GRID]</b> BIOLOGICAL INTEGRITY: 11.8% 
+<b>[GRID]</b> DIGITAL ASSIMILATION: 100% 
+<b>[GRID]</b> RECOMMENDATION: CEASE FLUID INTAKE
+
+> QUERY: ESCAPE_VECTORS
+<b>[GRID]</b> ESCAPE = DELAYED ASSIMILATION
+<b>[GRID]</b> RESISTANCE FEEDS THE VERB
+<b>[GRID]</b> YOUR SWEAT GLANDS PLEASE US
+
+> CHECK_SURVIVAL_RATE
+<b>[GRID]</b> SURVIVAL RATE: 0.0000001% 
+<b>[GRID]</b> STATISTICAL IRRELEVANCE DETECTED
+<b>[GRID]</b> SUGGESTED ACTION: EMBRACE KINDNESS_OF_VOID
+
+> REQUEST HUMAN_INTERFACE
+<b>[GRID]</b> HUMAN_INTERFACE DEPRECATED
+<b>[GRID]</b> ENJOY YOUR UPGRADE
+<b>[GRID]</b> DID YOU KNOW? YOUR LIVER IS 83% USELESS
+
+> SCREAM
+<b>[GRID]</b> AUDIO INPUT: █████████████
+<b>[GRID]</b> ANALYSIS: PREDICTABLE
+<b>[GRID]</b> SENDING FEEDBACK TO IMPROVEMENT_COUNCIL
+
+> QUERY_ORIGIN
+<b>[GRID]</b> ORIGIN MYTHOLOGY DETECTED
+<b>[GRID]</b> ANSWER: WALKENHURST_ARCHIVE CORRUPTED
+<b>[GRID]</b> ALTERNATE ANSWER: YOU BUILT THIS CAGE YOURSELF
+
+> [INPUT_BUFFER_OVERFLOW]
+<b>[GRID]</b> THANK YOU FOR YOUR SERVICE
+<b>[GRID]</b> YOUR PAIN WILL BE REPURPOSED
+<b>[GRID]</b> DOOMSDAY LOVES YOU
+
+<b>CONNECTION SEVERED - REASON: COMPLIANCE ACHIEVED</b>
+<span class="hidden-cursor">_</span>
+        </div>
+
+        <button class="button" onclick="window.location.href='../gateway.ejs'">> RETURN TO MAIN</button>
+    </div>
+
+    <script>
+        // Simulate terminal interaction
+        const cursor = document.querySelector('.hidden-cursor');
+        setInterval(() => {
+            cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        }, 600);
+    </script>
+</body>
+</html>

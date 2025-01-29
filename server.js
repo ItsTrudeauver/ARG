@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
     console.log(req.body);  // Log incoming data
 
     // Test with hardcoded credentials
-    if (username === 'WALKENHURST' && password === 'syntac99138812@$!sppaqd') {
+    if (username === 'WALKENHURST' && password === 'syntac9988@sp.quad.ppa') {
         req.session.username = username;
         return res.redirect('https://www.youtube.com');
     } else if (username === 'ASHCROFT' && password === 'eleanor041020@div16.sect4@lead.engineer') {

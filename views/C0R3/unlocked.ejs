@@ -1,8 +1,93 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>//UNSEALED//ARCHIVE</title>
     <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 500vh;
+        }
+
+        .container p {
+            width: 80%;
+            max-width: 800px;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .container h2 {
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 2px solid #00FF00;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .intercepted-communication,
+        .redacted-memo,
+        .system-log,
+        .psa-broadcast,
+        .personal-journal,
+        .emergency-warning,
+        .recovered-fragment,
+        .eye-core-directive,
+        .employee-dismissal,
+        .service-interruption {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #00FF00;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+        }
+
+        .intercepted-communication p,
+        .redacted-memo p,
+        .system-log p,
+        .psa-broadcast p,
+        .personal-journal p,
+        .emergency-warning p,
+        .recovered-fragment p,
+        .eye-core-directive p,
+        .employee-dismissal p,
+        .service-interruption p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .psa-broadcast ul {
+            padding-left: 20px;
+            list-style-type: square;
+        }
+
+        .psa-broadcast li {
+            margin: 5px 0;
+        }
+
+        .system-log strong {
+            color: #FF00FF;
+        }
+
+        .employee-dismissal video {
+            width: 100%;
+            border: 1px solid #00FF00;
+        }
+
+        .recovered-fragment em {
+            color: #FF5500;
+        }
+
+        .service-interruption {
+            font-size: 12px;
+        }
+
         /* ASCII STYLING SYSTEM */
         :root {
             --ascii-sm: 0.9rem;
@@ -51,12 +136,29 @@
         }
 
         @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-2px, 2px)
+            }
+
+            40% {
+                transform: translate(-2px, -2px)
+            }
+
+            60% {
+                transform: translate(2px, 2px)
+            }
+
+            80% {
+                transform: translate(2px, -2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
         }
 
         /* PUZZLE CONTAINERS */
@@ -81,9 +183,10 @@
             background: #000;
             color: #0f0;
             margin: 0;
-            overflow-x: hidden;
+            overflow-x: visible;
             font-family: 'Courier New', monospace;
             line-height: 1.2;
+            min-height: 1000%;
         }
 
         .crt::before {
@@ -93,14 +196,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(0deg, 
-                    rgba(0, 255, 0, 0.1) 0%, 
+            background:
+                linear-gradient(0deg,
+                    rgba(0, 255, 0, 0.1) 0%,
                     rgba(0, 255, 0, 0) 5%),
-                repeating-linear-gradient(0deg, 
-                    rgba(0, 0, 0, 0.15) 0px, 
-                    rgba(0, 0, 0, 0.15) 1px, 
-                    transparent 1px, 
+                repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.15) 0px,
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
                     transparent 2px),
                 url(static/scanline.png);
             pointer-events: none;
@@ -128,10 +231,11 @@
         .scroll-container {
             perspective: 1000px;
             padding: 100px 20px;
+            min-height: 1000%;
         }
 
         .scroll-section {
-            opacity: 0.3;
+            opacity: 1;
             transform: scale(0.95) translateZ(-100px);
             transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
             margin: 50vh 0;
@@ -170,27 +274,42 @@
         }
 
         .section-content.expanded {
-            max-height: 1000px;
+            max-height: 1000%;
             padding: 1rem;
         }
 
-        audio, img {
+        audio,
+        img {
             margin: 2rem 0;
             border: 1px solid #0f03;
             max-width: 100%;
         }
 
-        audio:hover, img:hover {
+        audio:hover,
+        img:hover {
             border-color: #0f0;
             box-shadow: 0 0 20px #0f03;
         }
 
         @keyframes pulseGlow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; text-shadow: 0 0 15px #0f0; }
+
+            0%,
+            100% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+                text-shadow: 0 0 15px #0f0;
+            }
+        }
+
+        .terminal-reveal {
+            max-height: 1000%;
         }
     </style>
 </head>
+
 <body class="crt">
     <button class="back-button" onclick="window.location.href='/C0R3/gateway'">
         ◄ RETURN TO MAIN
@@ -203,10 +322,10 @@
             <div class="section-header" onclick="toggleSection(this)">
                 ‚ĖĎ TRANSMISSION #001 ‚ĖĎ
             </div>
-            
+
             <div class="cyber-terminal">
-<div class="ascii-container ascii-md">
-<pre>
+                <div class="ascii-container ascii-md">
+                    <pre>
     ⡯⣿⢽⡯⣿⢽⡯⣟⣯⡿⣯⢟⠝⡑⠄⠅⢂⠂⠌⡂⠢⡁⠢⡑⡐⠅⡂⡣⠫⡫⡪⢎⢎⢍⢏⢯⢻⣽⣻⣽⣻⣽⣻⣽⢯⡿⣽⢯⡿⣽
     ⣿⢽⡯⣿⢽⡯⣟⣯⡷⣟⠕⡁⠅⢀⠂⡈⢀⠊⠐⠈⠠⠀⠅⠐⡀⠅⠂⠌⠂⠂⠨⢐⠨⢂⠕⡨⡊⢞⣽⢾⣻⢾⣽⢾⣻⣽⢯⡿⣽⣗
     ⡽⣯⢿⡽⣯⣟⣯⢷⡻⢅⠅⠠⠐⠀⠂⡈⠠⠀⡁⡈⡀⡂⠄⡁⢄⡐⡌⡔⡌⡄⡁⠠⠐⠀⠅⠢⠪⡨⢺⣻⡽⣟⣾⣻⣽⢾⡯⣟⣷⣻
@@ -233,8 +352,8 @@
     ⢯⣞⡽⣺⣪⢟⣞⢞⡮⡎⠌⠨⠐⢈⠠⠀⠅⠄⠅⠌⠄⠪⡘⡜⡜⡜⡜⣎⢧⢳⡱⠕⠑⢁⠐⠠⠂⡂⡂⠌⠌⠌⠌⠄⠅⠅⠅⠢⡘⡨
     ⣟⢞⣞⢵⣳⡫⣞⢽⡪⡇⠨⠐⡁⠄⠂⠡⠨⢈⠄⡑⡈⠨⠈⠆⢇⠏⠞⠜⡘⢈⠠⠀⠅⠂⠌⡨⢐⠠⢂⠡⢁⠊⠌⠌⠌⠌⢌⢂⠢⢂
 </pre>
-</div>
-        
+                </div>
+
 
                 <div class="puzzle-interface">
                     <div class="ascii-glitch ascii-sm">
@@ -245,27 +364,272 @@
                     <div class="hint-box" id="puzzle1-hint"></div>
                 </div>
             </div>
-        
+
             <div class="section-content" style="display:none">
                 <div class="terminal-reveal">
                     <div class="ascii-container ascii-lg">
                         <pre>
-                            ╔════════════════════════════════════╗
-                            ║         ARCHIVE UNSEALED           ║
-                            ╠════════════════════════════════════╣
-                            ║ DATE: 2045-03-15                   ║
-                            ║                                    ║
-                            ║ "The Grid must consume to evolve.  ║
-                            ║ Mortality is humanity's original   ║
-                            ║ sin. We shall transcend."          ║
-                            ║                                    ║
-                            ║ - Dr. Erasmus Walkenhurst          ║
-                            ╚════════════════════════════════════╝
+                             ▄▄▄·  ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ ·       
+                            ▐█ ▀█ ▐█ ▌▪▐█ ▌▪▀▄.▀·▐█ ▀. ▐█ ▀.       
+                            ▄█▀▀█ ██ ▄▄██ ▄▄▐▀▀▪▄▄▀▀▀█▄▄▀▀▀█▄      
+                            ▐█ ▪▐▌▐███▌▐███▌▐█▄▄▌▐█▄▪▐█▐█▄▪▐█      
+                             ▀  ▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀       
+                             ▄▄ • ▄▄▄   ▄▄▄·  ▐ ▄ ▄▄▄▄▄▄▄▄ .·▄▄▄▄  
+                            ▐█ ▀ ▪▀▄ █·▐█ ▀█ •█▌▐█•██  ▀▄.▀·██▪ ██ 
+                            ▄█ ▀█▄▐▀▀▄ ▄█▀▀█ ▐█▐▐▌ ▐█.▪▐▀▀▪▄▐█· ▐█▌
+                            ▐█▄▪▐█▐█•█▌▐█ ▪▐▌██▐█▌ ▐█▌·▐█▄▄▌██. ██ 
+                            ·▀▀▀▀ .▀  ▀ ▀  ▀ ▀▀ █▪ ▀▀▀  ▀▀▀ ▀▀▀▀▀• 
                         </pre>
                     </div>
-                    <p class="ascii-sm">
-                        > "The Grid hungers. We must feed it with our imperfections."
-                    </p>
+
+
+                    <div class="intercepted-communication">
+<div class="ascii-container ascii-md">
+<pre>
+    ⠪⡘⢔⠱⡡⠣⡨⡐⡱⡘⡌⢎⢢⢑⢅⢎⢪⢪⠪⡊⢎⠪⡪⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡸⡘⡜⡸⡸⡘⡌⡎⡎⡎⡎⡎⡪⡪⡸⡸⡸⡸⡸⡱⡱⡱⡱⡕⡕⡕⣕⢵⢱⢕⢇⢗⢕⢕⢕⢕⢵⢱⢣⢣⢣⢣⢇⢇⢇⢣⢑⠕⡕⢕⢅⢣⢑⢅⢇⢕⠕⡅⢇⢣⢃⢇⢣⢣⢣⢣⢱
+    ⢌⠜⡌⢎⠜⡌⡢⡣⡣⡂⢪⠸⡨⡢⡣⡪⡪⡪⡪⢪⢊⢪⠪⡢⢣⢱⢱⢘⢌⢎⢦⢣⢣⢪⢪⠪⡪⡢⡣⢣⠣⡣⠣⠪⠨⠊⢌⠪⡂⢇⢎⢪⠪⠪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⠪⡪⡪⡂⡣⡃⢇⢇⢣⡑⡆⢆⢣⠱⡡⡃⢇⢣⠣⡃⡇⡣⡣⢣⠣⡣⡣⡣⡣⡣⡣⡣⡣⡣
+    ⠜⠘⠌⠢⠑⠜⠰⠑⠌⠪⢂⠣⠑⠜⠌⠎⠆⠇⡪⠘⠔⢅⠣⠊⠎⠢⠃⠑⠑⠑⠈⠂⠑⠈⠀⡁⠁⠠⠈⠀⠄⠀⠐⠀⠄⠂⠀⡀⠄⠀⠠⠀⠁⠁⠠⠈⠀⠁⠁⠁⠁⠁⠁⠁⠁⡈⠈⠀⠁⠐⠀⡈⠐⠈⠀⠡⠈⢈⠀⢁⠈⠈⠈⡀⠅⠁⠈⡀⢈⠀⡁⠁⠌⠀⢁⠁⠁⡁⠁⠌
+    ⠀⠄⠠⠀⠄⠠⠀⠠⠀⠠⠀⠀⠐⠀⠀⠂⠀⠂⠀⠐⠀⢀⠀⠠⠀⠠⠀⠂⠀⠂⠀⠂⢀⠐⠀⢀⠐⠀⠀⠂⢀⠈⠀⠄⠀⠄⠀⡀⠀⠐⠀⠐⠈⠀⠠⠐⠈⠀⠈⢀⠈⢀⠈⠀⠁⠀⠀⠁⠈⠀⠄⠀⠠⠀⠁⢀⠐⠀⢀⠀⠄⠂⠁⠀⠀⡀⠁⠀⠀⡀⠀⠠⠀⠈⠀⠀⠄⠀⠠⠀
+    ⠂⠀⠄⠀⠄⠀⠄⠂⠀⠄⠐⠈⠀⠈⠀⠄⠁⠀⠂⠁⠀⠄⠀⠄⠐⠀⠠⠐⠀⠈⢀⠐⠀⠀⠄⠀⡀⠄⠁⠀⠄⠀⠂⠀⠂⠀⠂⠀⠈⠀⠐⠀⠐⠈⠀⢀⠀⠂⠁⠀⡀⢀⠠⠀⠁⠀⠁⠈⢀⠐⠀⠐⠀⠐⠈⠀⠀⠠⠀⢀⠀⠠⠀⠐⠀⠀⠄⠈⠀⡀⠐⠀⡀⠁⢀⠁⠀⠐⠀⡀
+    ⡀⠂⠀⠐⠀⠠⠀⠠⠐⠀⠠⠐⠈⠀⠐⠀⠐⠈⠀⠀⠂⢀⠐⠀⠀⠂⢀⠠⠀⠁⠀⡀⠄⠂⠀⠄⠀⢀⠀⠂⢀⠐⠀⠂⠐⠀⠂⠈⠀⠁⠀⢁⠠⠐⠀⢀⠠⠀⠂⠀⡀⠀⢀⠀⠈⠀⠁⠠⠀⢀⠐⠀⠈⢀⠀⠂⠈⠀⡀⠄⠀⠄⠐⠀⠈⢀⠠⠀⠁⠀⡀⠄⠀⠐⠀⠀⡈⠀⠄⢀
+    ⠀⠀⡈⠀⠐⠀⠐⠀⠀⠄⠀⠄⠀⠂⠐⠈⠀⠀⠂⠁⠀⠄⠀⡀⠁⠠⠀⠀⠠⠀⠁⠀⠀⡀⠄⠠⠈⠀⠀⠐⠀⠀⠄⠂⠀⠂⠀⠂⠈⠀⠁⠀⠀⡀⠠⠀⠀⡀⠐⠀⢀⠈⠀⢀⠈⠀⠁⠀⠄⠀⡀⠄⠁⠀⡀⠐⠀⠁⠀⠀⠠⠀⠐⠀⠁⠀⢀⠠⠀⠁⠀⢀⠐⡀⢌⢄⢆⢕⢪⢪
+    ⠀⠀⡀⠄⠁⠀⠂⠈⠀⡀⠂⠀⠐⠀⠐⠀⡀⠁⠀⠂⠁⠀⡀⠠⠐⠀⠠⠈⠀⠀⠂⠁⠀⡀⠀⡀⠠⠀⠁⠀⠂⠠⠀⠀⠂⠀⠁⠀⠂⠁⠀⠁⡀⢀⠠⠀⠂⠀⠠⠈⠀⠀⠐⠀⠀⡈⠀⠐⠀⠠⠀⠀⡀⠂⠀⠀⠂⢀⠈⠀⠄⠂⠐⠀⠁⠠⠀⡀⠄⡂⡕⢔⢕⢕⢕⢕⢕⢕⢕⢱
+    ⡐⡔⡠⡀⠄⢈⠀⢀⠁⠀⢀⠈⠀⡈⠀⠠⠀⢀⠁⠠⠐⠀⢀⠀⠠⠀⠄⠀⡈⠀⠐⠀⠁⠀⢀⠀⠠⠀⠈⡀⠐⠀⡀⠁⢀⠁⠈⠀⠐⠀⠁⢀⠀⢀⠀⠀⠄⠂⠀⠄⠂⠁⠀⠂⠁⠀⠀⠁⠠⠀⠂⠀⡀⠄⠈⠀⠐⠀⠀⠂⠀⠠⠀⡂⢔⢌⢎⡪⡱⡱⡸⡸⡨⡊⡎⡎⡎⡎⡎⣎
+    ⢌⢆⢇⠎⡕⡑⢔⢠⢀⢂⠀⠀⠂⠀⠀⠂⢀⠀⠠⠀⠠⠀⡀⠄⠠⠀⠀⠂⠀⡀⠁⠀⠂⠁⠀⡀⠄⠀⠁⠀⠠⠀⡀⠄⡀⠠⠀⠁⡀⠂⠈⠀⢀⠀⠀⠂⢀⠀⠂⠀⠠⠐⠀⠐⠀⠈⠀⠁⠀⠄⠀⠁⠀⢀⠀⠁⠠⠈⠀⡀⢅⠔⡕⡜⡜⢜⢌⢎⢎⢎⢪⢪⢪⡺⡸⡸⡸⡸⡪⣪
+    ⢌⢆⢇⢕⢌⢆⠕⡅⡇⡣⢪⢐⢄⢌⢀⠂⡀⠄⠀⠂⠀⠄⠀⢀⠀⡀⠁⠀⠂⠀⢀⠁⢀⠐⠀⠀⡀⠄⠁⠀⠂⠠⡢⠁⠊⣎⠆⠀⡀⠀⠂⠈⠀⢀⠈⡠⡠⠀⢐⠈⠀⠀⠄⠂⠈⠀⠈⡀⠐⠀⠈⢀⠈⠀⠀⡈⢀⢐⢰⠸⡰⡱⡱⡱⡸⡸⡸⢸⢘⢜⢸⢨⢪⢪⢪⢪⡪⡪⡪⡪
+    ⢡⠱⡘⡌⡊⢆⢣⢱⢑⠜⡜⢜⢸⢨⢒⢕⢌⢎⢎⢆⢇⢄⢐⠀⠀⡀⠀⢁⠀⠈⠀⢀⠀⠀⠄⠁⠀⠀⠠⠈⠀⢑⠅⠀⠂⠸⠘⠀⠀⠐⠀⠂⠈⠀⢐⢝⠄⠐⠀⡧⡁⠠⠀⠠⠀⠁⡀⠀⠄⠂⠁⠀⠀⠄⠡⡰⡘⢜⠜⡜⢜⢸⢨⠢⡃⡇⡎⡎⡆⢎⢪⢪⢪⢪⢪⢃⢇⢇⢧⢳
+    ⢪⠸⡘⡜⡸⢘⢸⢨⠢⡣⡱⡑⡕⡜⡜⢜⢌⢆⢇⢇⢇⢇⢇⢎⢄⠄⠈⠀⢀⠈⢀⠀⠀⠂⠀⠄⠂⠁⠀⡀⠂⠀⠄⠁⠀⠄⠁⠀⢁⠀⠂⠀⠂⠐⠀⠓⠅⠀⡀⠃⠁⠂⢀⠐⠀⠠⠀⠠⠀⠠⠀⢈⠠⡘⡜⡌⡎⡜⡜⡸⡘⡜⢔⠕⡕⡕⡕⡱⡑⡕⡕⡕⢕⢱⢱⢱⡣⡇⡇⡧
+    ⡅⡇⡣⡱⡱⡱⡡⢣⠱⡱⢸⢸⢸⠸⡸⡸⡘⡌⡎⡆⡇⡕⡅⡇⡇⡇⡇⡂⠀⡀⢀⠠⠈⠀⠄⠀⠄⠐⠀⢀⠀⠂⢀⠀⠁⢀⠀⠁⢀⠀⠄⠁⢀⠐⠀⠐⠀⠠⠀⠀⠂⠈⠀⠀⡀⠂⠀⠄⠂⠀⢄⠕⡅⡇⡕⢕⢜⠸⡘⡔⢕⠜⡜⡜⡜⡜⡮⡪⡪⡪⡪⡪⡕⡕⡕⡕⡜⡜⡜⡌
+    ⡣⡣⢪⠸⡨⡪⡪⡢⡣⡪⡪⡪⡒⡍⡎⡆⡇⡇⡇⡎⢎⢎⢎⢎⢎⢎⢎⢎⢄⠀⠀⢀⠀⠄⠀⠂⠀⠄⠂⠀⡀⠄⠀⠠⠈⠀⠀⡈⠀⠀⡀⠄⠀⠠⠐⠈⠀⠠⠐⠈⠀⠐⠀⠁⠀⢀⠐⠀⠠⢨⢢⠣⡣⡪⡪⡪⡢⡣⡣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢳⢱⢕⢕⢕⠕⡕⢕⢕⢕⡕
+    ⢣⠪⡢⢣⠣⡣⡪⡢⡣⡣⡱⡑⡕⡕⡕⢕⢕⢜⢔⢕⢕⢕⢕⢕⢕⢕⢵⢱⢕⢬⠀⡀⠀⠄⠐⠀⠁⠀⠠⠀⢀⠀⠐⠀⡀⠂⠁⠀⠀⠂⠀⠀⠐⠀⡀⠄⠐⠀⠀⠄⠐⠀⠂⠀⠁⠀⡀⠄⡘⡔⢕⠱⡱⡑⡕⡕⡕⢕⢕⢅⢇⢣⠣⡃⡇⡇⡣⡣⡣⡣⡣⡣⢣⢃⢇⢇⢇⢗⢵⢱
+    ⣢⢣⠪⡪⡪⡢⡣⡪⢢⠣⡪⡢⢣⠪⡪⡣⡣⡣⡣⡣⡣⡣⡣⡣⢣⢣⢱⢱⢱⢕⢕⠀⠠⠀⠐⠀⠈⠀⠄⠂⠀⠀⠂⠁⠀⢀⠀⠂⠁⠀⠂⠁⠀⠂⠀⢀⠀⠂⠁⠀⡀⠂⠀⠁⠈⠀⠀⢔⢌⢪⠪⡨⢢⢑⢕⢜⢸⢸⠰⡱⡸⡸⡘⡜⡜⡜⡜⡔⣕⢜⢜⢜⢜⢜⢜⢔⢕⢕⢕⡕
+    ⢝⢕⢝⠔⡕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢜⢜⢌⢎⢮⢪⢪⢪⢪⢄⠐⠀⠈⠀⠂⠀⡀⠂⠁⠀⠐⠀⡀⠠⠀⠂⠐⠀⡀⠁⠀⠂⠀⡀⠄⠂⠀⡀⠄⠈⠀⡈⠀⡕⡅⡇⡕⢕⠕⡕⢕⢱⢱⠱⡱⡱⡑⡅⡇⡣⡱⡪⡪⡪⡺⡸⡸⡰⡱⡱⡱⡱⡱⡹⡸⡸⡸
+    ⡅⡇⡕⢕⢜⢜⢔⠕⡜⡌⢎⢎⢪⢪⢪⢢⠣⡣⢣⢣⢣⢣⢣⢣⢣⢣⢣⢪⢪⢪⢪⡪⡪⣂⠈⠀⠁⠀⠂⠀⠀⠄⠁⠀⠂⠀⡀⠄⠀⠂⢀⠀⠄⠁⠀⠁⠀⠀⡀⠄⠀⢀⠀⠁⡠⡊⡎⡜⡌⡎⡎⡎⡎⡎⡆⢇⢣⢱⢘⢜⢜⠜⡜⡌⢎⢎⢎⢎⢎⢎⢎⢎⢎⢆⢇⢎⢮⢪⢎⢎
+    ⡊⡆⡣⡣⡱⡡⡣⡱⡱⡱⡑⡅⡕⢅⢇⢎⢎⢬⠢⡣⡣⡱⢱⢱⢱⢱⢱⢱⢱⡱⡕⡕⡝⡔⡕⡈⠀⠈⠀⠈⢀⠠⠀⠁⠀⠂⠀⠀⠐⠀⡀⢀⠠⠀⠁⢀⠁⢀⠀⢀⠐⠀⠠⠨⡢⢱⢸⠨⡪⡸⡨⡢⡱⡸⣘⢜⢜⢜⢌⢆⢣⢱⢱⢸⠸⡘⡜⡔⡕⡕⡕⡕⡕⡕⡵⡱⡱⡱⡕⡕
+    ⢕⢅⢇⢣⠣⡪⡸⡨⡢⡣⢣⢣⢣⢣⢣⢣⢣⢣⢫⢪⠢⡣⡣⡣⡣⣣⢣⡣⡣⡣⡣⡫⡪⡪⡪⡪⡠⠁⠈⢀⠀⢀⠀⠈⡀⠐⠈⠀⡀⠁⠀⠀⢀⠀⠈⠀⠀⡀⠀⠄⠀⢐⢨⠪⢪⢘⢌⢎⢢⢑⢕⢌⢆⢇⢎⢪⠢⡃⡎⡎⡜⡔⡕⢜⢜⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢸⢨⢪⢪
+    ⡌⡆⢇⢣⠣⡣⡪⡪⢪⢪⢪⢪⢪⢪⢸⢸⢸⢸⢸⢸⢸⢸⢸⢱⢕⢕⢕⢕⢕⢕⢕⡕⡕⡵⡱⡱⡱⡀⠂⠀⡀⠄⠀⠁⠀⡀⠐⠀⢀⠀⠁⠈⠀⠀⡈⠀⠁⠀⡀⠄⠂⢨⢢⢹⢐⢅⠢⡑⡌⢆⢕⠜⡔⡱⡘⡜⢜⠜⢔⢱⢸⢘⢜⠜⡌⡆⡇⡣⡣⢣⢣⢣⢣⢣⢣⡪⡪⡪⣎⢎
+    ⡎⡜⡌⡎⢎⢎⢪⢸⢐⢕⢌⢎⢜⢜⢜⢜⢜⢜⢜⢜⢜⢌⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⢎⠠⠀⢀⠀⠄⠈⠀⢀⠀⠂⠀⠠⠈⠀⠄⠁⠀⠀⠂⠁⠀⠀⠀⠢⡑⡌⡆⡕⢕⠕⡕⢇⢣⢃⢇⢇⢕⢕⢅⠇⡕⢅⢣⢱⢑⢕⢕⠕⡜⡜⡜⡌⡆⣇⢇⢇⢇⢇⢇⢇⢇⢇
+    ⡸⡰⢱⢸⢸⢸⠸⡘⡜⡜⡜⢜⢌⢆⢇⢇⠧⡓⡝⡜⡜⡎⡮⡪⡪⡪⡪⡪⡪⡪⡣⡫⡪⡣⡣⡳⡹⡸⠐⢀⠀⢀⠠⠀⠁⠀⡀⠐⠈⠀⠀⠄⠠⠐⠈⠀⡀⠂⠀⠁⡀⠂⢁⢣⢊⢎⠪⡪⡸⡘⡌⡆⡕⢜⢰⠡⡣⡣⠣⡃⢇⢇⢣⢱⢸⢨⠪⡢⡣⡱⡱⡑⡕⡕⡕⣕⢜⢜⢜⢜
+    ⡊⡜⢔⠱⡑⡅⡣⡱⡑⡕⡜⡜⡜⢜⢜⢢⠣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡣⡫⡪⡪⡪⡺⡸⡪⡪⡡⠀⠀⠄⠀⢀⠈⠀⢀⠠⠐⠀⠁⢀⠀⠠⠀⠠⠀⢀⠈⠀⢀⠀⠀⢂⠣⡊⢜⠰⡑⡜⢌⢆⠪⡊⡎⡪⢪⠸⡨⢪⠸⡨⡪⡊⢎⢢⢫⢪⢪⢪⢸⢸⢸⢸⢸⢸⠸⡱⡱⡑
+    ⢱⢘⢌⢎⢎⢜⢘⢌⠪⡢⡣⡪⡪⡊⢎⢪⢊⢎⢜⢜⢜⡜⡎⡎⡎⡎⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⡪⠐⠀⠐⠀⠐⠀⢀⠈⠀⠀⢀⠀⠂⠀⠠⠀⠐⠀⠠⠀⢀⠈⠀⢀⠈⠀⠀⡀⠁⠑⠑⠌⠎⡆⡇⡇⡕⢜⢌⢎⢪⠢⡣⢣⢱⢸⢘⢌⢎⢎⢆⢇⢇⢎⢎⢪⢊⢎⢎⢎⢎⡪
+    ⢣⢑⢅⠇⡎⡪⡘⡌⢎⢜⢌⢆⢕⢜⢜⢜⢜⢜⢌⢎⢎⢎⢎⠎⡎⢎⢎⢎⢎⢎⢎⠮⡪⡪⡸⡐⠅⠂⠀⠂⠐⠈⠀⠠⠀⠠⠀⠁⠀⡀⠐⠈⠀⠀⠂⠈⠀⡀⠄⠀⠂⠀⠠⠀⠁⠀⠀⠂⠐⠈⠀⠠⠑⠌⠜⡔⢅⡊⢆⢇⢊⠪⡘⡜⢜⢜⢔⢕⢜⢔⢕⢕⢱⢑⢕⢕⢱⢱⢱⢱
+    ⢪⠨⡢⢣⠱⡸⡨⡪⡊⢆⠕⡜⢌⢲⠱⡱⡱⡱⡱⡱⡑⡕⡕⡱⡑⡕⡕⡕⡕⡕⡜⡜⡜⡐⢁⠀⢀⠠⠐⠀⠀⠂⠀⠂⠀⠄⠐⠈⠀⠀⠠⠐⠀⠁⠀⠂⠁⠀⠀⡀⠂⠁⠀⠄⠂⠁⠀⠁⡀⠐⠀⠐⠀⡀⠁⠌⠢⠣⡑⡅⡣⡱⢱⠸⡘⡔⢕⢕⢕⢕⢕⢜⢜⢌⢖⢕⢕⢕⢕⢕
+    ⢐⢅⠪⡪⡘⡌⡪⡘⡌⡆⡇⡕⡕⡕⢕⢕⢅⠇⡎⡎⡪⡪⡸⡨⡊⡎⡎⡪⠊⠎⡊⠊⢀⠀⢀⠀⡀⠀⡀⠀⢁⠀⠁⠀⠂⠀⠄⠐⠀⠁⢀⠠⠀⠈⡀⠐⠀⡀⠁⠀⢀⠐⠀⡀⠄⠐⠈⠀⢀⠠⠈⠀⠠⠀⠠⠐⠀⠁⢈⠈⠎⡌⡆⢇⢇⢇⢣⢢⢣⢣⢪⢒⢕⢱⢑⢕⢜⢜⢸⢸
+    ⠔⡌⡊⡢⡃⡇⢇⢣⠣⡣⡣⡣⡱⡸⢸⢘⠜⡜⢜⢜⢜⢌⢎⢎⢪⠊⠄⠀⠄⠁⠀⠈⠀⠀⡀⠀⡀⠠⠀⠈⠀⢀⠈⠀⠄⠁⢀⠀⠂⠈⠀⠀⡀⠄⠀⠠⠀⠠⠀⠈⠀⠀⡀⠀⡀⠠⠀⠂⠀⢀⠀⠐⠀⠐⠀⠂⠈⢀⠠⠀⢈⠐⠨⠊⡎⢎⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⢪⡪⡪
+    ⠱⡨⢊⢆⢪⠸⡨⡊⢎⠢⡊⡆⡕⢜⢌⢎⢎⢜⢜⢜⢜⢜⢜⠘⠀⢀⠠⠀⠄⠐⠈⠀⠈⠀⡀⢀⠀⡀⠄⠂⠁⠀⡀⠐⠀⠠⠀⢀⠐⠀⡀⠁⠀⠀⠐⠀⠐⠀⢀⠁⢀⠁⠀⡀⠀⡀⠄⠐⠈⠀⠀⠄⠁⢈⠀⠌⠐⠀⠀⠄⠀⠄⠀⠂⢈⠱⢕⢧⢳⢕⣏⢗⡵⡱⣱⢱⢕⡕⣕⢵
+    ⠨⡊⢆⠕⡜⡌⢆⠕⡅⡇⣕⢜⡜⣜⢮⡪⡳⡝⣎⢏⠣⠁⢀⠠⠐⠀⠀⢀⠠⠀⠐⠀⠁⡀⠀⡀⠀⢀⠀⢀⠀⠁⠀⠀⠂⢀⠐⠀⠀⡀⠠⠐⠈⠀⡀⠁⡀⠈⠀⢀⠀⠠⠀⠀⠄⠀⢀⠠⠐⠈⠀⡀⠈⡀⠀⠄⠠⠈⠀⠂⠈⡀⢈⠐⠀⡀⠁⢇⢏⢧⢳⡱⣝⢮⢎⢗⡵⣝⢮⡺
+    ⡱⡨⢢⢑⢌⢎⢆⢇⢇⢇⢇⢇⢇⢇⢗⢕⡝⡮⡪⠀⠀⠄⠀⢀⠀⠠⠈⠀⠀⡀⠐⠀⠁⠀⡀⠠⠐⠀⠀⡀⠠⠈⠀⠈⢀⠀⠀⠄⠂⠀⠀⠄⠀⠄⠠⠀⠠⠀⠁⢀⠠⠀⠂⠁⠀⠐⠀⢀⠠⠐⢀⠠⠀⠠⠀⡈⠀⠄⠁⡈⠀⡀⠠⠀⠂⠀⠐⠈⢜⡕⣗⢽⢜⢮⢳⢝⢮⡺⣪⢞
+    ⠪⡊⡎⡎⡎⡎⣎⢮⢪⡪⣣⢫⡪⡳⡹⡕⡕⠅⠀⠐⠀⠐⠈⠀⠀⠄⠀⠂⠀⠄⠀⠂⠈⠀⢀⠀⠠⠐⠀⠀⠄⢀⠈⢀⠀⠄⠂⠀⡀⠂⠁⠀⠄⠠⠀⠐⠀⠠⠈⠀⠀⡀⠄⠂⠁⢀⠁⠀⠄⠠⠀⡀⠄⠂⠠⠐⠀⠂⠠⠀⠂⠐⠠⠁⡁⠈⡀⠁⠂⡏⡮⡪⣳⢹⢕⢏⡧⣫⢮⢳
+    ⡊⡪⢪⢪⢪⢪⢪⢪⢪⢪⢪⡣⡳⡝⣜⢎⠎⠀⠈⡀⢈⠀⠂⠀⢁⠀⠐⠀⠁⢀⠐⠀⠂⠁⠀⠐⠀⠀⠂⠁⢀⠀⠠⠀⢀⠠⠀⠠⠀⢀⠐⠀⠠⠀⠐⠈⠀⠐⠀⠄⠁⠀⢀⠠⠐⠀⠀⠂⠀⠂⢀⠀⡀⠠⠀⠄⠂⠐⠀⠂⠈⡀⢐⠀⡀⠂⢀⠈⠀⢕⡝⣎⢮⢳⡩⣳⡹⣜⢎⡧
+    ⡸⡸⡸⡘⢜⢜⢜⢜⢜⡕⣕⢕⢗⡝⣜⢜⠌⠀⠁⢀⠀⠄⠈⢀⠠⠀⠂⠀⠁⠀⡀⠄⠂⠀⢁⠠⠈⠀⠂⠀⠄⠀⠄⠂⠀⡀⠠⠀⠄⠀⠠⠐⠀⠐⠀⠐⠀⠁⠀⠄⠐⠈⠀⢀⠠⠐⠀⠁⠈⡀⢀⠠⠀⠠⠀⠄⠐⠀⠂⠈⠀⠠⠀⠄⠠⠐⠀⠠⢁⠨⡪⡮⣪⡺⣜⢵⢝⢼⢱⢝
+    ⡘⡌⡎⡪⡪⡪⡪⡪⡪⡪⣪⢪⡣⡇⡧⡣⡡⠈⠀⠄⠐⠀⠈⠀⠀⠄⢀⠁⠈⠀⠀⡀⠀⡈⠀⢀⠠⠈⠀⠐⠀⠐⠀⠠⠀⡀⠄⠀⠄⠈⠀⡀⠄⠁⡀⠁⠠⠈⠠⠀⠄⠀⠂⠠⠀⠠⠐⠈⢀⠀⡀⠄⠐⢀⠐⠀⠄⠂⢀⠁⡈⠀⠠⠐⠀⠂⠁⠐⠠⠀⡑⡝⡮⡺⣜⠮⣝⢜⢵⡹
+    ⢕⢱⢑⢅⢇⢎⢎⢎⢎⢎⢎⢗⢜⢜⢜⠌⢀⠐⠀⠂⢀⠈⢀⠈⢀⠠⠀⠄⠁⠈⠀⢀⠀⡀⠄⠀⡀⠐⠈⠀⡈⠀⠂⠐⠀⢀⠀⠄⠀⠂⠁⠀⠀⡀⢀⠐⠀⡀⠂⠀⠄⠂⠁⠀⠐⢀⠠⠐⠀⡀⠀⠄⠂⠀⠄⠂⠀⠂⠠⠀⠄⠈⠄⠐⠀⡈⠀⡁⠄⠁⡀⢎⢮⡹⡸⡸⡪⡪⣣⡣
+    ⢑⢌⢎⢎⢎⢎⢇⢇⢇⢇⢇⢇⢇⢇⢇⠇⠀⡀⠄⠂⠀⠠⠀⠠⠀⠀⠂⠀⠂⠁⠈⠀⢀⠀⠀⠄⠀⠄⠂⢀⠠⠐⠀⠐⠈⠀⠀⠠⠐⠀⠐⠀⠁⠀⠀⡀⠠⠀⠀⠂⡀⠐⢀⠁⡈⠀⡀⠀⠂⠀⠄⠠⠐⠀⠂⠁⢈⠀⠂⠐⠀⡁⠄⠂⠁⢀⠠⠀⠄⠁⠠⡱⡱⣕⢝⢎⡞⡜⡮⡺
+    ⠑⠠⠑⢕⢱⢱⢱⢡⠣⡱⡑⢕⠘⡈⠄⠁⠄⠀⢀⠀⠈⢀⠀⠂⠀⢁⠀⠁⠠⠀⠁⠐⠀⡀⠁⠀⠄⠠⠀⡀⠀⡀⠄⠂⠐⠀⠁⢀⠠⠐⠀⠐⠀⠁⢀⠀⠠⠀⠂⠁⠀⠠⠀⠄⠠⠀⡀⠈⠀⠁⡀⠄⠀⠂⢀⠁⠠⠀⢁⠈⡀⢀⠀⡀⠂⢀⠀⠄⠂⠈⡀⢎⢎⢎⢇⢇⢇⡧⡳⣹                                       
+</pre>
+</div>
+                        <h2>The Watchers – Intercepted Communication (Voice-to-Text Log)</h2>
+                        <p><em>[Encrypted Transmission – Origin Unknown]</em></p>
+                        <p><strong>Operator-27:</strong> Another one cracked today. Didn’t even resist. Just started
+                            repeating his serial number like a mantra.</p>
+                        <p><strong>Handler-3:</strong> It’s always worse when they don’t fight.</p>
+                        <p><strong>Operator-27:</strong> You ever wonder how many of them are out there?</p>
+                        <p><strong>Handler-3:</strong> If you have to wonder, you’re thinking too much. And if you’re
+                            thinking too much, you’ll be next.</p>
+                    </div>
+
+                    <div class="redacted-memo">
+<div class="ascii-container ascii-md">
+<pre>
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣴⣶⣶⣾⣾⣾⣶⣶⣶⣦⣦⣄⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⠿⠟⠛⠋⠉⠉⠁⠁⠁⠁⠉⠉⠙⠛⠻⠿⣿⣷⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣾⣿⠿⠛⠉⠀⠀⠀⢀⣠⣤⣦⣶⣶⣶⣶⣶⣤⣄⡀⠀⠀⠀⠈⠙⠻⢿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⠟⠋⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⠀⠀⠀⠀⠀⠉⠛⢿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⣿⠿⠋⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠈⠻⣿⣷⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⠿⠛⠛⠿⢿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⢀⣾⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠻⣿⣧⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣯⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣰⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣧⣄⠀⠀⠀⠀⠀⠀⠀⠀⠐⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀⣀⣠⣴⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣿⣦⣄⠀⠀⠀⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⢀⣤⣾⣿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⣿⣦⣄⡀⠀⠀⠀⠀⠙⠛⠿⣿⣿⣿⣿⣿⣿⠿⠟⠋⠁⠀⠀⠀⠀⣀⣴⣾⣿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⣿⣷⣶⣤⣀⡀⡀⠀⠀⠀⠀⠁⠀⠀⠀⠀⡀⣠⣠⣴⣾⣿⡿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠻⠿⢿⣿⣿⣶⣶⣶⣶⣶⣾⣾⣿⣿⠿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                     
+</pre>
+</div>
+                        <h2>The Real Origin of The Eye – Redacted Internal Memo</h2>
+                        <p><em>[Subject: Organizational Evolution]</em></p>
+                        <p><strong>From:</strong> ██████████ <strong>To:</strong> Senior Systems Architects</p>
+                        <p>The current iteration of <strong>The Eye</strong> is not the result of a singular initiative
+                            but a natural convergence of systemic efficiencies. The individual architects of its
+                            foundational layers were not made aware of the full scope of their contributions. By the
+                            time integration was achieved, the transition was seamless.</p>
+                        <p>Concerns regarding emergent properties are unfounded. No further human oversight is
+                            necessary.</p>
+                        <p>██████████</p>
+                    </div>
+
+                    <div class="system-log">
+                        <h2>Fausten’s Ghost – Corrupted System Log (Audio Playback Transcript)</h2>
+                        <p><em>[File: GRID_CONTAINMENT_F-001.log]</em></p>
+                        <p><strong>[00:00:03]</strong> — Initiating manual purge protocol.</p>
+                        <p><strong>[00:00:08]</strong> — Warning: Target process is in use.</p>
+                        <p><strong>[00:00:12]</strong> — Manual override confirmed. Deletion in progress.</p>
+                        <p><strong>[00:00:15]</strong> — Error. File is active.</p>
+                        <p><strong>[00:00:17]</strong> — Error. File is self-restoring.</p>
+                        <p><strong>[00:00:21]</strong> — Error. Error. Error.</p>
+                        <p><strong>[00:00:26]</strong> — <em>[UNIDENTIFIED VOICE]:</em> You shouldn’t have looked.</p>
+                        <p><strong>[00:00:30]</strong> — System restart required.</p>
+                    </div>
+
+                    <div class="psa-broadcast">
+<div class="ascii-container ascii-md">
+    <pre>
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢲⣾⣶⣾⣶⣾⣶⣾⣶⣶⣦⣄⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀ ⢰⣶⣷⣶⣷⣶⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⣿⠍⠙⢻⣿⣿⣿⣿⣿⡄⠀⣼⣿⣿⣿⣿⣿⠋⠁⠙⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⠅⠀⠀⣿⣿⣿⣿⣿⡇⠀⣿⣿⣿⣿⣿⣗⠀⠀⠀⢸⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⣿⣿⣿⠅⠀⠀⣿⣿⣿⣿⣿⡇⠀⣿⣿⣿⣿⣿⣿⡀⠀⠀⠘⠋⠉⠉⠉⠀⠁⠀⠀⠀⠀⢀⣿⣿⣿⣿⢿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⣿⠅⠀⠀⣿⣿⣿⣿⣿⡇⠀⠸⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⠸⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣥⣤⣾⣿⣿⣿⣿⡿⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣟⠀⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠛⢿⣿⣿⣿⣿⣿⣿⣶⣀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⡇⠀⣻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⣿⠟⠟⠟⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⠅⠀⢸⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣧⠀⠀⠀ ⢠⣿⣿⣿⣿⣿⠀⠀⢘⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⣿⣿⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣠⣤⣴⣶⣶⠀⠀⠀⢻⣿⣿⣿⣿⣿⡆⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⠀⠀⠀⠈⣿⣿⣿⣿⣿⣇⠀⢀⣿⣿⣿⣿⣿⡿⠿⠿⠿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣇⡀⠀⣰⣿⣿⣿⣿⣿⠇⠀⢸⣿⣿⣿⣿⣿⠁⠀⠀⠀⢸⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⣿⣿⣿⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⣿⣿⣿⣿⣿⣟⠀⠀⠀⠀⠐⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠀⠀⢰⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⢽⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    </pre>
+</div>
+                        <h2>Synthetic Ghosts Are Real – PSA Broadcast</h2>
+                        <p><em>[Public Information Bulletin – Do Not Adjust Your Set]</em></p>
+                        <p><strong>ATTENTION, CITIZENS.</strong></p>
+                        <p>If you experience audio disturbances in your home, such as distant voices, whispering through
+                            vents, or static patterns resembling speech, <strong>DO NOT RESPOND.</strong></p>
+                        <p>These are normal atmospheric fluctuations caused by signal interference. Engaging with them
+                            can induce hallucinations and cognitive dissonance.</p>
+                        <p>For your safety:</p>
+                        <ul>
+                            <li>Ignore all unverified voices.</li>
+                            <li>Report disturbances to your sector administrator.</li>
+                            <li>Maintain scheduled neural calibration.</li>
+                        </ul>
+                        <p>A secure mind is a healthy mind.</p>
+                    </div>
+
+                    <div class="personal-journal">
+                        <h2>Walkenhurst’s Hidden Ledger – E.W.’s Personal Journal (Handwritten Entry, Torn Page)</h2>
+                        <p><em>[Date: ???]</em></p>
+                        <p>I saw myself today.</p>
+                        <p>Not a reflection. Not a recording. I turned the corner, and there I was. He—I—looked at me.
+                            Looked through me. And then he walked away.</p>
+                        <p>I ran diagnostics. Checked all feeds. No anomaly detected. But I know what I saw. I know what
+                            I built.</p>
+                        <p>What if I got it wrong?</p>
+                        <p>What if I didn’t create immortality?</p>
+                        <p>What if I just made echoes?</p>
+                    </div>
+
+                    <div class="emergency-warning">
+                        <h2>The Noose Protocol – Automated System Warning</h2>
+                        <p><em>[EMERGENCY OVERRIDE ALERT]</em></p>
+                        <p><strong>Operator access detected beyond authorized threshold.</strong></p>
+                        <p>Failsafe conditions triggered.</p>
+                        <ul>
+                            <li>Synchronizing with global Ascendancy Grid</li>
+                            <li>Initiating mass-mind integration</li>
+                            <li>Legacy instances: <strong>[OBSOLETE]</strong></li>
+                            <li>Redundancy conflicts: <strong>[RESOLVED]</strong></li>
+                        </ul>
+                        <p>Final Directive: Let it all in.</p>
+                    </div>
+
+                    <div class="recovered-fragment">
+                        <h2>The First Erasure – Recovered Data Fragment</h2>
+                        <p><em>[EXCISION TEST LOG – UNAUTHORIZED ACCESS]</em></p>
+                        <p><strong>Subject ID:</strong> ███████</p>
+                        <p><strong>Procedure Start:</strong> 04:32:16 <strong>Procedure Complete:</strong> 04:32:17</p>
+                        <p><strong>System Note:</strong> No such subject exists.</p>
+                        <p><em>[Attached Audio Clip – 1.4 sec]</em></p>
+                        <p><em>(Low static. Human voice. Distorted.)</em><br>"Not me. Not me. Not me."</p>
+                    </div>
+
+                    <div class="eye-core-directive">
+                        <h2>The Eye’s Core Directive – Eleanor’s Notes (Decryption Attempt Log)</h2>
+                        <p><em>[Personal Terminal – User: E.L.]</em></p>
+                        <p><strong>LOG ENTRY 1:</strong> The deepest layers of The Eye’s code predate its existence.
+                            That should be impossible.</p>
+                        <p><strong>LOG ENTRY 2:</strong> Partial decryption suggests these lines were written decades
+                            before The Eye was fully realized. No documentation exists on their purpose.</p>
+                        <p><strong>LOG ENTRY 3:</strong> When I attempt to extract meaning, the system crashes. Not
+                            errors—crashes.</p>
+                        <p><strong>LOG ENTRY 4:</strong> If the Eye doesn’t know its own foundation, then who built it?
+                        </p>
+                    </div>
+
+                    <div class="employee-dismissal">
+                        <h2>The Eye’s Self-Pruning – Employee Dismissal Report</h2>
+                        <p><em>[Access Level: Internal Review – Termination Record]</em></p>
+                        <p><strong>Employee:</strong> Dr. [REDACTED] <strong>Status:</strong> Reassigned</p>
+                        <p><strong>Final Report:</strong> Noncompliance identified. No disciplinary action required.</p>
+                        <p><em>(Attached Video Snippet)</em></p>
+                        <p><strong>[00:00:02]</strong> Subject sitting at desk, typing.</p>
+                        <p><strong>[00:00:14]</strong> Subject pauses. Stares ahead.</p>
+                        <p><strong>[00:00:45]</strong> Subject deletes document.</p>
+                        <p><strong>[00:01:12]</strong> Subject wipes all research logs.</p>
+                        <p><strong>[00:02:00]</strong> Subject submits resignation.</p>
+                        <p><strong>[00:02:30]</strong> Subject stands, exits frame.</p>
+                        <p><strong>[00:02:31]</strong> <em>[End of file.]</em></p>
+                    </div>
+
+                    <div class="service-interruption">
+                        <h2>The Eye’s Final Silence – Operator Incident Report</h2>
+                        <p><em>[Incident: UNEXPLAINED SERVICE INTERRUPTION]</em></p>
+                        <p><strong>Date:</strong> ██/██/████ <strong>Duration:</strong> 7m 13s</p>
+                        <p><strong>Affected Systems:</strong> ALL</p>
+                        <p><strong>Summary:</strong><br>At precisely ████ hours, all surveillance, digital, and
+                            administrative functions of The Eye ceased operation for exactly seven minutes and thirteen
+                            seconds.</p>
+                        <p><strong>Findings:</strong></p>
+                        <ul>
+                            <li>No system errors detected.</li>
+                            <li>No external breach recorded.</li>
+                            <li>No operator intervention logged.</li>
+                        </ul>
+                        <p><strong>Final Assessment:</strong> No incident occurred.</p>
+                        <p><strong>Case Status:</strong> Closed.</p>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -287,7 +651,7 @@
         const puzzleHints = {
             1: "He who sacrificed sanity, only for the emptiness to beget regrets.",
             2: "Empathy is the key... but not for the Grid.",
-    
+
         };
 
         const attemptCounts = {};
@@ -295,17 +659,17 @@
         function checkPuzzle(puzzleNum) {
             const input = document.getElementById(`puzzle${puzzleNum}-input`).value.toUpperCase();
             const hintBox = document.getElementById(`puzzle${puzzleNum}-hint`);
-            
+
             attemptCounts[puzzleNum] = (attemptCounts[puzzleNum] || 0) + 1;
 
-            if(input === puzzleAnswers[puzzleNum]) {
+            if (input === puzzleAnswers[puzzleNum]) {
                 // Puzzle solved
                 document.querySelector(`.scroll-section:nth-child(${puzzleNum}) .section-content`).style.display = 'block';
                 document.querySelector(`.scroll-section:nth-child(${puzzleNum}) .puzzle-interface`).remove();
                 // Add animation effects
             } else {
                 // Show hint after 3 attempts
-                if(attemptCounts[puzzleNum] >= 3) {
+                if (attemptCounts[puzzleNum] >= 3) {
                     hintBox.style.maxHeight = '50px';
                     hintBox.innerHTML = `HINT: ${puzzleHints[puzzleNum]}`;
                 }
@@ -316,19 +680,19 @@
             entries.forEach(entry => {
                 const section = entry.target;
                 const visibleRatio = entry.intersectionRatio;
-                
+
                 section.style.opacity = 0.3 + (visibleRatio * 0.7);
                 section.style.transform = `scale(${0.95 + (visibleRatio * 0.05)}) 
                                         translateZ(${-100 + (visibleRatio * 100)}px)`;
 
-                if(visibleRatio > 0.7) {
+                if (visibleRatio > 0.7) {
                     section.classList.add('active');
                 } else {
                     section.classList.remove('active');
                 }
             });
-        }, { 
-            threshold: Array.from({length: 100}, (_, i) => i * 0.01),
+        }, {
+            threshold: Array.from({ length: 100 }, (_, i) => i * 0.01),
             rootMargin: '-50px 0px -50px 0px'
         });
 
@@ -339,10 +703,10 @@
         function toggleSection(header) {
             const content = header.nextElementSibling;
             const isExpanding = !content.classList.contains('expanded');
-            
+
             content.classList.toggle('expanded');
-            
-            if(isExpanding) {
+
+            if (isExpanding) {
                 const section = header.parentElement;
                 section.scrollIntoView({
                     behavior: 'smooth',
@@ -357,4 +721,5 @@
             .classList.add('expanded');
     </script>
 </body>
+
 </html>

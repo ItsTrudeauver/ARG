@@ -1,10 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; URL='C0R3/gateway.ejs'" />
-    <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL LOGIN</title>
+    <style>
+        /* General Styles */
+        body {
+            background-color: black;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Static & Enhanced CRT Scanline Effect */
+        .crt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.06), rgba(0, 255, 0, 0.06) 1px, transparent 2px, transparent 4px),
+                repeating-radial-gradient(circle, rgba(0, 255, 0, 0.05) 0%, transparent 10%),
+                url('https://www.transparenttextures.com/patterns/noise.png');
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* CRT Flicker Effect */
+        @keyframes flicker {
+            0% { opacity: 0.85; }
+            50% { opacity: 0.9; }
+            100% { opacity: 0.85; }
+        }
+
+        .flicker {
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        /* Scanline Animation */
+        @keyframes scanlines {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+
+        .scanlines::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.1) 0px, transparent 2px);
+            opacity: 0.2;
+            animation: scanlines 1s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Input Fields */
+        input {
+            background: none;
+            color: #00FF00;
+            border: none;
+            border-bottom: 2px solid #00FF00;
+            font-size: 1rem;
+            width: 100%;
+            padding: 5px;
+            text-transform: uppercase;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        /* Login Button */
+        button {
+            background: black;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: left;
+            padding: 5px 10px;
+        }
+
+        button:hover {
+            background: #00FF00;
+            color: black;
+        }
+
+        /* Access as Guest Link */
+        p a {
+            color: #00FF00;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        p a:visited {
+            color: #00FF00;
+        }
+
+        /* Glitching Boxes */
+        .glitch-box {
+            position: absolute;
+            border: 2px solid #00FF00;
+            color: #00FF00;
+            font-size: 0.8rem;
+            padding: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: glitch-text 0.1s infinite;
+        }
+
+        @keyframes glitch-text {
+            0% { transform: translate(0, 0); }
+            33% { transform: translate(-1px, 1px); }
+            66% { transform: translate(1px, -1px); }
+            100% { transform: translate(0, 0); }
+        }
+    </style>
 </head>
-<body>
-    If you are not redirected, <a href="C0R3/gateway.ejs">click here</a>.
+<body class="flicker scanlines">
+    <div class="crt"></div> <!-- CRT & Static Effect -->
+
+    <div class="login-container">
+        <form action="/login" method="POST">
+            <label for="username">USERNAME:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">PASSWORD:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">>>></button>
+        </form>
+    </div>
+
+    <br>
+    <p><a href="C0R3/gateway.ejs">ACCESS AS GUEST</a></p>
+
+    <script>
+        function createGlitchBoxes() {
+            for (let i = 0; i < 5; i++) {
+                let box = document.createElement("div");
+                box.classList.add("glitch-box");
+                box.innerText = "ERROR 0x" + Math.floor(Math.random() * 9999).toString(16).toUpperCase();
+                document.body.appendChild(box);
+                randomizeGlitch(box);
+            }
+        }
+
+        function randomizeGlitch(box) {
+            box.style.top = Math.random() * 80 + "%";
+            box.style.left = Math.random() * 80 + "%";
+            box.style.width = Math.random() * 100 + 50 + "px";
+            box.style.height = Math.random() * 40 + 20 + "px";
+        }
+
+        function randomizeAllGlitches() {
+            document.querySelectorAll(".glitch-box").forEach(box => {
+                randomizeGlitch(box);
+            });
+        }
+
+        createGlitchBoxes();
+        setInterval(randomizeAllGlitches, 500);
+    </script>
 </body>
 </html>

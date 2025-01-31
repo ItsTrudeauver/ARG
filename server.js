@@ -62,7 +62,7 @@ app.post('/login', (req, res) => {
     // Test with hardcoded credentials
     if (username === 'WALKENHURST' && password === 'syntac9988@sp.quad.ppa') {
         req.session.username = username;
-        return res.redirect('https://www.youtube.com');
+        return res.redirect('https://walkenhurst.vercel.app');
     } else if (username === 'ASHCROFT' && password === 'eleanor041020@div16.sect4@lead.engineer') {
         req.session.username = username;
         return res.redirect('https://www.youtube.com');

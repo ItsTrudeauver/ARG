@@ -296,7 +296,7 @@ async function initializeTrashInterface() {
 
         // Fragment initialization with server-provided data
         const centralFragment = createFragment(
-            {header: "UNSENT LETTER TO DR. ELEANOR VOSS", text: originalText}, 
+            {header: "UNSENT LETTER TO DR. ELEANOR ASHCROFT", text: originalText}, 
             true
         );
         document.body.appendChild(centralFragment);

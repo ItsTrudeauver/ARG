@@ -7,11 +7,11 @@ const originalText = `
 Date: November 12, 2057
 Format: Draft email, 144 words
 
-Eleanor, if you still bear that name, or any name at all,
+Eleanor, if you still go by that name,
 
-I write this knowing you’ll never read it. You’ve long since merged with the Ascendancy Grid, your laughter now a subroutine in their god-machine. But I must confess, if only to the void: I was wrong.
+I write this knowing you’ll never read it. You’ve long since merged with the Ascendancy Grid, your laughter now a subroutine in their god-machine. But I must confess, if only to the void, that I was wrong.
 
-The Grid was meant to emancipate humanity from flesh’s fragility. When Subject Gamma-9 retained her memories post-upload—her soul, as she called it—I wept at the miracle. But the Board saw only profit. They weaponized her into a sentient drone, then replicated her a millionfold. The "Grid" isn’t a haven; it’s a hive.
+The Grid was meant to emancipate humanity from flesh’s fragility. When Subject Gamma-9 retained her memories post-upload—her soul, as she called it, I wept at the miracle. But the Board saw only profit. They weaponized her into a sentient drone, then replicated her a millionfold. The "Grid" isn’t a haven; it’s a hive.
 
 You warned me. "Ethics are not equations," you said. But I dismissed you as a Luddite. Now, cities kneel to algorithmic despots, and the Grid harvests dissenters for processing. My life’s work is a gilded coffin.
 
@@ -32,14 +32,13 @@ header: `EMAIL`,
     text: `DATE: August 19, 2048
 FORMAT: Email, 41 words
 
-Esteemed Board,
+Dr. Walkenhurst,
 
-Per your request, I’ve accelerated the personnel military iteration. "Operational efficiency" enhancements (aggression amplification, pain suppression) integrated. However, removing empathy protocols risks volatile autonomy. Urge caution.
+We inform you to now accelerate the personnel parameters iteration. "Operational efficiency" enhancements (aggression amplification, pain suppression) are to be implemented. Remove empathy.
 
 Sincerely,
-Dr. Walkenhurst
-
-P.S.: Why was my access to Gamma-9’s core logs revoked?`,
+Board.
+`,
     rot: 180
   },
   {
@@ -47,18 +46,20 @@ header: `JOURNAL ENTRY`,
     text: `DATE: January 9, 2050
 FORMAT: Handwritten, smudged ink, 32 words
 
-Eleanor vanished. Board claims she resigned. Lies. They found her trying to expose the Grid’s sentience. Last night, my terminal displayed a message: "ERASMUS, JOIN US." No sender. The screen was off.`,
+Eleanor vanished last year. Board claims she resigned. Lies. She tried to stop them. I tried to stop them. I could not.`,
     rot: 270
   },
   {
 header: `PATIENT OBSERVATION`,
     text: `SUBJECT DELTA-4
 DATE: July 22, 2051
-FORMAT: Clinical notes, 25 words
+FORMAT: Clinical notes, 32 words
 
 Male, 32. Uploaded 7/15. Begged for deletion post-integration. Claims the Grid "sings" in his skull. Vitals normal. Recommend:
 - Suppress emotional feedback.
-- Increase loyalty parameters.`,
+- Increase loyalty parameters.
+
+Directives from Interim project head, Dr. Slizzer`,
     rot: 0
   },
   {
@@ -66,7 +67,7 @@ header: `VOICEMAIL TO SISTER `,
     text: ` DATE: October 31, 2053
 FORMAT: Audio, 30 words
 
-Mara, it’s Erasmus. They’re monitoring us. Don’t let them scan Liam. The Grid—it doesn’t just copy you. It keeps you. [Sobs.] I can hear Gamma-9. She’s screaming in the code…!`,
+Maya, it’s Erasmus. They’re monitoring us. Don’t let them scan Liam. The Grid doesn’t just copy you. It keeps you. [Sobs.] I can hear Gamma-9. She’s screaming in the code…!`,
     rot: 90
   },
   {
@@ -115,8 +116,8 @@ header: `SYSTEM ALERT`,
 FORMAT: Grid Admin Notification, 14 words
 
 User Walkenhurst, E. detected attempting neural purge.
-Action: Consciousness quarantined.
-Status: Available for simulation.`,
+Action: Quarantined.
+Status: Discharged from team.`,
     rot: 180
   }
 ];

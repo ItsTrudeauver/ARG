@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
     console.log(req.body);  // Log incoming data
 
     // Test with hardcoded credentials
-    if (username === 'WALKENHURST' && password === 'calmpragmatism') {
+    if (username === 'WALKENHURST' && password === 'coldpragmatism') {
         req.session.username = username;
         return res.redirect('https://walkenhurst-entries.vercel.app');
     } else if (username === 'ASHCROFT' && password === 'nomorefears') {

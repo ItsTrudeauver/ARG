@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
     if (req.session.username) {
         // Redirect based on the username stored in session
         if (req.session.username === 'WALKENHURST') {
-            return res.redirect('https://www.youtube.com');
+            return res.redirect('walkenhurst-entries.vercel.app');
         } else if (req.session.username === 'user2') {
             return res.redirect('https://www.youtube.com');
         }
@@ -62,7 +62,7 @@ app.post('/login', (req, res) => {
     // Test with hardcoded credentials
     if (username === 'WALKENHURST' && password === 'calmpragmatism') {
         req.session.username = username;
-        return res.redirect('https://walkenhurst.vercel.app');
+        return res.redirect('https://walkenhurst-entries.vercel.app');
     } else if (username === 'ASHCROFT' && password === 'nomorefears') {
         req.session.username = username;
         return res.redirect('https://www.youtube.com');
